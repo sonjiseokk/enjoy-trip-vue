@@ -6,8 +6,8 @@
           class="blur navbar navbar-expand-lg top-0 zindex-fixed shadow position-absolute my-3 py-2 start-0 end-0 w-100"
           style="background-color: #f5efe6"
         >
-          <a class="navbar-brand ms-5 pt-1 pb-2" href="/" style="color: #4b555e; font-size: 2em; font-weight: 800;"
-            >Enjoy_Trip</a
+          <a class="navbar-brand ms-4 pt-3 pb-2" href="/" style="color: #4b555e; font-size: 2em; font-weight: 800;"
+            >#Enjoy_Trip</a
           >
           <button
             class="navbar-toggler"
@@ -39,49 +39,21 @@
                 >
               </li>
             </ul>
-            <ul class="navbar-nav ms-auto">
-              <li class="mr-2" v-if="userInfo != null">
-                <a
-                  class="nav-link"
-                  href="#"
-                  id="navbarDropdown"
-                  role="button"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
-                  <b-iconstack font-scale="2">
-                    <b-icon stacked icon="bell" font-scale="2"></b-icon>
-                    <b-icon
-                      v-if="links.length > 0"
-                      stacked
-                      icon="circle-fill"
-                      shift-v="4"
-                      shift-h="3"
-                      scale="0.4"
-                      style="color: red"
-                    ></b-icon>
-                  </b-iconstack>
-                </a>
-                <user-alarm
-                  class="dropdown-menu dropdown-bell dropdown-menu-right dropdown-menu-bell"
-                  aria-labelledby="navbarDropdown"
-                >
-                </user-alarm>
-              </li>
+            TODO : 회원 이름
+            <ul class="navbar-nav me-4">
               <li class="nav-item dropdown">
                 <a
                   class="nav-link dropdown-toggle"
                   href="#"
                   id="navbarDropdown"
                   role="button"
-                  data-toggle="dropdown"
+                  data-bs-toggle="dropdown"
                   aria-haspopup="true"
                   aria-expanded="false"
                 >
                   <b-icon icon="people" font-scale="2"></b-icon>
                 </a>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="background-color: white">
                   <router-link id="userpage" to="/userpage" class="dropdown-item" v-if="userInfo">
                     마이페이지
                   </router-link>
