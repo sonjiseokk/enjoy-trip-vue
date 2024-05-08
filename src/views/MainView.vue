@@ -18,7 +18,7 @@
   </template>
   
   <script>
-  import HomeView from './HomeView.vue';
+  import HomeView from '../components/home/HomeDetail.vue';
   // import CrawlingBlog from "@/components/crawling/CrawlingBlog.vue";
   // import CrawlingNews from "@/components/crawling/CrawlingNews.vue";
   // import AptTopFive from "@/components/apt/AptTopFive";

@@ -1,10 +1,10 @@
 import { createWebHistory, createRouter } from "vue-router";
-import AppMain from "@/views/AppMain.vue";
+import MainView from "@/views/MainView.vue";
 import TripView from "@/views/TripView.vue";
 const routes = [
   {
     path: "/",
-    component: AppMain,
+    component: MainView,
   },
   {
     path: "/trip",

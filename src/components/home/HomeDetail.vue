@@ -46,7 +46,7 @@ export default {
 
 }
 </script>
-<style scoped src="./style/style.css"></style>
+<style scoped src="../../views/style/style.css"></style>
 <style scoped>
 .HomeMain {
   width: 100%;

@@ -24,7 +24,7 @@
           <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto me-auto">
               <li class="nav-item" @click="changed">
-                <router-link id="apt" to="/apt" class="ml-3 mr-3 nav-link text-secondary"
+                <router-link id="apt" to="/trip" class="ml-3 mr-3 nav-link text-secondary"
                   >관광지검색</router-link
                 >
               </li>
@@ -39,7 +39,6 @@
                 >
               </li>
             </ul>
-            TODO : 회원 이름
             <ul class="navbar-nav me-4">
               <li class="nav-item dropdown">
                 <a
@@ -51,7 +50,7 @@
                   aria-haspopup="true"
                   aria-expanded="false"
                 >
-                  <b-icon icon="people" font-scale="2"></b-icon>
+                <i class="bi bi-people" style="font-size: 2rem; padding-right: 10px;"></i>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="background-color: white">
                   <router-link id="userpage" to="/userpage" class="dropdown-item" v-if="userInfo">
