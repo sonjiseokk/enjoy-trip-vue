@@ -5,6 +5,8 @@
           <div class="row">
             <div class="col-md-7 text-center mx-auto">
               <h1 style="font-size: 50px !important;" class="text-dark mt-3">Enjoy your trip!</h1>
+              <div style="height: 30px;"></div>
+              <h2>당신의 여행을 즐겁게!</h2>
             </div>
           </div>
         </div>
@@ -16,7 +18,7 @@
   </template>
   
   <script>
-import HomeView from './HomeView.vue';
+  import HomeView from './HomeView.vue';
   // import CrawlingBlog from "@/components/crawling/CrawlingBlog.vue";
   // import CrawlingNews from "@/components/crawling/CrawlingNews.vue";
   // import AptTopFive from "@/components/apt/AptTopFive";

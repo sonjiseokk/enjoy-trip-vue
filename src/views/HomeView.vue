@@ -1,97 +1,47 @@
 <template>
-    <section class="card card-body blur shadow-blur mx-5 md-4 mt-n6 py-5">
-        <!-- 사이트 주요 기능 설명 -->
-        <section class="my-5">
-          <div class="container">
-            <div class="row align-items-center">
-              <div class="col-sm-4 ms-auto me-auto">
-                <div class="rotating-card-container">
-                  <div
-                    class="card card-rotate card-background card-background-mask-primary shadow-primary"
-                  >
-                    <div class="front front-background" style="height: 400px; width: 100%">
-                      <div class="card-body text-center">
-                        <h3 class="text-white">
-                          여행지 <br />
-                          주변 정보
-                        </h3>
-                        <p class="text-white opacity-8">저희 사이트에서 손쉽게 확인할 수 있습니다</p>
-                      </div>
-                    </div>
-                    <div class="back back-background">
-                      <div class="card-body text-center">
-                        <h3 class="text-white">Discover More</h3>
-                        <p class="text-white opacity-8">
-                          다양한 검색 방법을 통해 아파트 매매 실거래 자료를 확인할 수 있습니다.
-                        </p>
-                        <button class="btn btn-light btn-sm w-75 mx-auto mt-3">
-                          <router-link id="apt" to="/apt" class="ml-3 mr-3 nav-link text-secondary"
-                            >Try Search!</router-link
-                          >
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm-8 ms-auto">
-                <div class="row justify-content-start">
-                  <div class="col-sm-6">
-                    <div class="info">
-                      <b-icon icon="clipboard-data" style="color: #7895b2" font-scale="2"></b-icon>
-                      <h5 class="font-weight-bolder mt-3">실거래 데이터</h5>
-                      <p class="pe-5">
-                        공공데이터 사이트에서 직접 가져온 아파트 매매 실거래 자료를 확인할 수
-                        있습니다.
-                      </p>
-                    </div>
-                  </div>
-                  <div class="col-sm-6">
-                    <div class="info">
-                      <b-icon icon="search" style="color: #7895b2" font-scale="2"></b-icon>
-                      <h5 class="font-weight-bolder mt-3">매매 자료 조회</h5>
-                      <p class="pe-3">
-                        시/도를 선택하여 나타난 다각형을 클릭하거나, 구/군, 읍/면/동을 검색하여 해당
-                        장소의 데이터를 조회할 수 있습니다.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div class="row justify-content-start mt-5">
-                  <div class="col-sm-6 mt-3">
-                    <b-iconstack font-scale="2" stackvariant="white">
-                      <b-icon stacked icon="search" style="color: #7895b2"></b-icon>
-                      <b-icon
-                        stacked
-                        icon="bar-chart-fill"
-                        style="color: #7895b2"
-                        scale="0.5"
-                        shift-v="2"
-                        shift-h="-1.4"
-                      ></b-icon>
-                    </b-iconstack>
-                    <h5 class="font-weight-bolder mt-3">자세한 조회</h5>
-                    <p class="pe-5">
-                      지역 뿐만아니라 아파트 명을 검색하여 전국 조회할 수 있습니다. 또한 면적, 층,
-                      가격의 범위를 정하여 세밀한 조회가 가능합니다.
-                    </p>
-                  </div>
-                  <div class="col-sm-6 mt-3">
-                    <div class="info">
-                      <b-icon icon="card-list" scale="2" style="color: #7895b2"></b-icon>
-                      <h5 class="font-weight-bolder mt-3">안내</h5>
-                      <p class="pe-3">
-                        공지사항과 QnA 게시판을 통해 안내를 도와드리고 있습니다. 급히 도움이
-                        필요하시다면 챗봇도 사용해 보세요!
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-    </section>
+
+    <div class="HomeMain">
+        <p style="font-size: 4rem; font-family: LINESeedKR-Bd">여행지 가이드</p>
+        <p style="font-size: 4rem; font-family: LINESeedKR-Bd">Enjoy Trip에서 손쉽게</p>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <img src="@/assets/down_arrow.png" width="40px" height="40px" style="margin: 0 auto; "/>
+    </div>
+
+    <div class="HomeMid1">
+      <div class="HomeMid1Left">
+        <img
+          src="@/assets/hello2.gif"
+          width="400px"
+          style="
+            margin: 0 auto;
+            margin-top: 5%;
+            border-radius: 2rem;
+            filter: drop-shadow(5px 5px 5px #000);
+          "
+        />
+      </div>
+      <div class="HomeMid1Right">
+        <p style="font-size: 4rem; font-family: LINESeedKR-Bd">안녕하세요</p>
+        <p style="font-size: 3rem; font-family: LINESeedKR-Bd">Enjoy Trip 입니다.</p>
+      </div>
+    </div>
+
+    <div class="HomeMid2">
+        <p style="font-size: 2rem; font-family: LINESeedKR-Bd">
+            내가 원하는 매물을 한 눈에 조회하고 검색하세요
+        </p>
+        <p style="font-size: 2rem; font-family: LINESeedKR-Bd">
+            이제껏 찾지 못했던 편리한 매물 서비스,
+        </p>
+        <p style="font-size: 2rem; font-family: LINESeedKR-Bd">
+            다나와 홈즈와 함께 당신의 일상이 새로워질 거예요.
+        </p>
+    </div>
 </template>
 
 <script>
@@ -100,6 +50,42 @@ export default {
 }
 </script>
 <style scoped src="./style/style.css"></style>
-<style>
-
+<style scoped>
+.HomeMain {
+  width: 100%;
+  height: 840px;
+  /* background-color: rgb(187, 149, 149); */
+  text-align: center;
+  padding: 10rem;
+}
+.HomeMid1 {
+  width: 100%;
+  height: 500px;
+  padding-left: 10rem;
+  padding-right: 15rem;
+  /* background-color: rgb(112, 92, 92); */
+}
+.HomeMid1Left {
+  width: 50%;
+  height: 100%;
+  /* background-color: rgb(84, 61, 61); */
+  float: left;
+  padding-left: 8rem;
+}
+.HomeMid1Right {
+  width: 50%;
+  height: 100%;
+  /* background-color: rgb(215, 208, 208); */
+  float: left;
+  /* text-align: center; */
+  padding-left: 6rem;
+  padding-top: 8rem;
+}
+.HomeMid2 {
+  width: 100%;
+  height: 500px;
+  background-color: rgb(255, 218, 187);
+  text-align: center;
+  padding-top: 10rem;
+}
 </style>
