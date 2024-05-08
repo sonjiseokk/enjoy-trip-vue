@@ -70,18 +70,15 @@ export default {
 </style>
 
 <style>
-@import url("https://fonts.googleapis.com/css2?family=Libre+Barcode+128+Text&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&display=swap");
+
 @font-face {
-    font-family: 'SUIT-Medium';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Medium.woff2') format('woff2');
-    font-weight: normal;
+    font-family: 'LINESeedKR-Bd';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');
+    font-weight: 700;
     font-style: normal;
 }
-.logo {
-  font-family: "Libre Barcode 128 Text", cursive !important;
-}
+
 * {
-  font-family: "SUIT-Medium", sans-serif !important;
+  font-family: "LINESeedKR-Bd", sans-serif !important;
 }
 </style>
