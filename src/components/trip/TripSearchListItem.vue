@@ -1,7 +1,8 @@
 <template>
     <div
     class="m-2"
-
+    @mouseover="colorChange(true)"
+    @mouseout="colorChange(false)"
     :class="{ 'mouse-over-bgcolor': isColor }"
     style="display: flex; align-items: center"
   >
@@ -11,7 +12,7 @@
 
     <div class="apt-info-div">
       <div style="text-overflow: ellipsis">
-        [{{ trip.address }}] {{ trip.title }}
+        [{{ trip.title }}]
       </div>
     </div>
   </div>
@@ -19,8 +20,18 @@
 
 <script>
 export default {
+  data() {
+    return {
+      isColor : false,
+    }
+  },
   created(){
     console.log(this.trip);
+  },
+  methods : {
+    colorChange(flag) {
+      this.isColor = flag;
+    },
   },
   props : {
     trip : Object
