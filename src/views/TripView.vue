@@ -1,9 +1,10 @@
 <template>
   <div style="width: 100%; height: 100%">
-    <div class="position-relative mt-5">
+    <div class="position-relative">
       <main class="mt-0 main-content main-content-bg">
         <section>
           <KakaoMap class="kakao-map"></KakaoMap>
+          <my-kakao-map/>
           <div>
             <div class="search-div">
               <trip-search class="house-search-bar" />
@@ -11,7 +12,7 @@
                 <house-list class="house-list" />
               </div>
             </div>
-            <div v-if="!none" class="detail-div type1">
+            <div v-if="none" class="detail-div type1">
               <house-detail class="house-detail" />
             </div>
           </div>
@@ -23,9 +24,9 @@
 
 <script>
 import TripSearch from '@/components/trip/TripSearch.vue'
-import KakaoMap from '@/components/trip/KakaoMap.vue'
+import MyKakaoMap from '@/components/trip/MyKakaoMap.vue'
 export default {
-  components: { TripSearch,KakaoMap },
+  components: { TripSearch, MyKakaoMap },
 
 }
 </script>
@@ -44,9 +45,9 @@ export default {
 .search-div {
   position: absolute;
   width: 418px;
-  height: 94vh;
+  height: 100vh;
   z-index: 2;
-  top: 54px;
+  top: 1px;
   left: 0;
   background-color: #fcfbf6e0;
 }

@@ -1,9 +1,17 @@
 <template>
   <div id="app">
-    <NavBar 
-    class=".navbar-show" 
-    :class="{'navbar-hidden' : !showNavbar}"/>
-    <router-view></router-view>
+
+    <div class="top-0">
+      <NavBar class=".navbar-show" :class="{'navbar-hidden' : !showNavbar}" />
+
+    </div>
+
+    <main class="main-content position-relative border-radius-lg">
+      <transition name="slide-fade" mode="out-in">
+        <router-view />
+      </transition>
+
+    </main>
 
   </div>
 </template>

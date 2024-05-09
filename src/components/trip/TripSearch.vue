@@ -1,5 +1,6 @@
 <template>
     <div>
+      <div style="height: 100px"></div>
       <div class="map-select-div">
         <select class="form-control" v-model="sido" @change="gugunList">
           <option value="all">시/도</option>
@@ -25,7 +26,7 @@
           <input
             type="text"
             class="form-control name-search"
-            placeholder="아파트명"
+            placeholder="관광지명"
             style="width: 256px"
             v-model="name"
           />
