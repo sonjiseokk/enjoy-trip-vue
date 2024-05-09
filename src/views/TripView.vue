@@ -7,9 +7,9 @@
           <my-kakao-map/>
           <div>
             <div class="search-div">
-              <trip-search class="house-search-bar" />
+              <trip-search class="house-search-bar" @search="search($event)"/>
               <div class="list-div type1">
-                <house-list class="house-list" />
+                <trip-search-list class="house-list" :tripList="tripList"/>
               </div>
             </div>
             <div v-if="!none" class="detail-div type1">
@@ -25,9 +25,29 @@
 <script>
 import TripSearch from '@/components/trip/TripSearch.vue'
 import MyKakaoMap from '@/components/trip/MyKakaoMap.vue'
-export default {
-  components: { TripSearch, MyKakaoMap },
+import TripSearchList from '@/components/trip/TripSearchList.vue'
 
+import http from "@/api/http-common";
+export default {
+  data() {
+    return {
+      tripList : [],
+    }
+  },
+  components: { TripSearch, MyKakaoMap, TripSearchList },
+  methods : {
+    search(formData){
+      console.log(formData);
+      http.post(`/trip/search`, formData)
+        .then((response) => {
+          console.log(response.data);
+          this.tripList = response.data
+        })
+        .catch((error) => {
+          console.error("요청 중 오류 발생:", error);
+        });
+    }
+  }
 }
 </script>
 
@@ -87,6 +107,7 @@ export default {
 .house-list {
   position: absolute;
   z-index: 3;
+  top: 100px;
   width: 418px;
   padding: 20px 30px 20px 20px;
 }

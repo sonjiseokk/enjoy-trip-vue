@@ -4,6 +4,7 @@ const coordinate = {
   lat: 37.566826,
   lng: 126.9786567
 };
+
 </script>
 
 <template>
