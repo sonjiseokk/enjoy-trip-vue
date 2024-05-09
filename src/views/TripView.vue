@@ -12,7 +12,7 @@
                 <house-list class="house-list" />
               </div>
             </div>
-            <div v-if="none" class="detail-div type1">
+            <div v-if="!none" class="detail-div type1">
               <house-detail class="house-detail" />
             </div>
           </div>
