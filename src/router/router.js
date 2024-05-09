@@ -5,6 +5,8 @@ import NoticeView from "@/views/NoticeView.vue";
 import NoticeList from "@/components/notice/NoticeList.vue";
 import NoticeSearch from "@/components/notice/NoticeSearch.vue";
 import NoticeDetail from "@/components/notice/NoticeDetail.vue";
+import AppSignup from "@/views/AppSignup.vue";
+import AppLogin from "@/views/AppLogin.vue";
 const routes = [
   {
     path: "/",
@@ -12,11 +14,11 @@ const routes = [
   },
   {
     path: "/trip",
-    component : TripView,
+    component: TripView,
   },
   {
     path: "/notice",
-    component : NoticeView,
+    component: NoticeView,
     redirect: "/notice/list",
     children: [
       {
@@ -47,7 +49,15 @@ const routes = [
       //   component: NoticeModify,
       // },
     ],
-  }
+  },
+  {
+    path: "/signup",
+    component: AppSignup,
+  },
+  {
+    path: "/login",
+    component: AppLogin,
+  },
 ];
 
 const router = createRouter({
@@ -55,4 +65,4 @@ const router = createRouter({
   routes,
 });
 
-export default router; 
+export default router;
