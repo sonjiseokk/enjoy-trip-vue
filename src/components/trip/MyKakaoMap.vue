@@ -1,19 +1,38 @@
 <script setup>
+import { computed } from 'vue';
+import { useStore } from 'vuex';
 import { KakaoMap, KakaoMapMarker } from 'vue3-kakao-maps';
-const coordinate = {
-  lat: 37.566826,
-  lng: 126.9786567
-};
+
+const store = useStore();
+
+const lat = computed(() => store.state.lat);
+const lng = computed(() => store.state.lng);
+
 
 </script>
+
+
+
 
 <template>
   <div>
     <div id="map">
-      <KakaoMap :lat="coordinate.lat" :lng="coordinate.lng" :draggable="true" style="width: 100%; height: 900px;">
-        <KakaoMapMarker :lat="coordinate.lat" :lng="coordinate.lng"></KakaoMapMarker>
+      <KakaoMap :lat="lat" :lng="lng" :draggable="true"
+        style="width: 100%; height: 900px;">
+        <KakaoMapMarker 
+        :lat="lat" 
+        :lng="lng">
+        <template v-slot:infoWindow><div 
+          style=" 
+  display: flex;
+  flex-direction: column;
+  align-items : center; /* 수평 중앙 정렬 */
+  justify-content: center; /* 수직 중앙 정렬 */
+  text-align: center;
+  min-width: 50px;
+  min-height: 50px;">{{ $store.state.mapTripTitle }}</div></template>
+        </KakaoMapMarker>
       </KakaoMap>
-
     </div>
 
     <div class="map_wrap" style="z-index: 3">
@@ -49,6 +68,10 @@ const coordinate = {
 </template>
 
 <style scss>
+#infoWIndow {
+
+}
+
 #map {
   width: 100vw;
 }

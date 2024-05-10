@@ -1,18 +1,20 @@
 <template>
-    <div
-    class="m-2"
-    @mouseover="colorChange(true)"
-    @mouseout="colorChange(false)"
+  <div class="m-2" style="display: flex; align-items: center">
+    <div class="card mb-3" style="max-width: 540px;" 
+    @mouseover="colorChange(true)" 
+    @mouseout="colorChange(false)" 
     :class="{ 'mouse-over-bgcolor': isColor }"
-    style="display: flex; align-items: center"
-  >
-  <div class="apt-icon-div">
-    <i class="bi bi-house-door-fill apt-icon"></i>
-  </div>
-
-    <div class="apt-info-div">
-      <div style="text-overflow: ellipsis">
-        [{{ trip.title }}]
+    @click="cardClick(trip)">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <img :src="thumnailImage" class="img-fluid rounded-start" alt="Trip Image" style="height: 100%;">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title">{{ trip.title }}</h5>
+            <p class="card-text"><small class="text-body-secondary">{{ trip.address }}</small></p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -22,22 +24,31 @@
 export default {
   data() {
     return {
-      isColor : false,
+      isColor: false,
+      thumnailImage: '', // 초기 이미지 경로 설정
     }
   },
-  created(){
-    console.log(this.trip);
+  props: {
+    trip: Object
   },
-  methods : {
+  created() {
+    // 이미지 경로를 조건에 따라 설정
+    this.thumnailImage = this.trip.thumnailImage !== '' ? this.trip.thumnailImage : require('@/assets/noimage.jpg');
+  },
+  methods: {
     colorChange(flag) {
       this.isColor = flag;
     },
+    cardClick(){
+      console.log(this.trip.title);
+      this.$store.commit('changeMap', { lat: this.trip.latitude, lng: this.trip.longitude });
+      this.$store.commit('changeTitle', { title : this.trip.title});
+
+    }
   },
-  props : {
-    trip : Object
-  }
 }
 </script>
+
 
 <style scoped>
 .apt {

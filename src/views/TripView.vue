@@ -44,6 +44,7 @@ export default {
           this.tripList = response.data
         })
         .catch((error) => {
+          this.tripList = [];
           console.error("요청 중 오류 발생:", error);
         });
     }
