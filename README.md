@@ -1,35 +1,78 @@
-# EnjoyTripVue
+# ✈️ EnjoyTrip
 
-## 1. 메인화면
+![](https://i.imgur.com/bF3hFhx.png)
 
+> Enjoy Trip 여행 정보 제공 사이트<br>
+> 임베딩 API를 활용해 유사도를 측정하여 여행지를 추천해주는 서비스
+> 
+> 프로젝트 기간 : 2024.05.10 ~ 2024.05.23
+
+## Tech Stack (Core)
+### BackEnd
+  ![Spring](https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white)
+  ![Spring Boot](https://img.shields.io/badge/springboot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white)
+  ![Spring Security](https://img.shields.io/badge/Spring%20Security-6DB33F?style=for-the-badge&logo=Spring%20Security&logoColor=white)
+  ![MySQL](https://img.shields.io/badge/mysql-4479A1.svg?style=for-the-badge&logo=mysql&logoColor=white)
+
+### FrontEnd
+![Vue.js](https://img.shields.io/badge/vuejs-%2335495e.svg?style=for-the-badge&logo=vuedotjs&logoColor=%234FC08D)
+
+### ETC
+![JWT](https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens)
+![Bootstrap](https://img.shields.io/badge/bootstrap-%238511FA.svg?style=for-the-badge&logo=bootstrap&logoColor=white)
+
+
+## Use-Case Diagram
+![](https://i.imgur.com/1OiaKms.jpeg)
+
+
+## ERD
+![](https://i.imgur.com/WbLJlTZ.png)
+
+## Team
+
+<table>
+    <tr align="center">
+        <td><B>Backend, Frontend</B></td>
+        <td><B>Backend, Frontend</B></td>
+    </tr>
+    <tr align="center">
+        <td><a href="https://github.com/sonjiseokk">손지석</a></td>
+        <td><a href="https://github.com/YBK1">김영빈</a></td>
+    </tr>
+    <tr align="center">
+        <td>
+            <img src="https://github.com/hseong3243.png?size=100">
+        </td>
+        <td>
+            <img src="https://avatars.githubusercontent.com/u/97382736?v=4" style="width:100px; height:100px;">
+        </td>
+    </tr>
+</table>
+
+## 화면 구조 및 주요 코드
+#### 1. 메인화면
 ![](https://i.imgur.com/oTGPyNd.png)
-
-## 2. 회원가입
-
+#### 2. 회원가입
 ![](https://i.imgur.com/y43bRVd.png)
-
 ![](https://i.imgur.com/nGXfejM.gif)
-
-## 3. 로그인
-
+#### 3. 로그인
 ![](https://i.imgur.com/NsJLGb8.png)
-
 ![](https://i.imgur.com/IBoq0CO.gif)
-
-## 4. 로그아웃
-
+#### 4. 로그아웃
 ![](https://i.imgur.com/9lbd9M8.gif)
-
-## 5. 관광지 확인
-
+#### 5. 관광지 확인
 ![](https://i.imgur.com/IaNmBkl.png)
 ![](https://i.imgur.com/ZCcN2rI.gif)
-
-## 6. 공지사항 게시판
-
+#### 6. 공지사항 게시판
 ![](https://i.imgur.com/RsAzOBe.png)
 ![](https://i.imgur.com/uBLXT0m.gif)
-
-## 7. QNA 게시판
-
+#### 7. QNA 게시판
 ![](https://i.imgur.com/zE64Rwm.gif)
+
+
+## API 명세서
+
+## 이슈/해결 아카이빙
+
+
