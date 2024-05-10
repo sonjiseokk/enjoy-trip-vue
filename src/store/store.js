@@ -6,6 +6,8 @@ const store = createStore({
       lat: 37.566826,
       lng: 126.9786567,
       mapTripTitle : '기본 위치',
+      detailOpen : false,
+      clickedTrip : {},
     };
   },
   mutations: {
@@ -16,7 +18,18 @@ const store = createStore({
     },
     changeTitle(state,payload){
         state.mapTripTitle = payload.title;
-    }
+    },
+    openDetail(state){
+        state.detailOpen = true;
+        console.log("Detail is open:", state.detailOpen);
+    },
+    closeDetail(state){
+        state.detailOpen = false;
+    },
+    clickTrip(state,payload){
+        state.clickedTrip = payload.trip;
+    },
+
   },
 })
 

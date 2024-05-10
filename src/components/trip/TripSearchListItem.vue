@@ -42,8 +42,8 @@ export default {
     cardClick(){
       this.$store.commit('changeMap', { lat: this.trip.latitude, lng: this.trip.longitude });
       this.$store.commit('changeTitle', { title : this.trip.title});
-      console.log(this.$store.state.mapTripTitle);
-
+      this.$store.commit('openDetail');
+      this.$store.commit('clickTrip',{ trip : this.trip});
     }
   },
 }

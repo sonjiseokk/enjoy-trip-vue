@@ -12,8 +12,8 @@
                 <trip-search-list class="house-list" :tripList="tripList"/>
               </div>
             </div>
-            <div v-if="none" class="detail-div type1">
-              <house-detail class="house-detail" />
+            <div v-if="$store.state.detailOpen" class="detail-div type1">
+              <trip-detail class="house-detail" />
             </div>
           </div>
         </section>
@@ -27,14 +27,16 @@ import TripSearch from '@/components/trip/TripSearch.vue'
 import MyKakaoMap from '@/components/trip/MyKakaoMap.vue'
 import TripSearchList from '@/components/trip/TripSearchList.vue'
 
+
 import http from "@/api/http-common";
+import TripDetail from '@/components/trip/TripDetail.vue';
 export default {
   data() {
     return {
       tripList : [],
     }
   },
-  components: { TripSearch, MyKakaoMap, TripSearchList },
+  components: { TripSearch, MyKakaoMap, TripSearchList, TripDetail },
   methods : {
     search(formData){
       console.log(formData);
@@ -68,7 +70,7 @@ export default {
   width: 418px;
   height: 100vh;
   z-index: 2;
-  top: 1px;
+  top: 0px;
   left: 0;
   background-color: #fcfbf6e0;
 }
@@ -85,9 +87,10 @@ export default {
 .detail-div {
   position: absolute;
   width: 401px;
-  height: 94vh;
+  height: 100vh;
   z-index: 2;
-  top: 54px;
+  padding-top: 60px;
+  top: 0px;
   left: 417px;
   background-color: #fcfbf6e0;
   overflow-y: scroll;
