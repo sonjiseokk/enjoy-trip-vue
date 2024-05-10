@@ -14,13 +14,13 @@
       <br />
       <div class="btn-group">
         <router-link
-          v-if="userInfo != null && userInfo.id == 'admin'"
+          v-if="userinfo.loginId != null"
           class="btn btn-dark"
           to="/notice/modify"
           >수정하기</router-link
         >
         <button
-          v-if="userInfo != null && userInfo.id == 'admin'"
+        v-if="userinfo.loginId != null"
           class="btn btn-dark"
           @click="deleteNotice(notice.num)"
         >
@@ -39,12 +39,16 @@ import http from '@/api/http-common';
     name: "NoticeDetail",
     data(){
       return {
-        notice : {}
+        notice : {},
+        userinfo : {}
       }
     },
     mounted(){
-      const boardId = this.$route.params.boardId;
+      this.userinfo = this.$store.state.session;
+    
 
+      const boardId = this.$route.params.boardId;
+      console.log(this.userinfo);
       http.get(`/api/board/detail/${boardId}`)
       .then((response) => {
         this.notice = response.data.data;

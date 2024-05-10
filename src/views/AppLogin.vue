@@ -109,7 +109,9 @@ const login = () => {
     .then(() => {
       sessionStorage.setItem("userInfo", JSON.stringify(user.value));
       store.commit('setSession', user.value)
+      console.log(store.state.session);
       router.push({ path: "/" });
+
     })
     .catch((error) => {
       alert("요청 중 오류 발생:", error);

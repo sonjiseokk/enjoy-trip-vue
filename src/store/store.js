@@ -31,7 +31,7 @@ const store = createStore({
         state.clickedTrip = payload.trip;
     },
     setSession(state, payload) {
-      state.session = payload.session;
+      state.session = payload;
     },
     removeSession(state) {
       state.session = {};
