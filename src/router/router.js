@@ -34,7 +34,7 @@ const routes = [
         ],
       },
       {
-        path: "detail/:num",
+        path: "detail/:boardId",
         name: "noticedetail",
         component: NoticeDetail,
       },

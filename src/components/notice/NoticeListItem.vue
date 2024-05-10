@@ -1,9 +1,10 @@
 <template>
-    <tr @click="getNotice(notice.num)">
-        <td>{{ notice.num }}</td>
-        <td>{{ notice.title }}</td>
-        <td>{{ notice.regdate }}</td>
-        <td>{{ notice.count }}</td>
+    <tr @click="getNotice(notice.boardId)">
+        <td>{{ notice.boardId }}</td>
+        <td>{{ notice.subject }}</td>
+        <td>{{ notice.createDate }}</td>
+        <td>{{ notice.userId }}</td>
+        <td>{{ notice.viewCount }}</td>
     </tr>
 </template>
 
@@ -14,9 +15,10 @@ export default {
     props: {
         notice: {},
     },
-    methods : {
-        getNotice(){
-            
+    methods: {
+        getNotice(boardId) {
+            // Navigate to the detailed page with the boardId as a route parameter
+            this.$router.push(`/notice/detail/${boardId}`);
         }
     }
 

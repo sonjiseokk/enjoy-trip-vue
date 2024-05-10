@@ -1,11 +1,11 @@
 <template>
     <div class="container text-center pt-5">
-      <h4>{{ notice.title }}</h4>
+      <h4>{{ notice.subject }}</h4>
   
       <br />
       <div class="card mb-3 m-auto">
         <div class="card-header text-right" style="font-size: 0.8em">
-          등록 날짜 : {{ notice.regdate }}<br />조회수 : {{ notice.count }}
+          등록 날짜 : {{ notice.createDate }}<br />조회수 : {{ notice.viewCount }}
         </div>
         <div class="card-body" style="height: 300px">
           <p class="card-text text-left" v-html="notice.content"></p>
@@ -33,11 +33,25 @@
   </template>
   
   <script>
+import http from '@/api/http-common';
   
   export default {
     name: "NoticeDetail",
-    props : {
-        notice : Object
+    data(){
+      return {
+        notice : {}
+      }
+    },
+    mounted(){
+      const boardId = this.$route.params.boardId;
+
+      http.get(`/api/board/detail/${boardId}`)
+      .then((response) => {
+        this.notice = response.data.data;
+      })
+      .catch((e) => {
+        console.log(e);
+      })
     }
   };
   </script>

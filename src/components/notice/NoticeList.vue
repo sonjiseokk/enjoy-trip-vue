@@ -12,15 +12,17 @@
         <table class="table table-hover">
             <colgroup>
                 <col style="width: 5%" />
-                <col style="width: 70%" />
+                <col style="width: 50%" />
                 <col style="width: 15%" />
-                <col style="width: 10%" />
+                <col style="width: 15%" />
+                <col style="width: 15%" />
             </colgroup>
             <thead>
                 <tr>
                     <th>#</th>
                     <th>제목</th>
                     <th>날짜</th>
+                    <th>작성자</th>
                     <th>조회수</th>
                 </tr>
             </thead>
@@ -61,13 +63,15 @@
   import NoticeSearch from "@/components/notice/NoticeSearch.vue";
   import NoticeListItem from "@/components/notice/NoticeListItem.vue";
 
+  import http from "@/api/http-common";
+
   
   export default {
     name: "NoticeList",
     data() {
       return {
         pages: [],
-        selectedNotices: [{num : 1, title : "제목1", regdate : new Date(), count : 1}],
+        selectedNotices: [],
         dataLength: 0,
         totalPage: 0,
         startPage: 1,
@@ -76,6 +80,13 @@
         hidePrevious: true,
         hideNext: true,
       };
+    },
+    mounted(){
+        http.get('/api/board')
+        .then((response) => {
+            this.selectedNotices = response.data.data;
+            console.log(this.selectedNotices)
+        })
     },
     components: {
       NoticeSearch,
