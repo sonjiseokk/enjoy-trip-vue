@@ -107,9 +107,10 @@ const router = useRouter();
 const login = () => {
     http.post(`/api/member/login`, user.value)
     .then(() => {
-      sessionStorage.setItem("userInfo", JSON.stringify(user.value));
       store.commit('setSession', user.value)
       console.log(store.state.session);
+
+      alert("로그인에 성공했습니다.");
       router.push({ path: "/" });
 
     })
