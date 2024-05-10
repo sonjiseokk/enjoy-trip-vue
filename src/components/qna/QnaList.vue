@@ -82,10 +82,14 @@
       };
     },
     mounted(){
-        http.get(`/api/board?boardType=1`)
+        http.get('/api/board?boardType=2')
         .then((response) => {
             this.selectedNotices = response.data.data;
             console.log(this.selectedNotices)
+        })
+        .catch((e) => {
+            console.error(e);
+            
         })
     },
     components: {
