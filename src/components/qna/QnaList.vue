@@ -5,9 +5,9 @@
                 <button v-if="userInfo != null && userInfo.id == 'admin'" class="btn btn-dark" @click="writeNotice">
                     글쓰기
                 </button>
-                <button class="btn btn-dark" @click="getNoticeList">전체 목록</button>
+                <button class="btn btn-dark" @click="getQnaList">전체 목록</button>
             </div>
-            <notice-search></notice-search>
+            <qna-search @search="search"></qna-search>
         </div>
         <table class="table table-hover">
             <colgroup>
@@ -27,8 +27,8 @@
                 </tr>
             </thead>
             <tbody>
-                <notice-list-item v-for="notice in selectedNotices" :key="notice.num"
-                    :notice="notice"></notice-list-item>
+                <qna-list-item v-for="qna in selectedQnas" :key="qna.boardId"
+                    :qna="qna"></qna-list-item>
             </tbody>
         </table>
         <section class="py-7">
@@ -60,10 +60,9 @@
 </template>
   
 <script>
-  import NoticeSearch from "@/components/notice/NoticeSearch.vue";
-  import NoticeListItem from "@/components/notice/NoticeListItem.vue";
-
   import http from "@/api/http-common";
+  import QnaSearch from './QnaSearch.vue';
+  import QnaListItem from './QnaListItem.vue';
 
   
   export default {
@@ -71,7 +70,7 @@
     data() {
       return {
         pages: [],
-        selectedNotices: [],
+        selectedQnas: [],
         dataLength: 0,
         totalPage: 0,
         startPage: 1,
@@ -84,20 +83,43 @@
     mounted(){
         http.get('/api/board?boardType=2')
         .then((response) => {
-            this.selectedNotices = response.data.data;
-            console.log(this.selectedNotices)
+            this.selectedQnas = response.data.data;
+            console.log(this.selectedQnas)
         })
         .catch((e) => {
             console.error(e);
-            
+            this.selectedQnas = [];
         })
     },
     components: {
-      NoticeSearch,
-      NoticeListItem,
+        QnaSearch ,
+        QnaListItem
     },
-    
-  };
+    methods : {
+        search(receivedTitle){
+            http.get(`/api/board?boardType=2&keyword=${receivedTitle}`)
+            .then((response) => {
+                this.selectedQnas = response.data.data;
+                console.log(this.selectedQnas)
+            })
+            .catch((e) => {
+                this.selectedQnas = [];
+                console.error(e);
+            })
+        },
+        getQnaList(){
+            http.get('/api/board?boardType=2')
+            .then((response) => {
+                this.selectedQnas = response.data.data;
+                console.log(this.selectedQnas)
+            })
+            .catch((e) => {
+                console.error(e);
+                this.selectedQnas = [];
+            }) 
+        }
+    }
+}
 </script>
   
   <style scoped>

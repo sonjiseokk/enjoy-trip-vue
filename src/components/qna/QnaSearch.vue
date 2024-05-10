@@ -10,9 +10,9 @@
         aria-describedby="search-addon"
         style="max-width: 150px"
         @input="changeTitle($event.target.value)"
-        @keyup.enter="searchNotice()"
+        @keyup.enter="searchQna()"
       />
-      <button type="button" class="btn btn-dark" @click="searchNotice()">검색</button>
+      <button type="button" class="btn btn-dark" @click="searchQna()">검색</button>
     </div>
   </template>
   
@@ -29,7 +29,7 @@
       changeTitle(value){
         this.title = value;
       },
-      searchNotice(){
+      searchQna(){
         this.$emit('search',this.title)
       }
     }

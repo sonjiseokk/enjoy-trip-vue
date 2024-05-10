@@ -7,7 +7,7 @@
                 </button>
                 <button class="btn btn-dark" @click="getNoticeList">전체 목록</button>
             </div>
-            <notice-search></notice-search>
+            <notice-search @search="search"></notice-search>
         </div>
         <table class="table table-hover">
             <colgroup>
@@ -92,6 +92,29 @@
       NoticeSearch,
       NoticeListItem,
     },
+    methods : {
+        search(receivedTitle){
+            http.get(`/api/board?boardType=1&keyword=${receivedTitle}`)
+            .then((response) => {
+                this.selectedNotices = response.data.data;
+                console.log(this.selectedNotices)
+            })
+            .catch((e) => {
+                this.selectedNotices = [];
+                console.error(e);
+            })
+        },
+        getNoticeList(){
+            http.get(`/api/board?boardType=1`)
+            .then((response) => {
+                this.selectedNotices = response.data.data;
+                console.log(this.selectedNotices)
+            })
+            .catch((e) => {
+                console.error(e);
+            })
+        }
+    }
     
   };
 </script>
