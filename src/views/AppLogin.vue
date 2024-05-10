@@ -22,7 +22,7 @@
             <input
               type="text"
               class="form-control"
-              v-model="user.id"
+              v-model="user.loginId"
               placeholder="아이디를 입력해주세요."
               required=""
               @submit.prevent=""
@@ -30,13 +30,13 @@
             />
           </div>
         </div>
-        <div class="form-group row">
+        <div class="form-group row mt-3">
           <label for="pass" class="col-sm-3 col-form-label">비밀번호</label>
           <div class="col-sm-9">
             <input
               type="password"
               class="form-control"
-              v-model="user.pass"
+              v-model="user.loginPw"
               placeholder="비밀번호를 입력해주세요."
               required=""
               @submit.prevent=""
@@ -53,13 +53,13 @@
           >
             회원가입
           </button>
-          <button
+          <!-- <button
             class="btn btn-dark mr-2"
             @submit.prevent=""
             @click="moveFindPass"
           >
             비밀번호 찾기
-          </button>
+          </button> -->
         </div>
         <div class="d-flex justify-content-center mt-3">
           <!-- <div
@@ -87,21 +87,24 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: "AppLogin",
-  //   components: {
-  //     TheModal,
-  //   },
-  data() {
-    return {
-      user: {
-        id: "",
-        pass: "",
-      },
-    };
-  },
-};
+<script setup>
+import { ref } from 'vue';
+import http from "@/api/http-common";
+
+const user = ref({
+  loginId: "",
+  loginPw: "",
+})
+
+const login = () => {
+    http.post(`/api/member/login`, user.value)
+    .then((response) => {
+      console.log(response.data);
+    })
+    .catch((error) => {
+      alert("요청 중 오류 발생:", error);
+    });
+}
 </script>
 
 <style scoped>

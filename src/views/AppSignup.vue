@@ -19,7 +19,7 @@
             <input
               type="text"
               class="form-control"
-              v-model="user.id"
+              v-model="user.userId"
               @change="idchange"
               placeholder="아이디를 입력해주세요."
               required=""
@@ -38,7 +38,7 @@
         <div class="row">
           <p class="col-sm-3"></p>
           <p
-            v-if="user.id.length > 0 && user.id.length < 5"
+            v-if="user.userId.length > 0 && user.userId.length < 5"
             style="font-size: 14px; color: red"
           >
             &nbsp;&nbsp;&nbsp;&nbsp;아이디는 5글자 이상이어야 합니다.
@@ -47,7 +47,7 @@
             &nbsp;&nbsp;&nbsp;&nbsp;사용가능한 아이디입니다.
           </p>
           <p
-            v-if="user.id.length >= 5 && !checkid"
+            v-if="user.userId.length >= 5 && !checkid"
             style="font-size: 14px; color: red"
           >
             &nbsp;&nbsp;&nbsp;&nbsp;중복체크를 해주세요.
@@ -61,14 +61,14 @@
             <input
               type="text"
               class="form-control"
-              v-model="user.name"
+              v-model="user.userName"
               placeholder="이름을 입력해주세요."
             />
           </div>
         </div>
         <div class="row">
           <p class="col-sm-3"></p>
-          <p v-if="user.name.length == 0" style="font-size: 14px; color: red">
+          <p v-if="user.userName.length == 0" style="font-size: 14px; color: red">
             &nbsp;&nbsp;&nbsp;&nbsp;이름을 입력해주세요.
           </p>
         </div>
@@ -80,7 +80,7 @@
             <input
               type="password"
               class="form-control"
-              v-model="user.pass"
+              v-model="user.userPassword"
               placeholder="비밀번호를 입력해주세요."
             />
           </div>
@@ -88,7 +88,7 @@
         <div class="row">
           <p class="col-sm-3"></p>
           <p
-            v-if="user.pass.length > 0 && user.pass.length < 8"
+            v-if="user.userPassword.length > 0 && user.userPassword.length < 8"
             style="font-size: 14px; color: red"
           >
             &nbsp;&nbsp;&nbsp;&nbsp;비밀번호는 8글자 이상이어야 합니다.
@@ -103,7 +103,7 @@
               type="password"
               class="form-control"
               id="inputPassword"
-              v-model="temp"
+              v-model="secondPassword"
               placeholder="비밀번호를 입력해주세요."
             />
           </div>
@@ -111,12 +111,12 @@
         <div class="row">
           <p class="col-sm-3"></p>
           <p
-            v-if="user.pass.length >= 8 && user.pass == temp"
+            v-if="user.userPassword.length >= 8 && user.userPassword == secondPassword"
             style="font-size: 14px; color: blue"
           >
             &nbsp;&nbsp;&nbsp;&nbsp;비밀번호가 일치합니다.
           </p>
-          <p v-else-if="temp.length > 0" style="font-size: 14px; color: red">
+          <p v-else-if="secondPassword.length > 0" style="font-size: 14px; color: red">
             &nbsp;&nbsp;&nbsp;&nbsp;비밀번호가 일치하지 않습니다.
           </p>
         </div>
@@ -128,11 +128,11 @@
             <input
               type="email"
               class="form-control"
-              v-model="user.email"
+              v-model="user.userEmail"
               placeholder="이메일을 입력해주세요."
             />
           </div>
-          <div class="col-sm-2">
+          <!-- <div class="col-sm-2">
             <button
               class="btn btn-dark d-flex m-auto"
               @submit.prevent=""
@@ -140,9 +140,9 @@
             >
               인증하기
             </button>
-          </div>
+          </div> -->
         </div>
-        <div class="form-group row" v-if="sendComplete">
+        <!-- <div class="form-group row" v-if="sendComplete">
           <label for="email" class="col-sm-3 col-form-label"
             >인증번호&nbsp;<span style="color: red">*</span></label
           >
@@ -173,8 +173,8 @@
           <p v-else style="font-size: 14px; color: red">
             &nbsp;&nbsp;&nbsp;&nbsp;인증번호가 일치하지 않습니다.
           </p>
-        </div>
-        <div class="form-group row">
+        </div> -->
+        <!-- <div class="form-group row">
           <label for="inputPassword" class="col-sm-3 col-form-label"
             >휴대폰 번호&nbsp;<span style="color: red">*</span></label
           >
@@ -187,9 +187,9 @@
               @keyup="getPhoneMask(contact)"
             />
           </div>
-        </div>
+        </div> -->
         <button
-          class="btn btn-dark d-flex m-auto"
+          class="btn btn-dark d-flex mt-3 m-auto"
           @submit.prevent=""
           @click="signup"
         >
@@ -200,29 +200,61 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: "AppSignup",
-  data() {
-    return {
-      image: null,
-      contact: "",
-      temp: "",
-      checkid: false,
-      time: "",
-      inputCode: "",
-      checkEmail: false,
-      input: false,
-      user: {
-        id: "",
-        pass: "",
-        name: "",
-        phone: "",
-        email: "",
-      },
-    };
-  },
-};
+<script setup>
+import { ref } from 'vue';
+import http from "@/api/http-common";
+//import axios from 'axios'
+
+//const image = ref(null);
+//const contact = ref('');
+const secondPassword = ref('');
+const checkid = ref(false);
+//const time = ref('');
+// const inputCode = ref('');
+// const checkEmail = ref(false);
+// const input = ref(false);
+
+const user = ref({
+  userId: "",
+  userPassword: "",
+  userName: "",
+  userEmail: "",
+})
+
+/********************************* 중복체크 기능 없으니까 일단 넘어가자 *********************************/
+const idcheck= () => {
+  if (user.value.userId < 5) {
+    alert("5글자 이상 입력해주세요!!");
+    return;
+  }
+  else {
+    checkid.value = true;
+  }
+  // http.get(`/users/idcheck/` + this.user.id).then(({ data }) => {
+  //   if (data.message == "success") {
+  //     this.checkid = true;
+  //   } else {
+  //     alert("사용할 수 없는 아이디입니다.");
+  //   }
+  // });
+}
+
+const signup = () => {
+  if (checkid.value && user.value.userPassword == secondPassword.value) {
+    console.log(user.value);
+
+    http.post(`/api/member/join`, user.value)
+        .then((response) => {
+          console.log(response.data);
+        })
+        .catch((error) => {
+          alert("요청 중 오류 발생:", error);
+        });
+  } else {
+    alert("정보를 다시 입력해주세요");
+  }
+}
+
 </script>
 
 <style scoped>

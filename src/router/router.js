@@ -52,10 +52,12 @@ const routes = [
   },
   {
     path: "/signup",
+    name: "signup",
     component: AppSignup,
   },
   {
     path: "/login",
+    name: "login",
     component: AppLogin,
   },
 ];
