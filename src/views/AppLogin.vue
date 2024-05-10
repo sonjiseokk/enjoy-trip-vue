@@ -90,20 +90,34 @@
 <script setup>
 import { ref } from 'vue';
 import http from "@/api/http-common";
+import { useRouter } from 'vue-router';
+import { useStore } from 'vuex';
+
+const store = useStore();
 
 const user = ref({
-  loginId: "",
-  loginPw: "",
+  session: {
+    loginId: "",
+    loginPw: "",
+  }
 })
+
+const router = useRouter();
 
 const login = () => {
     http.post(`/api/member/login`, user.value)
-    .then((response) => {
-      console.log(response.data);
+    .then(() => {
+      sessionStorage.setItem("userInfo", JSON.stringify(user.value));
+      store.commit('setSession', user.value)
+      router.push({ path: "/" });
     })
     .catch((error) => {
       alert("요청 중 오류 발생:", error);
     });
+}
+
+const moveSignup = () => {
+  router.push({ name: "signup" });
 }
 </script>
 

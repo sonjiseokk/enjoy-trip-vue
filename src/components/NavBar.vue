@@ -53,14 +53,14 @@
                 <i class="bi bi-people" style="font-size: 2rem; padding-right: 10px;"></i>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="background-color: white">
-                  <router-link id="userpage" to="/userpage" class="dropdown-item" v-if="userInfo">
+                  <router-link id="userpage" to="/userpage" class="dropdown-item" v-if="Object.keys(userInfo).length !== 0">
                     마이페이지
                   </router-link>
-                  <router-link id="join" to="/signup" class="dropdown-item" v-if="!userInfo">
+                  <router-link id="join" to="/signup" class="dropdown-item" v-if="Object.keys(userInfo).length === 0">
                     회원가입
                   </router-link>
                   <div class="dropdown-divider" style="border: #7895b2 1px"></div>
-                  <a href="" v-if="userInfo" class="dropdown-item" @click="userLogout(userInfo.id)">
+                  <a href="" v-if="Object.keys(userInfo).length !== 0" class="dropdown-item" @click="userLogout()">
                     <b-icon icon="key"></b-icon> 로그아웃
                   </a>
                   <router-link v-else id="login" to="/login" class="dropdown-item">
@@ -76,10 +76,25 @@
   </div>
 </template>
 
-<script>
-export default {
+<script setup>
+import { computed } from 'vue';
+import { useStore } from 'vuex';
 
+const store = useStore();
+
+const userInfo = computed(() => store.state.session);
+
+const userLogout = () => {
+  if (!userInfo.value) {
+    alert("오류가 발생했습니다.");
+  }
+  else {
+    sessionStorage.removeItem("userInfo");
+    store.commit('removeSession');
+  }
 }
+
+
 </script>
 
 <style scoped>

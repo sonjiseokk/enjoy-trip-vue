@@ -7,7 +7,8 @@ const store = createStore({
       lng: 126.9786567,
       mapTripTitle : '기본 위치',
       detailOpen : false,
-      clickedTrip : {},
+      clickedTrip: {},
+      session: {},
     };
   },
   mutations: {
@@ -29,7 +30,12 @@ const store = createStore({
     clickTrip(state,payload){
         state.clickedTrip = payload.trip;
     },
-
+    setSession(state, payload) {
+      state.session = payload.session;
+    },
+    removeSession(state) {
+      state.session = {};
+    }
   },
 })
 

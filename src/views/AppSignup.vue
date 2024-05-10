@@ -203,7 +203,10 @@
 <script setup>
 import { ref } from 'vue';
 import http from "@/api/http-common";
+import { useRouter } from 'vue-router';
 //import axios from 'axios'
+
+const router = useRouter();
 
 //const image = ref(null);
 //const contact = ref('');
@@ -244,8 +247,9 @@ const signup = () => {
     console.log(user.value);
 
     http.post(`/api/member/join`, user.value)
-        .then((response) => {
-          console.log(response.data);
+        .then(() => {
+          alert("회원가입에 성공했습니다.");
+          router.push({ path: "/" });
         })
         .catch((error) => {
           alert("요청 중 오류 발생:", error);
