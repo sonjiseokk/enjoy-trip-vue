@@ -5,7 +5,7 @@ const store = createStore({
     return {
       lat: 37.566826,
       lng: 126.9786567,
-      mapTripTitle : '',
+      mapTripTitle : '기본 위치',
     };
   },
   mutations: {

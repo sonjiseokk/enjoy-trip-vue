@@ -40,9 +40,9 @@ export default {
       this.isColor = flag;
     },
     cardClick(){
-      console.log(this.trip.title);
       this.$store.commit('changeMap', { lat: this.trip.latitude, lng: this.trip.longitude });
       this.$store.commit('changeTitle', { title : this.trip.title});
+      console.log(this.$store.state.mapTripTitle);
 
     }
   },

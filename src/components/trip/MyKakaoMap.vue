@@ -3,11 +3,11 @@ import { computed } from 'vue';
 import { useStore } from 'vuex';
 import { KakaoMap, KakaoMapMarker } from 'vue3-kakao-maps';
 
+
 const store = useStore();
 
 const lat = computed(() => store.state.lat);
 const lng = computed(() => store.state.lng);
-
 
 </script>
 
@@ -17,21 +17,12 @@ const lng = computed(() => store.state.lng);
 <template>
   <div>
     <div id="map">
-      <KakaoMap :lat="lat" :lng="lng" :draggable="true"
-        style="width: 100%; height: 900px;">
-        <KakaoMapMarker 
-        :lat="lat" 
-        :lng="lng">
-        <template v-slot:infoWindow><div 
-          style=" 
-  display: flex;
-  flex-direction: column;
-  align-items : center; /* 수평 중앙 정렬 */
-  justify-content: center; /* 수직 중앙 정렬 */
-  text-align: center;
-  min-width: 50px;
-  min-height: 50px;">{{ $store.state.mapTripTitle }}</div></template>
+      <KakaoMap :lat="lat" :lng="lng" :draggable="true" style="width: 100%; height: 900px;">
+        <KakaoMapMarker :lat="lat" :lng="lng">
+          <template v-slot:infoWindow><div style="padding: 10px; margin-bottom: 10px;">{{$store.state.mapTripTitle}}</div></template>
         </KakaoMapMarker>
+        
+    
       </KakaoMap>
     </div>
 
@@ -68,9 +59,6 @@ const lng = computed(() => store.state.lng);
 </template>
 
 <style scss>
-#infoWIndow {
-
-}
 
 #map {
   width: 100vw;
