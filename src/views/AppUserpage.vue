@@ -28,6 +28,7 @@ const userInfo = computed(() => store.state.session);
 
 onMounted(() => {
     if (Object.keys(userInfo).length === 0) {
+        alert("로그인 후 이용가능합니다.");
         router.push({ path: "/" });
     }
 });
