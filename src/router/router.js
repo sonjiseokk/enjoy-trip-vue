@@ -9,6 +9,9 @@ import NoticeDetail from "@/components/notice/NoticeDetail.vue";
 import QnaList from "@/components/qna/QnaList.vue";
 import AppSignup from "@/views/AppSignup.vue";
 import AppLogin from "@/views/AppLogin.vue";
+import AppUserpage from '@/views/AppUserpage.vue';
+import ProfilePage from '@/components/user/ProfilePage.vue';
+import ProfileModify from '@/components/user/ProfileModify.vue';
 const routes = [
   {
     path: "/",
@@ -90,6 +93,24 @@ const routes = [
     path: "/login",
     name: "login",
     component: AppLogin,
+  },
+  {
+    path: "/userpage",
+    name: "userpage",
+    component: AppUserpage,
+    redirect: "/userPage/profile",
+    children: [
+      {
+        path: "profile",
+        name: "profile",
+        component: ProfilePage,
+      },
+      {
+        path: "modify",
+        name: "modify",
+        component: ProfileModify,
+      },
+    ],
   },
 ];
 

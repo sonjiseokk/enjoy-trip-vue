@@ -11,74 +11,70 @@
               </div>
               <!-- User Name -->
               <div class="card-body">
-                <h5 class="text-center">이름이 들어감</h5>
-                <p>이메일이 들어감</p>
+                <h5 class="text-center">회원 이름</h5>
+                <p>회원 이메일</p>
               </div>
             </div>
-            <!-- Dashboard Links -->
-            <div class="card m-auto">
-              <div class="card-body">
-                <ul class="list-unstyled">
-                  <li class="active">
-                    <router-link class="dash-links" to="/userpage/view"><b-icon icon="person-fill"></b-icon><span> 회원정보</span></router-link
-                    >
-                  </li>
-                  <li>
-                    <router-link class="dash-links" to="/userpage/favorite"
-                      ><b-icon icon="star-fill"></b-icon><span> 관심지역</span></router-link
-                    >
-                  </li>
-                  <li>
-                    <router-link class="dash-links" to="/userpage/qna"
-                      ><b-icon icon="inbox-fill"></b-icon><span> 내 질문</span></router-link
-                    >
-                  </li>
-                </ul>
-              </div>
+            <div class = "card m-2 p-2">
+              <RouterLink class="dash-links" to="/userpage/profile"><b-icon icon="person-fill">
+                </b-icon><span> 내 정보</span>
+              </RouterLink>
+            </div>
+            <div class = "card m-2 p-2">
+              <RouterLink class="dash-links" to="/userpage/like"><b-icon icon="person-fill">
+                </b-icon><span> 내 관광지</span>
+              </RouterLink>
+            </div>
+            <div class = "card m-2 p-2">
+              <RouterLink class="dash-links" to="/userpage/manage"><b-icon icon="person-fill">
+                </b-icon><span> 게시판 관리</span>
+              </RouterLink>
             </div>
           </div>
         </div>
-        <router-view class="col-lg-9"></router-view>
+        <div class="col-lg-9">
+          <RouterView/>
+        </div>
       </div>
     </div>
   </template>
   
 <script setup> 
-import { computed, onMounted } from 'vue';
-import { useStore } from 'vuex';
-import { useRouter } from 'vue-router';
-import http from "@/api/http-common";
+// import { computed, onMounted } from 'vue';
+// import { useStore } from 'vuex';
+import { RouterLink, RouterView } from 'vue-router';
+// import http from "@/api/http-common";
 
-const store = useStore();
-const router = useRouter();
+// const store = useStore();
+//const router = useRouter();
 
-const loginUser = computed(() => store.state.session);
-//const userInfo = ref({});
+// const loginUser = computed(() => store.state.session);
+// //const userInfo = ref({});
 
-const find = () => {
-    http.post(`/api/member/find`, loginUser.value.loginId)
-        .then((response) => {
-            console.log(response.data);
-            //userInfo.value = response.data;
-        })
-    .catch((error) => {
-      alert("요청 중 오류 발생:", error);
-    });
-}
+// const find = () => {
+//     http.post(`/api/member/find`, loginUser.value.loginId)
+//         .then((response) => {
+//             console.log(response.data);
+//             //userInfo.value = response.data;
+//         })
+//     .catch((error) => {
+//       alert("요청 중 오류 발생:", error);
+//     });
+// }
 
-onMounted(() => {
-    if (Object.keys(loginUser).length !== 0) {
-        alert("로그인 후 이용가능합니다.");
-        router.push({ path: "/" });
-    }
-    else find();
-});
+// onMounted(() => {
+//     if (Object.keys(loginUser).length !== 0) {
+//         alert("로그인 후 이용가능합니다.");
+//         router.push({ path: "/" });
+//     }
+//     else find();
+// });
 </script>
   
-  <style>
-  .dash-links{
-    text-decoration: none;
-    color: #4b555e !important;
-  }
-  </style>
+<style>
+.dash-links{
+  text-decoration: none;
+  color: #4b555e !important;
+}
+</style>
   

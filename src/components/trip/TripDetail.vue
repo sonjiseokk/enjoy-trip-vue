@@ -54,7 +54,7 @@ export default {
     },
     methods : {
         dispalynone(){
-            this.$store.commit('closeDetail');
+            this.$store.commit('closeDetail', );
         }
     }
 }
