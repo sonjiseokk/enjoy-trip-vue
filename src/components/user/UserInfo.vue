@@ -1,7 +1,7 @@
 <template>
-    <div class="container pt-5">
+    <div class="container pt-1">
       <div class="row">
-        <div class="col-lg-3">
+        <div class="col-lg-2">
           <div class="sidebar">
             <!-- User Widget -->
             <div class="card">
@@ -32,7 +32,7 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-9">
+        <div class="col-lg-10 overflow-hidden">
           <RouterView/>
         </div>
       </div>

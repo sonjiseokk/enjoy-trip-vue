@@ -12,6 +12,7 @@ import AppLogin from "@/views/AppLogin.vue";
 import AppUserpage from '@/views/AppUserpage.vue';
 import ProfilePage from '@/components/user/ProfilePage.vue';
 import ProfileModify from '@/components/user/ProfileModify.vue';
+import LikePage from '@/components/user/LikePage.vue';
 const routes = [
   {
     path: "/",
@@ -109,6 +110,11 @@ const routes = [
         path: "modify",
         name: "modify",
         component: ProfileModify,
+      },
+      {
+        path: "like",
+        name: "like",
+        component: LikePage,
       },
     ],
   },
