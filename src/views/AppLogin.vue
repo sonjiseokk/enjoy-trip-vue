@@ -107,8 +107,8 @@ const router = useRouter();
 const login = () => {
     http.post(`/api/member/login`, user.value)
     .then((response) => {
-      let accessToken = response.data.data.accessToken;
-      store.commit('setAccessToken', {accessToken : accessToken});
+      let jwt = response.data.data;
+      store.commit('setJwt', {jwt : jwt});
 
       alert("로그인에 성공했습니다.");
       router.push({ path: "/" });
