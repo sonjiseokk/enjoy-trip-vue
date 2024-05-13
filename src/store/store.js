@@ -3,6 +3,8 @@ import { createStore } from 'vuex'
 const store = createStore({
   state() {
     return {
+      accessToken : "",
+      refreshToken : "",
       lat: 37.566826,
       lng: 126.9786567,
       mapTripTitle : '기본 위치',
@@ -35,6 +37,13 @@ const store = createStore({
     },
     removeSession(state) {
       state.session = {};
+    },
+
+    // JWT 인증
+    setAccessToken(state,payload){
+      console.log("저장하는 값은" + payload.accessToken);
+      state.accessToken = payload.accessToken;
+      localStorage.setItem('accessToken',state.accessToken);
     }
   },
 })

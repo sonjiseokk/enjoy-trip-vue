@@ -36,6 +36,9 @@ export default {
       tripList : [],
     }
   },
+  mounted() {
+    console.log(localStorage.getItem('accessToken'));
+  },
   components: { TripSearch, MyKakaoMap, TripSearchList, TripDetail },
   methods : {
     search(formData){
