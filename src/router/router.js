@@ -13,6 +13,7 @@ import AppUserpage from '@/views/AppUserpage.vue';
 import ProfilePage from '@/components/user/ProfilePage.vue';
 import ProfileModify from '@/components/user/ProfileModify.vue';
 import LikePage from '@/components/user/LikePage.vue';
+import ManagePage from '@/components/user/ManagePage.vue';
 const routes = [
   {
     path: "/",
@@ -115,6 +116,11 @@ const routes = [
         path: "like",
         name: "like",
         component: LikePage,
+      },
+      {
+        path: "manage",
+        name: "manage",
+        component: ManagePage,
       },
     ],
   },

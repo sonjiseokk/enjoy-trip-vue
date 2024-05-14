@@ -11,8 +11,8 @@
               </div>
               <!-- User Name -->
               <div class="card-body">
-                <h5 class="text-center">회원 이름</h5>
-                <p>회원 이메일</p>
+                <h5 class="text-center">{{userInfo.userName}}</h5>
+                <p>{{userInfo.userEmail}}</p>
               </div>
             </div>
             <div class = "card m-2 p-2">
@@ -40,35 +40,11 @@
   </template>
   
 <script setup> 
-// import { computed, onMounted } from 'vue';
-// import { useStore } from 'vuex';
 import { RouterLink, RouterView } from 'vue-router';
-// import http from "@/api/http-common";
+import { ref } from 'vue';
 
-// const store = useStore();
-//const router = useRouter();
+const userInfo = ref(JSON.parse(sessionStorage.getItem('jwt')));
 
-// const loginUser = computed(() => store.state.session);
-// //const userInfo = ref({});
-
-// const find = () => {
-//     http.post(`/api/member/find`, loginUser.value.loginId)
-//         .then((response) => {
-//             console.log(response.data);
-//             //userInfo.value = response.data;
-//         })
-//     .catch((error) => {
-//       alert("요청 중 오류 발생:", error);
-//     });
-// }
-
-// onMounted(() => {
-//     if (Object.keys(loginUser).length !== 0) {
-//         alert("로그인 후 이용가능합니다.");
-//         router.push({ path: "/" });
-//     }
-//     else find();
-// });
 </script>
   
 <style>

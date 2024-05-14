@@ -31,19 +31,14 @@ const store = createStore({
     clickTrip(state,payload){
         state.clickedTrip = payload.trip;
     },
-    setSession(state, payload) {
-      state.session = payload;
-    },
-    removeSession(state) {
-      state.session = {};
-    },
-
     // JWT 인증
     setJwt(state,payload){
       console.log("저장하는 값은" + JSON.stringify(payload.jwt));
       state.jwt = JSON.stringify(payload.jwt);
-      localStorage.setItem('jwt',state.jwt);
-    }
+      sessionStorage.setItem('jwt', state.jwt);
+      
+      console.log(state.jwt);
+    },
   },
 })
 

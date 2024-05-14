@@ -18,7 +18,7 @@
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            <b-icon-list></b-icon-list>
+            <!-- <b-icon-list></b-icon-list> -->
           </button>
 
           <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
@@ -50,21 +50,22 @@
                   aria-haspopup="true"
                   aria-expanded="false"
                 >
-                <i class="bi bi-people" style="font-size: 2rem; padding-right: 10px;"></i>
+                <i v-if="!userInfo" class="bi bi-people" style="font-size: 2rem; padding-right: 10px;"></i>
+                <i v-else class="bi bi-people-fill" style="font-size: 2rem; padding-right: 10px;"></i>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="background-color: white">
-                  <router-link id="userpage" to="/userpage" class="dropdown-item" v-if="Object.keys(userInfo).length !== 0">
+                  <router-link id="userpage" to="/userpage" class="dropdown-item" v-if="userInfo">
                     마이페이지
                   </router-link>
-                  <router-link id="join" to="/signup" class="dropdown-item" v-if="Object.keys(userInfo).length === 0">
+                  <router-link id="join" to="/signup" class="dropdown-item" v-if="!userInfo">
                     회원가입
                   </router-link>
                   <div class="dropdown-divider" style="border: #7895b2 1px"></div>
-                  <a href="" v-if="Object.keys(userInfo).length !== 0" class="dropdown-item" @click="userLogout()">
-                    <b-icon icon="key"></b-icon> 로그아웃
+                  <a href="" v-if="userInfo" class="dropdown-item" @click="userLogout()">
+                    로그아웃
                   </a>
                   <router-link v-else id="login" to="/login" class="dropdown-item">
-                    <b-icon icon="key"></b-icon> 로그인
+                    로그인
                   </router-link>
                 </div>
               </li>
@@ -77,22 +78,16 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
-import { useStore } from 'vuex';
-
-const store = useStore();
-
-const userInfo = computed(() => store.state.session);
+const userInfo = sessionStorage.getItem("jwt");
 
 const userLogout = () => {
-  if (!userInfo.value) {
+  if (!userInfo) {
     alert("오류가 발생했습니다.");
   }
   else {
-    store.commit('removeSession');
+    sessionStorage.removeItem('jwt');
   }
 }
-
 
 </script>
 

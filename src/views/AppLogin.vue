@@ -9,7 +9,7 @@
       <div class="container absolute">
         <div class="row">
           <div class="col-md-7 text-center mx-auto">
-            <h3><b-icon icon="key"></b-icon> 로그인</h3>
+            <h3>로그인</h3>
           </div>
         </div>
       </div>
@@ -108,14 +108,18 @@ const login = () => {
     http.post(`/api/member/login`, user.value)
     .then((response) => {
       let jwt = response.data.data;
-      store.commit('setJwt', {jwt : jwt});
 
-      alert("로그인에 성공했습니다.");
-      router.push({ path: "/" });
+      if (jwt === undefined) {
+        throw new Error("아이디 혹은 비밀번호가 일치하지 않습니다.");
+      }
+
+      store.commit('setJwt', { jwt: jwt });
+
+      location.href = "/";
 
     })
     .catch((error) => {
-      alert("요청 중 오류 발생:", error);
+      alert(error.message);
     });
 }
 

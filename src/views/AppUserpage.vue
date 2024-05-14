@@ -17,19 +17,19 @@
   
 <script setup>
 import UserInfo from "@/components/user/UserInfo.vue";
-import { onMounted, computed } from 'vue';
+import { onMounted } from 'vue';
 import { useRouter } from 'vue-router';
-import { useStore } from 'vuex';
+// import { useStore } from 'vuex';
 
-const store = useStore();
+// const store = useStore();
 const router = useRouter();
 
-const userInfo = computed(() => store.state.session);
+const userInfo = sessionStorage.getItem("jwt");
 
 onMounted(() => {
-    if (Object.keys(userInfo).length === 0) {
+    if (!userInfo) {
         alert("로그인 후 이용가능합니다.");
-        router.push({ path: "/" });
+        router.push({ path: "/login" });
     }
 });
 
