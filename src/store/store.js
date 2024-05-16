@@ -10,6 +10,10 @@ const store = createStore({
       detailOpen : false,
       clickedTrip: {},
       session: {},
+
+      markerInfoList : [
+        { name: "기본 위치" ,lat: 37.566826, lng: 126.9786567 }
+      ],
     };
   },
   mutations: {
@@ -39,6 +43,16 @@ const store = createStore({
       localStorage.setItem('jwt',state.jwt)
       console.log(state.jwt);
     },
+
+    placeMarkers(state, payload){
+      console.log(payload.data);
+      payload.data.forEach((location) => {
+        // location 객체에서 lat와 lng를 직접 추가합니다.
+        state.markerInfoList.push({ name : location.title, lat: location.latitude, lng: location.longitude });
+      });
+
+      console.log(state.markerInfoList);
+    }
   },
 })
 

@@ -14,9 +14,9 @@
             <img class="sell-thumbnail" :src="thumnailImage" alt="Image 1" />
         </div>
         <div class="detail-menu-bar">
-            <button @click="showInfo" class="btn menu"
+            <button @click="showRooms" class="btn menu"
                 :class="{ 'active btn-primary': false, 'btn-outline-primary': true }" id="info">
-                후기/게시판
+                숙박
             </button>
             <button @click="showInfo" class="btn menu"
                 :class="{ 'active btn-primary': false, 'btn-outline-primary': true }">
@@ -36,6 +36,7 @@
 </template>
 
 <script>
+import http from "@/api/http-common";
 export default {
     data() {
         return {
@@ -55,7 +56,22 @@ export default {
     methods : {
         dispalynone(){
             this.$store.commit('closeDetail', );
+        },
+        showRooms(){
+          console.log(this.trip);
+          const formData = {
+            contentTypeId : 32,
+            sidoCode : this.trip.sidoCode,
+            gugunCode : this.trip.gugunCode,
+          }
+          http.post(`/api/trip/search`,formData)
+          .then((response) => {
+            console.log(response.data);
+            this.$store.commit('placeMarkers',{data : response.data})
+          })
+          .catch((e) => console.error(e));
         }
+
     }
 }
 </script>

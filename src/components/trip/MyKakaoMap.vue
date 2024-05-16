@@ -1,14 +1,52 @@
 <script setup>
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { useStore } from 'vuex';
-import { KakaoMap, KakaoMapMarker } from 'vue3-kakao-maps';
+import { KakaoMap, KakaoMapMarker,KakaoMapInfoWindow  } from 'vue3-kakao-maps';
 
 
 const store = useStore();
 
+const map = ref();
+const markerList = computed(() => []);
+
 const lat = computed(() => store.state.lat);
 const lng = computed(() => store.state.lng);
 
+const markerInfoList = computed( () => store.state.markerInfoList);
+const onLoadKakaoMap = (mapRef) => {
+  map.value = mapRef;
+
+  console.log(markerInfoList.value);
+  /* eslint-disable */
+  const bounds = new kakao.maps.LatLngBounds();
+
+  // 장소 검색 객체를 생성합니다
+  for (let marker of markerInfoList.value) {
+      const markerItem = {
+        lat: marker.lat,
+        lng: marker.lng,
+        infoWindow: {
+          content: marker.name,
+          visible: false
+        }
+      };
+      markerList.value.push(markerItem);
+      bounds.extend(new kakao.maps.LatLng(Number(marker.y), Number(marker.x)));
+  }
+  console.log('이놈음')
+  console.log(markerList.value);
+
+};
+
+const marker = ref();
+
+const onClickMapMarker = (markerItem) => {
+  if (markerItem.infoWindow?.visible !== null && markerItem.infoWindow?.visible !== undefined) {
+    markerItem.infoWindow.visible = !markerItem.infoWindow.visible;
+  } else {
+    markerItem.infoWindow.visible = true;
+  }
+};
 </script>
 
 
@@ -17,12 +55,22 @@ const lng = computed(() => store.state.lng);
 <template>
   <div>
     <div id="map">
-      <KakaoMap :lat="lat" :lng="lng" :draggable="true" style="width: 100%; height: 900px;">
-        <KakaoMapMarker :lat="lat" :lng="lng">
-          <template v-slot:infoWindow><div style="padding: 10px; margin-bottom: 10px;">{{$store.state.mapTripTitle}}</div></template>
-        </KakaoMapMarker>
-        
-    
+      <KakaoMap :lat="lat" :lng="lng" :draggable="true" style="width: 100%; height: 900px;" @onLoadKakaoMap="onLoadKakaoMap">
+        <KakaoMapMarker
+        :lat="marker.lat" 
+        :lng="marker.lng" 
+        :infoWindow="marker.infoWindow"
+        @onClickKakaoMapMarker="onClickMapMarker(marker)" 
+        :clickable="true" 
+        v-for="(marker, index) in markerList" 
+        :key="index"/>
+          <!-- <template v-slot:infoWindow>
+            <div style="padding: 10px; margin-bottom: 10px;">{{$store.state.mapTripTitle}}</div>
+          </template> -->
+        <!-- </KakaoMapMarker> -->
+        <KakaoMapInfoWindow :marker="marker" :lat="lat" :lng="lng" :visible="true">
+          <div>{{$store.state.mapTripTitle}}</div>
+        </KakaoMapInfoWindow>
       </KakaoMap>
     </div>
 
