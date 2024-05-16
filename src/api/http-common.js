@@ -9,45 +9,45 @@ const apiClient = axios.create({
 });
 
 // 리프레시 토큰을 사용하여 새로운 액세스 토큰을 요청하는 함수
-const refreshAccessToken = async (jwt) => {
-    try {
-        const response = await axios.post('http://localhost:80/api/auth/refresh', jwt, {
-            headers: {
-                "Content-Type": "application/json"
-            }
-        });
-        console.log("반환은" + response);
-        return response.data;
-    } catch (error) {
-        console.error('Error refreshing access token:', error);
-        return null;
-    }
-};
+// const refreshAccessToken = async (jwt) => {
+//     try {
+//         const response = await axios.post('http://localhost:80/api/auth/refresh', jwt, {
+//             headers: {
+//                 "Content-Type": "application/json"
+//             }
+//         });
+//         console.log("반환은" + response);
+//         return response.data;
+//     } catch (error) {
+//         console.error('Error refreshing access token:', error);
+//         return null;
+//     }
+// };
 
-apiClient.interceptors.response.use(
-    (res) => res,
-    async (err) => {
-      const { config, response: { status } } = err;
+// apiClient.interceptors.response.use(
+//     (res) => res,
+//     async (err) => {
+//       const { config, response: { status } } = err;
   
-      console.log(config.url)
-      console.log(status)
-      console.log(config.sent)
-      /** 1 */
-    //   if (config.url === REFRESH_URL || status !== 401 || config.sent) {
-    //       return Promise.reject(err);
-    //   }
+//       console.log(config.url)
+//       console.log(status)
+//       console.log(config.sent)
+//       /** 1 */
+//     //   if (config.url === REFRESH_URL || status !== 401 || config.sent) {
+//     //       return Promise.reject(err);
+//     //   }
   
-      /** 2 */
-      config.sent = true;
-      const accessToken = await refreshAccessToken();
+//       /** 2 */
+//       config.sent = true;
+//       const accessToken = await refreshAccessToken();
   
-      if (accessToken) {
-        config.headers.Authorization = `Bearer ${accessToken}`;
-      }
+//       if (accessToken) {
+//         config.headers.Authorization = `Bearer ${accessToken}`;
+//       }
   
-      return axios(config);
-    }
-  );
+//       return axios(config);
+//     }
+//   );
 
 // 요청 인터셉터 추가
 apiClient.interceptors.request.use( async (config) => {

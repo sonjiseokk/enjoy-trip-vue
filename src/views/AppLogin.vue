@@ -112,7 +112,7 @@ const login = () => {
       if (jwt === undefined) {
         throw new Error("아이디 혹은 비밀번호가 일치하지 않습니다.");
       }
-
+      
       store.commit('setJwt', { jwt: jwt });
 
       location.href = "/";

@@ -78,14 +78,14 @@
 </template>
 
 <script setup>
-const userInfo = sessionStorage.getItem("jwt");
+const userInfo = sessionStorage.getItem("userInfo");
 
 const userLogout = () => {
   if (!userInfo) {
     alert("오류가 발생했습니다.");
   }
   else {
-    sessionStorage.removeItem('jwt');
+    sessionStorage.removeItem('userInfo');
   }
 }
 

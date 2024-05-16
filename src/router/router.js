@@ -90,17 +90,53 @@ const routes = [
     path: "/signup",
     name: "signup",
     component: AppSignup,
+    beforeEnter: (to, from, next) => {
+      // sessionStorage에서 값 가져오기
+      const userInfo = sessionStorage.getItem('userInfo');
+      // 값이 없으면 다른 페이지로 이동
+      if (userInfo) {
+        alert("로그아웃 이후 이용 가능합니다.");
+        next('/');
+      } else {
+        // 값이 있으면 계속 진행
+        next();
+      }
+    },
   },
   {
     path: "/login",
     name: "login",
     component: AppLogin,
+    beforeEnter: (to, from, next) => {
+      // sessionStorage에서 값 가져오기
+      const userInfo = sessionStorage.getItem('userInfo');
+      // 값이 없으면 다른 페이지로 이동
+      if (userInfo) {
+        alert("로그아웃 후 이용 가능합니다.");
+        next('/');
+      } else {
+        // 값이 있으면 계속 진행
+        next();
+      }
+    },
   },
   {
     path: "/userpage",
     name: "userpage",
     component: AppUserpage,
     redirect: "/userPage/profile",
+    beforeEnter: (to, from, next) => {
+      // sessionStorage에서 값 가져오기
+      const userInfo = sessionStorage.getItem('userInfo');
+      // 값이 없으면 다른 페이지로 이동
+      if (!userInfo) {
+        alert("로그인 후 이용 가능합니다.");
+        next('/login');
+      } else {
+        // 값이 있으면 계속 진행
+        next();
+      }
+    },
     children: [
       {
         path: "profile",

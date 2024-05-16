@@ -25,7 +25,7 @@
                 </b-icon><span> 내 관광지</span>
               </RouterLink>
             </div>
-            <div class = "card m-2 p-2">
+            <div class = "card m-2 p-2" v-if='userInfo.role === "MANAGER"'>
               <RouterLink class="dash-links" to="/userpage/manage"><b-icon icon="person-fill">
                 </b-icon><span> 게시판 관리</span>
               </RouterLink>
@@ -43,7 +43,7 @@
 import { RouterLink, RouterView } from 'vue-router';
 import { ref } from 'vue';
 
-const userInfo = ref(JSON.parse(sessionStorage.getItem('jwt')));
+const userInfo = ref(JSON.parse(sessionStorage.getItem('userInfo')));
 
 </script>
   

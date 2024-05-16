@@ -17,22 +17,6 @@
   
 <script setup>
 import UserInfo from "@/components/user/UserInfo.vue";
-import { onMounted } from 'vue';
-import { useRouter } from 'vue-router';
-// import { useStore } from 'vuex';
-
-// const store = useStore();
-const router = useRouter();
-
-const userInfo = sessionStorage.getItem("jwt");
-
-onMounted(() => {
-    if (!userInfo) {
-        alert("로그인 후 이용가능합니다.");
-        router.push({ path: "/login" });
-    }
-});
-
 
 </script>
   

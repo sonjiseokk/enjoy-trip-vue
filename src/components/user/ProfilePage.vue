@@ -7,7 +7,11 @@ const moveModify = () => {
     router.push("/userpage/modify");
 }
 
-const userInfo = JSON.parse(sessionStorage.getItem('jwt'));
+const moveModifyPw = () => {
+    alert("미구현");
+}
+
+const userInfo = JSON.parse(sessionStorage.getItem('userInfo'));
 
 </script>
 
@@ -28,7 +32,8 @@ const userInfo = JSON.parse(sessionStorage.getItem('jwt'));
                 <input type="text" class="form-control" id="userEmail" readOnly v-model='userInfo.userEmail'>
             </div>
             <div class="d-flex justify-content-end">
-                <button @click="moveModify" class="btn btn-primary m-5">정보 수정</button>
+                <button @click="moveModify" class="btn btn-primary mt-5 mb-5 ms-2 me-2">정보 수정</button>
+                <button @click="moveModifyPw" class="btn btn-primary mt-5 mb-5 me-5">비밀번호 변경</button>
             </div>
         </div>
     </div>
