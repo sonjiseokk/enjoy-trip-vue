@@ -20,8 +20,9 @@ const modifyInfo = () => {
     .then((response) => {
       console.log(response);
 
-      // alert("정보 수정에 성공했습니다.");
-      // location.href = "/userpage/profile";
+      alert("성공적으로 정보가 변경되었습니다. 다시 로그인해 주세요.");
+      sessionStorage.removeItem("jwt");
+      location.href = "/login";
     })
     .catch((error) => {
       alert(error.message);
