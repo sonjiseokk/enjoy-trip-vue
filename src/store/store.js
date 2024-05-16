@@ -50,9 +50,7 @@ const store = createStore({
     },
 
     placeMarkers(state, payload){
-      state.markerInfoList = [
-        { name: "기본 위치" ,lat: 37.566826, lng: 126.9786567 }
-      ];
+      state.markerInfoList = [];
       console.log(payload.data);
       payload.data.forEach((location) => {
         // location 객체에서 lat와 lng를 직접 추가합니다.

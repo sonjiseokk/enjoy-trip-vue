@@ -18,13 +18,17 @@
                 :class="{ 'active btn-primary': false, 'btn-outline-primary': true }" id="info">
                 숙박
             </button>
-            <button @click="showInfo" class="btn menu"
+            <button @click="showShopping" class="btn menu"
                 :class="{ 'active btn-primary': false, 'btn-outline-primary': true }">
-                후기/게시판
+                쇼핑
             </button>
-            <button @click="showInfra" class="btn menu"
-                :class="{ 'active btn-primary': true, 'btn-outline-primary': false }" id="infra">
-                인프라
+            <button @click="showReisure" class="btn menu"
+                :class="{ 'active btn-primary': false, 'btn-outline-primary': true }">
+                레포츠
+            </button>
+            <button @click="showRestaurant" class="btn menu"
+                :class="{ 'active btn-primary': false, 'btn-outline-primary': true }">
+                음식점
             </button>
         </div>
 
@@ -69,8 +73,63 @@ export default {
             console.log(response.data);
             this.$store.commit('placeMarkers',{data : response.data})
           })
-          .catch((e) => console.error(e));
-        }
+          .catch((e) => {
+            console.error(e)
+            alert('해당 정보가 없습니다.')
+        });
+        },
+        showShopping(){
+          console.log(this.trip);
+          const formData = {
+            contentTypeId : 38,
+            sidoCode : this.trip.sidoCode,
+            gugunCode : this.trip.gugunCode,
+          }
+          http.post(`/api/trip/search`,formData)
+          .then((response) => {
+            console.log(response.data);
+            this.$store.commit('placeMarkers',{data : response.data})
+          })
+          .catch((e) => {
+            console.error(e)
+            alert('해당 정보가 없습니다.')
+          });
+          
+        },
+        showRestaurant(){
+          console.log(this.trip);
+          const formData = {
+            contentTypeId : 39,
+            sidoCode : this.trip.sidoCode,
+            gugunCode : this.trip.gugunCode,
+          }
+          http.post(`/api/trip/search`,formData)
+          .then((response) => {
+            console.log(response.data);
+            this.$store.commit('placeMarkers',{data : response.data})
+          })
+          .catch((e) => {
+            console.error(e)
+            alert('해당 정보가 없습니다.')
+        });
+        },
+        showReisure(){
+          console.log(this.trip);
+          const formData = {
+            contentTypeId : 28,
+            sidoCode : this.trip.sidoCode,
+            gugunCode : this.trip.gugunCode,
+          }
+          http.post(`/api/trip/search`,formData)
+          .then((response) => {
+            console.log(response.data);
+            this.$store.commit('placeMarkers',{data : response.data})
+          })
+          .catch((e) => {
+            console.error(e)
+            alert('해당 정보가 없습니다.')
+          });
+        },
 
     }
 }
