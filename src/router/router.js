@@ -9,11 +9,11 @@ import NoticeDetail from "@/components/notice/NoticeDetail.vue";
 import QnaList from "@/components/qna/QnaList.vue";
 import AppSignup from "@/views/AppSignup.vue";
 import AppLogin from "@/views/AppLogin.vue";
-import AppUserpage from '@/views/AppUserpage.vue';
-import ProfilePage from '@/components/user/ProfilePage.vue';
-import ProfileModify from '@/components/user/ProfileModify.vue';
-import LikePage from '@/components/user/LikePage.vue';
-import ManagePage from '@/components/user/ManagePage.vue';
+import AppUserpage from "@/views/AppUserpage.vue";
+import ProfilePage from "@/components/user/ProfilePage.vue";
+import ProfileModify from "@/components/user/ProfileModify.vue";
+import LikePage from "@/components/user/LikePage.vue";
+import ManagePage from "@/components/user/ManagePage.vue";
 const routes = [
   {
     path: "/",
@@ -92,11 +92,11 @@ const routes = [
     component: AppSignup,
     beforeEnter: (to, from, next) => {
       // sessionStorage에서 값 가져오기
-      const userInfo = sessionStorage.getItem('userInfo');
+      const userInfo = sessionStorage.getItem("jwt");
       // 값이 없으면 다른 페이지로 이동
       if (userInfo) {
         alert("로그아웃 이후 이용 가능합니다.");
-        next('/');
+        next("/");
       } else {
         // 값이 있으면 계속 진행
         next();
@@ -109,11 +109,11 @@ const routes = [
     component: AppLogin,
     beforeEnter: (to, from, next) => {
       // sessionStorage에서 값 가져오기
-      const userInfo = sessionStorage.getItem('userInfo');
+      const userInfo = sessionStorage.getItem("jwt");
       // 값이 없으면 다른 페이지로 이동
       if (userInfo) {
         alert("로그아웃 후 이용 가능합니다.");
-        next('/');
+        next("/");
       } else {
         // 값이 있으면 계속 진행
         next();
@@ -127,11 +127,11 @@ const routes = [
     redirect: "/userPage/profile",
     beforeEnter: (to, from, next) => {
       // sessionStorage에서 값 가져오기
-      const userInfo = sessionStorage.getItem('userInfo');
+      const userInfo = sessionStorage.getItem("jwt");
       // 값이 없으면 다른 페이지로 이동
       if (!userInfo) {
         alert("로그인 후 이용 가능합니다.");
-        next('/login');
+        next("/login");
       } else {
         // 값이 있으면 계속 진행
         next();
