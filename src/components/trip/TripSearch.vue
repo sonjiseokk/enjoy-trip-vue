@@ -49,18 +49,20 @@ export default {
     }
   },
   created() {
-    http.get(`/trip/sido`)
+    http.get(`/api/trip/sido`)
       .then((response) => {
         this.sidos = response.data.data;
       })
       .catch((e) => {
+        console.log("에러에요 에러");
         console.error(e);
       });
-    http.get(`/trip/contentType`)
+    http.get(`/api/trip/contentType`)
     .then((response) => {
       this.contentTypes = response.data.data;
     })
     .catch((e) => {
+      
       console.error(e);
     })
   },
@@ -74,7 +76,7 @@ export default {
   },
   methods: {
     getGugun(sido) {
-      http.get(`/trip/gugun?sido=${sido.sidoCode}`)
+      http.get(`/api/trip/gugun?sido=${sido.sidoCode}`)
       .then((response) => {
         this.guguns = response.data.data;
       })

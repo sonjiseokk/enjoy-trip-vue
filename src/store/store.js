@@ -36,7 +36,7 @@ const store = createStore({
       console.log("저장하는 값은" + JSON.stringify(payload.jwt));
       state.jwt = JSON.stringify(payload.jwt);
       sessionStorage.setItem('jwt', state.jwt);
-      
+      localStorage.setItem('jwt',state.jwt)
       console.log(state.jwt);
     },
   },

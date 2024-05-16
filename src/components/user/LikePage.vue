@@ -40,7 +40,7 @@
     methods : {
       search(formData){
         console.log(formData);
-        http.post(`/trip/search`, formData)
+        http.post(`/api/trip/search`, formData)
           .then((response) => {
             console.log(response.data);
             this.tripList = response.data
