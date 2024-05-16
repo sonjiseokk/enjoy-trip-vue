@@ -3,11 +3,12 @@ import { computed, ref,onMounted,onUnmounted  } from 'vue';
 import { useStore } from 'vuex';
 import { KakaoMap, KakaoMapMarker,KakaoMapInfoWindow  } from 'vue3-kakao-maps';
 
-
+// 위치 정보를 저장할 ref 변수
 const store = useStore();
 
 const map = ref();
 const markerList = ref([]);
+
 
 const lat = computed(() => store.state.lat);
 const lng = computed(() => store.state.lng);
@@ -53,9 +54,11 @@ const unsubscribe = store.subscribe((mutation, state) => {
   }
 });
 
+
 onMounted(() => {
-  // 컴포넌트가 마운트될 때 동작
+
 });
+
 
 onUnmounted(() => {
   // 컴포넌트가 언마운트될 때 구독 해제

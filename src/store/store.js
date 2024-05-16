@@ -6,21 +6,22 @@ const store = createStore({
       jwt : {},
       lat: 37.566826,
       lng: 126.9786567,
-      mapTripTitle : '기본 위치',
+      mapTripTitle : '현재 위치',
       detailOpen : false,
       clickedTrip: {},
       session: {},
-
+      
       markerInfoList : [
-        { name: "기본 위치" ,lat: 37.566826, lng: 126.9786567 }
       ],
     };
   },
   mutations: {
-    getDefaultInfoList(state){
+    setDefaultInfoList(state,payload){
       state.markerInfoList = [
-        { name: "기본 위치" ,lat: 37.566826, lng: 126.9786567 }
+        { name: "현재 위치" ,lat: payload.lat, lng: payload.lng }
       ];
+      state.lat = payload.lat;
+      state.lng = payload.lng;
     },
     // `state`를 첫 번째 매개변수로 받고, 두 번째 매개변수로 `payload`를 받습니다.
     changeMap(state, payload) {

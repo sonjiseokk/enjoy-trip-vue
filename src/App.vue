@@ -36,7 +36,16 @@ export default {
       scrollValue: 0,
     }
   },
-  
+  created() {
+    this.$getLocation()
+      .then((coordinates) => {
+        console.log(coordinates);
+        this.$store.commit('setDefaultInfoList',{lat : coordinates.lat, lng : coordinates.lng})
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
   mounted() {
     this.lastScrollPosition = window.pageYOffset;
     window.addEventListener("scroll", this.onScroll);
