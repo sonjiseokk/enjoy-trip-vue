@@ -17,6 +17,11 @@ const store = createStore({
     };
   },
   mutations: {
+    getDefaultInfoList(state){
+      state.markerInfoList = [
+        { name: "기본 위치" ,lat: 37.566826, lng: 126.9786567 }
+      ];
+    },
     // `state`를 첫 번째 매개변수로 받고, 두 번째 매개변수로 `payload`를 받습니다.
     changeMap(state, payload) {
       state.lat = payload.lat;
@@ -45,6 +50,9 @@ const store = createStore({
     },
 
     placeMarkers(state, payload){
+      state.markerInfoList = [
+        { name: "기본 위치" ,lat: 37.566826, lng: 126.9786567 }
+      ];
       console.log(payload.data);
       payload.data.forEach((location) => {
         // location 객체에서 lat와 lng를 직접 추가합니다.

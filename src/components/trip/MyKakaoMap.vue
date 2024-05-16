@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref } from 'vue';
+import { computed, ref,onMounted,onUnmounted  } from 'vue';
 import { useStore } from 'vuex';
 import { KakaoMap, KakaoMapMarker,KakaoMapInfoWindow  } from 'vue3-kakao-maps';
 
@@ -7,39 +7,63 @@ import { KakaoMap, KakaoMapMarker,KakaoMapInfoWindow  } from 'vue3-kakao-maps';
 const store = useStore();
 
 const map = ref();
-const markerList = computed(() => []);
+const markerList = ref([]);
 
 const lat = computed(() => store.state.lat);
 const lng = computed(() => store.state.lng);
 
-const markerInfoList = computed( () => store.state.markerInfoList);
+const markerInfoList = ref(store.state.markerInfoList);
+
 const onLoadKakaoMap = (mapRef) => {
   map.value = mapRef;
 
   console.log(markerInfoList.value);
   /* eslint-disable */
+  updateMarkers();
+};
+const updateMarkers = () => {
+  markerList.value = []; // 마커 리스트 초기화
   const bounds = new kakao.maps.LatLngBounds();
 
-  // 장소 검색 객체를 생성합니다
   for (let marker of markerInfoList.value) {
-      const markerItem = {
-        lat: marker.lat,
-        lng: marker.lng,
-        infoWindow: {
-          content: marker.name,
-          visible: false
-        }
-      };
-      markerList.value.push(markerItem);
-      bounds.extend(new kakao.maps.LatLng(Number(marker.y), Number(marker.x)));
+    const markerItem = {
+      lat: marker.lat,
+      lng: marker.lng,
+      infoWindow: {
+        content: marker.name,
+        visible: false
+      }
+    };
+    markerList.value.push(markerItem);
+    bounds.extend(new kakao.maps.LatLng(Number(marker.lat), Number(marker.lng)));
   }
-  console.log('이놈음')
-  console.log(markerList.value);
 
+  if (map.value) {
+    map.value.setBounds(bounds);
+  }
 };
 
+// Vuex mutation을 구독하고 mutation이 발생할 때 updateMarkers 호출
+const unsubscribe = store.subscribe((mutation, state) => {
+  if (mutation.type === 'placeMarkers') {
+    markerInfoList.value = state.markerInfoList;
+    if (map.value) {
+      updateMarkers();
+    }
+  }
+});
+
+onMounted(() => {
+  // 컴포넌트가 마운트될 때 동작
+});
+
+onUnmounted(() => {
+  // 컴포넌트가 언마운트될 때 구독 해제
+  unsubscribe();
+});
 const marker = ref();
 
+//마커 클릭 시 인포윈도우의 visible 값을 반전시킵니다
 const onClickMapMarker = (markerItem) => {
   if (markerItem.infoWindow?.visible !== null && markerItem.infoWindow?.visible !== undefined) {
     markerItem.infoWindow.visible = !markerItem.infoWindow.visible;
