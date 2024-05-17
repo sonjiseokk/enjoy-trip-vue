@@ -15,11 +15,8 @@ import ProfileModify from "@/components/user/ProfileModify.vue";
 import LikePage from "@/components/user/LikePage.vue";
 import ManagePage from "@/components/user/ManagePage.vue";
 import AiTripView from "@/views/AiTripView.vue";
-<<<<<<< HEAD
-import NoticeInsert from '@/components/notice/NoticeInsert.vue';
-import NoticeModify from '@/components/notice/NoticeModify.vue';
-=======
->>>>>>> 986abdc9a97a59c55fe50431c102b6b432857362
+import NoticeInsert from "@/components/notice/NoticeInsert.vue";
+import NoticeModify from "@/components/notice/NoticeModify.vue";
 const routes = [
   {
     path: "/",
@@ -59,7 +56,7 @@ const routes = [
           // sessionStorage에서 값 가져오기
           const userInfo = JSON.parse(sessionStorage.getItem("jwt"));
           // 값이 없으면 다른 페이지로 이동
-          if (userInfo === null || userInfo.role !== 'ADMIN') {
+          if (userInfo === null || userInfo.role !== "ADMIN") {
             alert("관리자만 진행가능합니다.");
             next("/");
           } else {
@@ -76,7 +73,7 @@ const routes = [
           // sessionStorage에서 값 가져오기
           const userInfo = JSON.parse(sessionStorage.getItem("jwt"));
           // 값이 없으면 다른 페이지로 이동
-          if (userInfo === null || userInfo.role !== 'ADMIN') {
+          if (userInfo === null || userInfo.role !== "ADMIN") {
             alert("관리자만 진행가능합니다.");
             next("/");
           } else {
@@ -84,7 +81,7 @@ const routes = [
             next();
           }
         },
-      }
+      },
     ],
   },
   {
