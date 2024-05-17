@@ -14,6 +14,9 @@ import ProfilePage from "@/components/user/ProfilePage.vue";
 import ProfileModify from "@/components/user/ProfileModify.vue";
 import LikePage from "@/components/user/LikePage.vue";
 import ManagePage from "@/components/user/ManagePage.vue";
+import AiTripView from "@/views/AiTripView.vue";
+import NoticeInsert from '@/components/notice/NoticeInsert.vue';
+import NoticeModify from '@/components/notice/NoticeModify.vue';
 const routes = [
   {
     path: "/",
@@ -45,16 +48,40 @@ const routes = [
         name: "noticedetail",
         component: NoticeDetail,
       },
-      // {
-      //   path: "insert",
-      //   name: "noticeinsert",
-      //   component: NoticeInsert,
-      // },
-      // {
-      //   path: "modify",
-      //   name: "noticemodify",
-      //   component: NoticeModify,
-      // },
+      {
+        path: "insert",
+        name: "noticeinsert",
+        component: NoticeInsert,
+        beforeEnter: (to, from, next) => {
+          // sessionStorage에서 값 가져오기
+          const userInfo = JSON.parse(sessionStorage.getItem("jwt"));
+          // 값이 없으면 다른 페이지로 이동
+          if (userInfo === null || userInfo.role !== 'ADMIN') {
+            alert("관리자만 진행가능합니다.");
+            next("/");
+          } else {
+            // 값이 있으면 계속 진행
+            next();
+          }
+        },
+      },
+      {
+        path: "modify/:boardId",
+        name: "noticemodify",
+        component: NoticeModify,
+        beforeEnter: (to, from, next) => {
+          // sessionStorage에서 값 가져오기
+          const userInfo = JSON.parse(sessionStorage.getItem("jwt"));
+          // 값이 없으면 다른 페이지로 이동
+          if (userInfo === null || userInfo.role !== 'ADMIN') {
+            alert("관리자만 진행가능합니다.");
+            next("/");
+          } else {
+            // 값이 있으면 계속 진행
+            next();
+          }
+        },
+      }
     ],
   },
   {
@@ -85,6 +112,10 @@ const routes = [
       //   component: NoticeModify,
       // },
     ],
+  },
+  {
+    path: "/ai",
+    component: AiTripView,
   },
   {
     path: "/signup",

@@ -12,50 +12,69 @@
         </div>
       </div>
       <br />
-      <div class="btn-group">
+      <div class="d-flex justify-content-end">
+        <router-link class="btn btn-dark m-3" to="/notice/list">공지 목록</router-link>
         <router-link
-          v-if="userinfo.loginId != null"
-          class="btn btn-dark"
-          to="/notice/modify"
+          v-if="userinfo !== undefined && userinfo.userId === notice.userId"
+          class="btn btn-dark m-3"
+          :to='"/notice/modify/" + notice.boardId'
           >수정하기</router-link
         >
         <button
-        v-if="userinfo.loginId != null"
-          class="btn btn-dark"
-          @click="deleteNotice(notice.num)"
+        v-if="userinfo !== undefined && userinfo.userId === notice.userId"
+          class="btn btn-dark m-3"
+          @click="deleteNotice(notice.boardId)"
         >
           삭제하기
         </button>
-        <router-link class="btn btn-dark" to="/notice/list">공지 목록</router-link>
       </div>
       <br />
     </div>
   </template>
   
   <script>
-import http from '@/api/http-common';
+  import http from '@/api/http-common';
+  import { useRouter } from 'vue-router';
+  // const userInfo = JSON.parse(sessionStorage.getItem('jwt'));
+  const router = useRouter();
   
   export default {
     name: "NoticeDetail",
     data(){
       return {
         notice : {},
-        userinfo : {}
+        userinfo: JSON.parse(sessionStorage.getItem('jwt')),
+        router: router
       }
     },
-    mounted(){
-      this.userinfo = this.$store.state.session;
-    
-
+    mounted() {
+      console.log("아문갑");
+      console.log(this.userInfo);
       const boardId = this.$route.params.boardId;
-      console.log(this.userinfo);
       http.get(`/api/board/detail/${boardId}`)
       .then((response) => {
+          console.log(response.data.data);
+        
         this.notice = response.data.data;
+
       })
       .catch((e) => {
         console.log(e);
       })
+    },
+    methods: {
+      deleteNotice(id) {
+        console.log(id);
+        
+        http.post(`/api/board/delete/` + id)
+        .then((response) => {
+          this.notice = response.data.data;
+          this.$router.push('/notice/list');
+        })
+        .catch((e) => {
+          console.log(e);
+        })
+      }
     }
   };
   </script>

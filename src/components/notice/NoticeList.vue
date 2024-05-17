@@ -1,11 +1,11 @@
 <template>
     <div class="container">
         <div class="mb-2 input-group d-flex justify-content-between">
-            <div class="btn-group">
-                <button v-if="userInfo != null && userInfo.id == 'admin'" class="btn btn-dark" @click="writeNotice">
+            <div class="">
+                <button class="btn btn-dark" @click="getNoticeList">전체 목록</button>
+                <button v-if="userInfo != null && userInfo.role === 'ADMIN'" class="btn btn-secondary ms-3" @click="writeNotice">
                     글쓰기
                 </button>
-                <button class="btn btn-dark" @click="getNoticeList">전체 목록</button>
             </div>
             <notice-search @search="search"></notice-search>
         </div>
@@ -61,11 +61,14 @@
   
 <script>
   import NoticeSearch from "@/components/notice/NoticeSearch.vue";
-  import NoticeListItem from "@/components/notice/NoticeListItem.vue";
+import NoticeListItem from "@/components/notice/NoticeListItem.vue";
+import { useRouter } from 'vue-router';
 
   import http from "@/api/http-common";
 
-  
+    const userInfo = JSON.parse(sessionStorage.getItem('jwt'));
+const router = useRouter();
+    
   export default {
     name: "NoticeList",
     data() {
@@ -79,6 +82,8 @@
         curPage: 1,
         hidePrevious: true,
         hideNext: true,
+        userInfo: userInfo,
+        router: router
       };
     },
     mounted(){
@@ -86,6 +91,10 @@
         .then((response) => {
             this.selectedNotices = response.data.data;
             console.log(this.selectedNotices)
+        })
+        .catch((e) => {
+            console.error(e);
+            this.selectedQnas = [];
         })
     },
     components: {
@@ -113,6 +122,9 @@
             .catch((e) => {
                 console.error(e);
             })
+        },
+        writeNotice() {
+            this.$router.push('/notice/insert');
         }
     }
     
