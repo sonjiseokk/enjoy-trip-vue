@@ -53,6 +53,14 @@
                   >QnA</router-link
                 >
               </li>
+              <li class="nav-item" @click="changed">
+                <router-link
+                  id="ai"
+                  to="/ai"
+                  class="ml-3 mr-3 nav-link text-secondary"
+                  >AI추천</router-link
+                >
+              </li>
             </ul>
             <ul class="navbar-nav me-4">
               <li class="nav-item dropdown">

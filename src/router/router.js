@@ -14,6 +14,7 @@ import ProfilePage from "@/components/user/ProfilePage.vue";
 import ProfileModify from "@/components/user/ProfileModify.vue";
 import LikePage from "@/components/user/LikePage.vue";
 import ManagePage from "@/components/user/ManagePage.vue";
+import AiTripView from "@/views/AiTripView.vue";
 const routes = [
   {
     path: "/",
@@ -85,6 +86,10 @@ const routes = [
       //   component: NoticeModify,
       // },
     ],
+  },
+  {
+    path: "/ai",
+    component: AiTripView,
   },
   {
     path: "/signup",
