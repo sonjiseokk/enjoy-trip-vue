@@ -15,8 +15,11 @@ import ProfileModify from "@/components/user/ProfileModify.vue";
 import LikePage from "@/components/user/LikePage.vue";
 import ManagePage from "@/components/user/ManagePage.vue";
 import AiTripView from "@/views/AiTripView.vue";
+<<<<<<< HEAD
 import NoticeInsert from '@/components/notice/NoticeInsert.vue';
 import NoticeModify from '@/components/notice/NoticeModify.vue';
+=======
+>>>>>>> 986abdc9a97a59c55fe50431c102b6b432857362
 const routes = [
   {
     path: "/",
