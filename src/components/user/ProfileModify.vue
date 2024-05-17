@@ -16,7 +16,7 @@ const inputJson = ref({
 const modifyInfo = () => {
   console.log(userInfo.value);
   http
-    .patch(`/api/member/update/info`, inputJson.value)
+    .post(`/api/member/update/info`, inputJson.value)
     .then((response) => {
       console.log(response);
 

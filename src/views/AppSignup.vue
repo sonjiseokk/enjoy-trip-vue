@@ -230,16 +230,14 @@ const idcheck= () => {
     alert("5글자 이상 입력해주세요!!");
     return;
   }
-  else {
-    checkid.value = true;
-  }
-  // http.get(`/users/idcheck/` + this.user.id).then(({ data }) => {
-  //   if (data.message == "success") {
-  //     this.checkid = true;
-  //   } else {
-  //     alert("사용할 수 없는 아이디입니다.");
-  //   }
-  // });
+  http.get(`/api/member/check/duplication/` + user.value.userId).then(({ data }) => {
+    console.log(data);
+    if (data.data == "success") {
+      checkid.value = true;
+    } else {
+      alert("사용할 수 없는 아이디입니다.");
+    }
+  });
 }
 
 const signup = () => {
