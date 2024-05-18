@@ -1,46 +1,29 @@
 <script setup>
-import { ref, onMounted } from "vue";
-import { useRouter, useRoute } from "vue-router";
+import { ref } from "vue";
+import { useRouter } from "vue-router";
 import http from "@/api/http-common";
 
 const userInfo = ref(JSON.parse(sessionStorage.getItem("jwt")));
 const router = useRouter();
-const route = useRoute();
 
-const newBoard = ref({
-  boardId: 0,
-  subject: "asfd",
-  content: "asdf",
+const boardInfo = ref({
+  subject: "",
+  content: "",
+  userId: userInfo.value.userId,
+  boardTypeId: 2,
+  contentId: 0,
 });
 
-const modifyArticle = () => {
-  if (userInfo.value.role !== "ADMIN") {
-    alert("관리자만 수정 가능합니다.");
-  } else {
-    http
-      .post(`/api/board/modify`, newBoard.value)
-      .then(() => {
-        router.push("/notice/list");
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  }
-};
-
-onMounted(() => {
-  const boardId = route.params.boardId;
+const writeArticle = () => {
   http
-    .get(`/api/board/detail/${boardId}`)
-    .then((response) => {
-      newBoard.value.boardId = response.data.data.boardId;
-      newBoard.value.subject = response.data.data.subject;
-      newBoard.value.content = response.data.data.content;
+    .post(`/api/board/write`, boardInfo.value)
+    .then(() => {
+      router.push("/qna/list");
     })
     .catch((e) => {
       console.log(e);
     });
-});
+};
 </script>
 
 <template>
@@ -49,7 +32,7 @@ onMounted(() => {
       <div class="row">
         <div class="col-md-12">
           <div class="well well-sm">
-            <form class="form-horizontal" @submit.prevent="modifyArticle">
+            <form class="form-horizontal" @submit.prevent="writeArticle">
               <fieldset>
                 <div class="form-group d-flex flex-row m-3">
                   <span
@@ -63,7 +46,7 @@ onMounted(() => {
                       type="text"
                       placeholder="제목을 입력하세요"
                       class="form-control"
-                      v-model="newBoard.subject"
+                      v-model="boardInfo.subject"
                     />
                   </div>
                 </div>
@@ -79,7 +62,7 @@ onMounted(() => {
                       name="message"
                       placeholder="내용을 입력하세요"
                       rows="15"
-                      v-model="newBoard.content"
+                      v-model="boardInfo.content"
                     ></textarea>
                   </div>
                 </div>

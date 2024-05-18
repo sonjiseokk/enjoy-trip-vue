@@ -4,6 +4,7 @@ import { useRouter, useRoute } from "vue-router";
 import http from "@/api/http-common";
 
 const userInfo = ref(JSON.parse(sessionStorage.getItem("jwt")));
+const writeUser = ref("");
 const router = useRouter();
 const route = useRoute();
 
@@ -14,13 +15,13 @@ const newBoard = ref({
 });
 
 const modifyArticle = () => {
-  if (userInfo.value.role !== "ADMIN") {
-    alert("관리자만 수정 가능합니다.");
+  if (userInfo.value.userId !== writeUser.value) {
+    alert("글 작성자만 수정 가능합니다.");
   } else {
     http
       .post(`/api/board/modify`, newBoard.value)
       .then(() => {
-        router.push("/notice/list");
+        router.push("/qna/list");
       })
       .catch((e) => {
         console.log(e);
@@ -36,6 +37,7 @@ onMounted(() => {
       newBoard.value.boardId = response.data.data.boardId;
       newBoard.value.subject = response.data.data.subject;
       newBoard.value.content = response.data.data.content;
+      writeUser.value = response.data.data.userId;
     })
     .catch((e) => {
       console.log(e);

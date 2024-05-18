@@ -17,6 +17,9 @@ import ManagePage from "@/components/user/ManagePage.vue";
 import AiTripView from "@/views/AiTripView.vue";
 import NoticeInsert from "@/components/notice/NoticeInsert.vue";
 import NoticeModify from "@/components/notice/NoticeModify.vue";
+import QnaDetail from "@/components/qna/QnaDetail.vue";
+import QnaModify from "@/components/qna/QnaModify.vue";
+import QnaInsert from "@/components/qna/QnaInsert.vue";
 const routes = [
   {
     path: "/",
@@ -101,16 +104,45 @@ const routes = [
           },
         ],
       },
-      // {
-      //   path: "insert",
-      //   name: "noticeinsert",
-      //   component: NoticeInsert,
-      // },
-      // {
-      //   path: "modify",
-      //   name: "noticemodify",
-      //   component: NoticeModify,
-      // },
+      {
+        path: "detail/:boardId",
+        name: "qnadetail",
+        component: QnaDetail,
+      },
+      {
+        path: "insert",
+        name: "qnainsert",
+        component: QnaInsert,
+        beforeEnter: (to, from, next) => {
+          // sessionStorage에서 값 가져오기
+          const userInfo = JSON.parse(sessionStorage.getItem("jwt"));
+          // 값이 없으면 다른 페이지로 이동
+          if (userInfo === null) {
+            alert("로그인 후 사용 가능합니다.");
+            next("/");
+          } else {
+            // 값이 있으면 계속 진행
+            next();
+          }
+        },
+      },
+      {
+        path: "modify/:boardId",
+        name: "qnamodify",
+        component: QnaModify,
+        beforeEnter: (to, from, next) => {
+          // sessionStorage에서 값 가져오기
+          const userInfo = JSON.parse(sessionStorage.getItem("jwt"));
+          // 값이 없으면 다른 페이지로 이동
+          if (userInfo === null) {
+            alert("로그인 후 사용 가능합니다.");
+            next("/");
+          } else {
+            // 값이 있으면 계속 진행
+            next();
+          }
+        },
+      },
     ],
   },
   {
