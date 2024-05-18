@@ -2,13 +2,9 @@
     <div v-if="trip">
         <div class="detail-name">
             <div class="title-area">
-                <like-button v-if="isLogin" @btnClick="setLike" :isLiked="likeStatus"></like-button>
-                <h3>{{ trip.title }}</h3>
+              <h3>{{ trip.title }}</h3>
+              <like-button></like-button>
             </div>
-            <!-- <div class="title-sub-info">
-                준공 : {{ house.buildYear }} | {{ house.roadName }} ({{ house.dong }})
-                gg
-            </div> -->
         </div>
         <div class="detail-img-div">
             <img class="sell-thumbnail" :src="thumnailImage" alt="Image 1" />
@@ -41,7 +37,9 @@
 
 <script>
 import http from "@/api/http-common";
+import LikeButton from './LikeButton.vue';
 export default {
+  components: { LikeButton },
     data() {
         return {
             trip : {},
@@ -140,7 +138,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: flex-start !important;
-  width: 325px !important;
+  width: 385px !important;
 }
 .mouse-over-bgcolor {
   background-color: rgb(214, 211, 211);
