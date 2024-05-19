@@ -30,7 +30,7 @@ export default {
     Slide 
   },
   mounted() {
-    http.get('/api/embed/most5')
+    http.get('/api/embed/most')
       .then((response) => {
         console.log(response.data);
         this.recommendList = response.data.data
