@@ -4,9 +4,9 @@
         <div class="container absolute">
           <div class="row">
             <div class="col-md-7 text-center mx-auto">
-              <h1 style="font-size: 50px !important;" class="text-dark mt-3">Enjoy your trip!</h1>
+              <h1 style="font-size: 50px !important; color: #FFFFFF !important;" class="mt-3">Travel Pick</h1>
               <div style="height: 30px;"></div>
-              <h2>당신의 여행을 즐겁게!</h2>
+              <h2 style="color: #ADD8E6;">당신의 성향, 취향 분석 완료! <br/>마음에 쏙 들 여행지를 추천해 드릴게요.</h2>
             </div>
           </div>
         </div>

@@ -10,7 +10,7 @@
             class="navbar-brand ms-4 pt-3 pb-2"
             href="/"
             style="color: #4b555e; font-size: 2em; font-weight: 800"
-            >#Enjoy_Trip</a
+            >#Travel_Pick</a
           >
           <button
             class="navbar-toggler"

@@ -1,8 +1,8 @@
 <template>
 
   <div class="HomeMain">
-    <p style="font-size: 4rem; font-family: LINESeedKR-Bd">여행지 가이드</p>
-    <p style="font-size: 4rem; font-family: LINESeedKR-Bd">Enjoy Trip에서 손쉽게</p>
+    <p style="font-size: 4rem; font-family: LINESeedKR-Bd">AI를 통해 추천받으세요</p>
+    <p style="font-size: 4rem; font-family: LINESeedKR-Bd">Travel Pick</p>
     <br />
     <br />
     <br />
@@ -23,7 +23,7 @@
     </div>
     <div class="HomeMid1Right">
       <p style="font-size: 4rem; font-family: LINESeedKR-Bd">안녕하세요</p>
-      <p style="font-size: 3rem; font-family: LINESeedKR-Bd">Enjoy Trip 입니다.</p>
+      <p style="font-size: 3rem; font-family: LINESeedKR-Bd">Travel Pick 입니다.</p>
     </div>
   </div>
 
@@ -81,7 +81,7 @@ export default {
 .HomeMid2 {
   width: 100%;
   height: 500px;
-  background-color: rgb(255, 218, 187);
+  background-color: #D8BFD8;
   text-align: center;
   padding-top: 10rem;
 }
