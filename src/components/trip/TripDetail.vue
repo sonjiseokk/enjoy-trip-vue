@@ -3,7 +3,7 @@
         <div class="detail-name">
             <div class="title-area">
               <h3>{{ trip.title }}</h3>
-              <like-button></like-button>
+              <like-button :contentId="trip.contentId"></like-button>
             </div>
         </div>
         <div class="detail-img-div">
@@ -137,7 +137,7 @@ export default {
 .title-area {
   display: flex;
   align-items: center;
-  justify-content: flex-start !important;
+  justify-content: space-between !important;
   width: 385px !important;
 }
 .mouse-over-bgcolor {
