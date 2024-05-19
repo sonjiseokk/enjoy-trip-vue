@@ -1,29 +1,32 @@
 <template>
-    <div class="main-info-div">
-        <div class="main-info-img-div">
-            <img :src="recommend.thumnailImage" alt="" style="height: 300px; width: 400px;">
-        </div>
-        <div class="main-info-text">
-            <div>
-                <h3>{{ recommend.title }}</h3>
-            </div>
-            <div>
-                <span class="main-info-desc">{{ recommend.sido }}<br />
-                    {{recommend.gugun}}</span>
-            </div>
-        </div>
+  <div class="main-info-div">
+    <div class="main-info-img-div">
+      <img :src="recommend.info.thumnailImage" alt="" style="height: 300px; width: 400px;">
     </div>
+    <div class="main-info-text">
+      <div>
+        <h3>{{ recommend.info.title }}</h3>
+      </div>
+      <div>
+        <span class="main-info-desc">{{ recommend.info.address }}</span>
+      </div>
+      <div>
+        <span class="main-info-desc">유사도 : {{ recommend.similarity }} %</span>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
 export default {
-    props : {
-        recommend : Object
-    }
+  props: {
+    recommend: Object
+  },
+  
 }
 </script>
 
-<style scopped>
+<style scoped>
 .main-info-div {
   margin: 18px;
   display: flex;
@@ -53,7 +56,6 @@ span.impress {
   font-weight: bold;
   color: #2196f3;
 }
-
 .main-info-img:hover {
   transform: translateY(-20px);
   transition: 400ms;

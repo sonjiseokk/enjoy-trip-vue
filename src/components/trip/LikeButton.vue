@@ -20,15 +20,13 @@ export default {
   updated(){
     http.get(`/api/member/like/${this.contentId}`)
     .then((response) => {
-      console.log('확인')
-      console.log(response.data);
-      console.log(response.data.data);
       if (response.data.data == true){
         this.liked = true;
       } else{
         this.liked = false;
       }
     })
+    .catch((e) =>  console.error(e));
   },
   methods: {
     doLike() {
