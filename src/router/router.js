@@ -13,13 +13,14 @@ import AppUserpage from "@/views/AppUserpage.vue";
 import ProfilePage from "@/components/user/ProfilePage.vue";
 import ProfileModify from "@/components/user/ProfileModify.vue";
 import LikePage from "@/components/user/LikePage.vue";
-import ManagePage from "@/components/user/ManagePage.vue";
+import ManagePage from "@/components/ban/ManagePage.vue";
 import AiTripView from "@/views/AiTripView.vue";
 import NoticeInsert from "@/components/notice/NoticeInsert.vue";
 import NoticeModify from "@/components/notice/NoticeModify.vue";
 import QnaDetail from "@/components/qna/QnaDetail.vue";
 import QnaModify from "@/components/qna/QnaModify.vue";
 import QnaInsert from "@/components/qna/QnaInsert.vue";
+import BanDetail from "@/components/ban/BanDetail.vue";
 const routes = [
   {
     path: "/",
@@ -220,6 +221,11 @@ const routes = [
         path: "manage",
         name: "manage",
         component: ManagePage,
+      },
+      {
+        path: "ban/:boardId",
+        name: "bandetail",
+        component: BanDetail,
       },
     ],
   },

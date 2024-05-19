@@ -1,15 +1,8 @@
 <template>
   <div class="container">
     <div class="mb-2 input-group d-flex justify-content-between">
-      <div class="">
-        <button class="btn btn-dark" @click="getNoticeList">전체 목록</button>
-        <button
-          v-if="userInfo != null && userInfo.role === 'ADMIN'"
-          class="btn btn-secondary ms-3"
-          @click="writeNotice"
-        >
-          글쓰기
-        </button>
+      <div class="btn-group">
+        <button class="btn btn-dark" @click="getList">전체 목록</button>
       </div>
       <notice-search @search="search"></notice-search>
     </div>
@@ -24,18 +17,18 @@
       <thead>
         <tr>
           <th>#</th>
-          <th>제목</th>
+          <th>차단 내역</th>
           <th>날짜</th>
           <th>작성자</th>
           <th>조회수</th>
         </tr>
       </thead>
       <tbody>
-        <notice-list-item
-          v-for="notice in selectedNotices"
-          :key="notice.num"
-          :notice="notice"
-        ></notice-list-item>
+        <BanListItem
+          v-for="ban in banList"
+          :key="ban.num"
+          :ban="ban"
+        ></BanListItem>
       </tbody>
     </table>
     <section class="py-7">
@@ -85,77 +78,36 @@
   </div>
 </template>
 
-<script>
-import NoticeSearch from "@/components/notice/NoticeSearch.vue";
-import NoticeListItem from "@/components/notice/NoticeListItem.vue";
-import { useRouter } from "vue-router";
-
+<script setup>
+import { ref, onMounted } from "vue";
 import http from "@/api/http-common";
 
-const userInfo = JSON.parse(sessionStorage.getItem("jwt"));
-const router = useRouter();
+import BanListItem from "./BanListItem.vue";
+const banList = ref([]);
 
-export default {
-  name: "NoticeList",
-  data() {
-    return {
-      pages: [],
-      selectedNotices: [],
-      dataLength: 0,
-      totalPage: 0,
-      startPage: 1,
-      endPage: 5,
-      curPage: 1,
-      hidePrevious: true,
-      hideNext: true,
-      userInfo: userInfo,
-      router: router,
-    };
-  },
-  mounted() {
-    http
-      .get(`/api/board?boardType=1`)
-      .then((response) => {
-        this.selectedNotices = response.data.data;
-        console.log(this.selectedNotices);
-      })
-      .catch((e) => {
-        console.error(e);
-        this.selectedNotices = [];
-      });
-  },
-  components: {
-    NoticeSearch,
-    NoticeListItem,
-  },
-  methods: {
-    search(receivedTitle) {
-      http
-        .get(`/api/board?boardType=1&keyword=${receivedTitle}`)
-        .then((response) => {
-          this.selectedNotices = response.data.data;
-          console.log(this.selectedNotices);
-        })
-        .catch((e) => {
-          this.selectedNotices = [];
-          console.error(e);
-        });
-    },
-    getNoticeList() {
-      http
-        .get(`/api/board?boardType=1`)
-        .then((response) => {
-          this.selectedNotices = response.data.data;
-          console.log(this.selectedNotices);
-        })
-        .catch((e) => {
-          console.error(e);
-        });
-    },
-    writeNotice() {
-      this.$router.push("/notice/insert");
-    },
-  },
+onMounted(() => {
+  http
+    .get(`/api/board/banList`)
+    .then((response) => {
+      console.log(response.data.data);
+      banList.value = response.data.data;
+    })
+    .catch((e) => {
+      console.error(e);
+      banList.value = [];
+    });
+});
+
+const getList = () => {
+  http
+    .get(`/api/board/banList`)
+    .then((response) => {
+      banList.value = response.data.data;
+    })
+    .catch((e) => {
+      console.error(e);
+      banList.value = [];
+    });
 };
 </script>
 

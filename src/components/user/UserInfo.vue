@@ -25,7 +25,7 @@
               ><b-icon icon="person-fill"> </b-icon><span> 내 관광지</span>
             </RouterLink>
           </div>
-          <div class="card m-2 p-2" v-if="userInfo.role === 'MANAGER'">
+          <div class="card m-2 p-2" v-if="userInfo.role === 'ADMIN'">
             <RouterLink class="dash-links" to="/userpage/manage"
               ><b-icon icon="person-fill"> </b-icon><span> 게시판 관리</span>
             </RouterLink>
