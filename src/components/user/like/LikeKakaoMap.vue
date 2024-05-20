@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, onMounted, watch } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import { useStore } from 'vuex';
 import { KakaoMap, KakaoMapMarker, KakaoMapMarkerPolyline } from 'vue3-kakao-maps';
 import http from "@/api/http-common";
@@ -44,10 +44,6 @@ const optimalPath = (id) => {
       alert(error.message);
     });
 }
-
-watch(markerList, (newValue) => {
-  console.log('markerList changed:', newValue);
-});
  
 </script>
 
@@ -59,8 +55,8 @@ watch(markerList, (newValue) => {
           <template v-slot:infoWindow><div style="padding: 10px; margin-bottom: 10px;">{{$store.state.mapTripTitle}}</div></template>
         </KakaoMapMarker>
 
-        <KakaoMapMarker v-for='item in likeList' :key='item.contentId' :lat="item.latitude" :lng="item.longitude" :clickable="true" @onClickKakaoMapMarker="optimalPath(item.contentId)">
-          <template v-slot:infoWindow><div style="padding: 10px; margin-bottom: 10px;">{{ item.title}}</div></template>
+        <KakaoMapMarker v-for='item in likeList' :key='item.contentId' :lat="item.latitude" :lng="item.longitude" :clickable="true">
+          <template v-slot:infoWindow><div style="padding: 10px; margin-bottom: 10px;" @click="optimalPath(item.contentId)">{{ item.title}}</div></template>
         </KakaoMapMarker>
     
         <KakaoMapMarkerPolyline :markerList="markerList" :endArrow="true" />
