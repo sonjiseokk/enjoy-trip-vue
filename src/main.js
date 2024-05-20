@@ -7,14 +7,14 @@ import store from "./store/store";
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Vue3Geolocation from "vue3-geolocation";
-
+import vuetify from './plugins/vuetify';
 useKakao("ca6f818170cad1a64894a6dc419a62d4", [
   "clusterer",
   "services",
   "drawing",
 ]); // 각 라이브러리는 ',(콤마)'로 구분합니다.
 
-createApp(App).use(Vue3Geolocation).use(router).use(store).mount("#app");
+createApp(App).use(Vue3Geolocation).use(vuetify).use(router).use(store).mount("#app");
 
 // import { createApp } from "vue";
 // import App from "./App.vue";

@@ -1,11 +1,13 @@
 <script setup>
-import { ref, computed, onMounted } from 'vue';
+import { ref, computed, onMounted, watch } from 'vue';
 import { useStore } from 'vuex';
-import { KakaoMap, KakaoMapMarker } from 'vue3-kakao-maps';
+import { KakaoMap, KakaoMapMarker, KakaoMapMarkerPolyline } from 'vue3-kakao-maps';
 import http from "@/api/http-common";
 
-const likeList = ref([]);
 const store = useStore();
+const likeList = ref([]);
+const orderedList = ref([]);
+const markerList = ref([]);
 
 const lat = computed(() => store.state.lat);
 const lng = computed(() => store.state.lng);
@@ -14,13 +16,39 @@ onMounted(() => {
   http.get(`/api/member/mylike`)
     .then((response) => {
       likeList.value = response.data.data;
-      console.log(likeList.value);
     })
     .catch((error) => {
       alert(error.message);
     });
 })
 
+const optimalPath = (id) => {
+  http.post(`/api/member/optimalpath`, id)
+    .then((response) => {
+      orderedList.value = [];
+      markerList.value = [];
+
+      orderedList.value = response.data.data;
+      console.log(response.data.data);
+
+      if (orderedList.value && orderedList.value.length > 0) {
+        for (var i = 0; i < orderedList.value.length; i++) {
+          markerList.value.push({
+            lat: orderedList.value[i].latitude,
+            lng: orderedList.value[i].longitude
+          });
+        }
+      }
+    })
+    .catch((error) => {
+      alert(error.message);
+    });
+}
+
+watch(markerList, (newValue) => {
+  console.log('markerList changed:', newValue);
+});
+ 
 </script>
 
 <template>
@@ -31,10 +59,11 @@ onMounted(() => {
           <template v-slot:infoWindow><div style="padding: 10px; margin-bottom: 10px;">{{$store.state.mapTripTitle}}</div></template>
         </KakaoMapMarker>
 
-        <KakaoMapMarker v-for='item in likeList' :key='item.contentId' :lat="item.latitude" :lng="item.longitude">
+        <KakaoMapMarker v-for='item in likeList' :key='item.contentId' :lat="item.latitude" :lng="item.longitude" :clickable="true" @onClickKakaoMapMarker="optimalPath(item.contentId)">
           <template v-slot:infoWindow><div style="padding: 10px; margin-bottom: 10px;">{{ item.title}}</div></template>
         </KakaoMapMarker>
     
+        <KakaoMapMarkerPolyline :markerList="markerList" :endArrow="true" />
       </KakaoMap>
     </div>
   </div>

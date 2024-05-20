@@ -21,7 +21,7 @@
     </div>
     <br />
     <div class="d-flex justify-content-end">
-      <router-link class="btn btn-dark m-3" to="/userpage/manage"
+      <router-link class="btn btn-dark m-3" to="/userpage/banned"
         >목록으로</router-link
       >
     </div>

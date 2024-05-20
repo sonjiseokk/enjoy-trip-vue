@@ -14,6 +14,9 @@
               <div class="card-title">{{ trip.title }}</div>
               <p class="card-text"><small class="text-body-secondary">{{ trip.address }}</small></p>
             </div>
+            <div class = "row g-1">
+                <liked-button :contentId="trip.contentId"></liked-button>
+            </div>
           </div>
         </div>
       </div>
@@ -21,7 +24,11 @@
   </template>
   
   <script>
-  export default {
+  import LikedButton from '@/components/user/like/LikedButton.vue';
+export default {
+    components: {
+        LikedButton,
+    },
     data() {
       return {
         isColor: false,
