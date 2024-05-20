@@ -11,7 +11,7 @@
         <span class="main-info-desc">{{ recommend.info.address }}</span>
       </div>
       <div>
-        <span class="main-info-desc">유사도 : {{ recommend.similarity }} %</span>
+        <span class="main-info-desc">유사도 : {{ formattedSimilarity }} %</span>
       </div>
       <div style="margin-top: 20px;">
         <like-button :contentId="recommend.info.contentId"></like-button>
@@ -31,6 +31,11 @@ export default {
     return {
       thumbnailImage: ''
     };
+  },
+  computed: {
+    formattedSimilarity() {
+      return (this.recommend.similarity * 100).toFixed(2);
+    }
   },
   watch: {
     recommend: {
