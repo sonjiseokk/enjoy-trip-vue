@@ -29,13 +29,13 @@
 
   <div class="HomeMid2">
     <p style="font-size: 2rem; font-family: LINESeedKR-Bd">
-      지도와 게시판을 통해 여행지 정보를 한눈에 확인하세요.
+      내가 좋아할 관광지만 Pick
     </p>
     <p style="font-size: 2rem; font-family: LINESeedKR-Bd">
-      추천 알고리즘으로 연관 관광지를 손쉽게 찾아보세요.
+      Travel Pick만의 추천 알고리즘으로 관광지를 쉽게 선택하세요!
     </p>
     <p style="font-size: 2rem; font-family: LINESeedKR-Bd">
-      24시간 상담 봇과 함께 새로운 여행을 시작하세요.
+      나의 성향에 따른 맞춤형 여행지를 추천해드리겠습니다.
     </p>
 
   </div>
