@@ -1,7 +1,7 @@
 <template>
   <div class="main-info-div">
     <div class="main-info-img-div">
-      <img :src="recommend.info.thumnailImage" alt="" style="height: 300px; width: 400px;">
+      <img :src="thumbnailImage" alt="" style="height: 300px; width: 400px;">
     </div>
     <div class="main-info-text">
       <div>
@@ -13,15 +13,28 @@
       <div>
         <span class="main-info-desc">유사도 : {{ recommend.similarity }} %</span>
       </div>
+      <div style="margin-top: 20px;">
+        <like-button :contentId="recommend.info.contentId"></like-button>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import LikeButton from '../trip/LikeButton.vue'
 export default {
+  components: { LikeButton },
   props: {
     recommend: Object
   },
+  data() {
+    return {
+      thumbnailImage: ''
+    };
+  },
+  updated() {
+    this.thumbnailImage = this.recommend.info.thumnailImage !== '' ? this.recommend.info.thumnailImage : require('@/assets/noimage.jpg');
+  }
   
 }
 </script>

@@ -16,12 +16,11 @@
 import AiRecommendDetail from './AiRecommendDetail.vue'
 import { Carousel, Slide } from 'vue3-carousel';
 import 'vue3-carousel/dist/carousel.css';
-import http from "@/api/http-common";
+
 
 export default {
   data() {
     return {
-      recommendList: []
     }
   },
   components: { 
@@ -29,27 +28,9 @@ export default {
     Carousel, 
     Slide 
   },
-  mounted() {
-    http.get('/api/embed/most')
-      .then((response) => {
-        console.log(response.data);
-        this.recommendList = response.data.data
-        if(this.recommendList .length == 0){
-          alert('좋아요 개수가 부족합니다.\n관광지를 더 추가해주세요!');
-          this.$router.push('/');
-
-        }
-      })
-      .catch((error) => {
-        console.log(error.response.status); // 상태 코드 출력
-        let code = error.response.status;
-        console.error(error.response)
-        if(code === 403){
-          alert('로그인이 필요한 페이지입니다.');
-          this.$router.push('/');
-        }
-      }
-    );
+  props: {
+    recommendList : Array,
+    selectedDto : Object,
   }
 }
 </script>
