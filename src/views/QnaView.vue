@@ -3,7 +3,7 @@
         <div class="page-header min-vh-40 relative">
             <div class="container absolute">
                 <div class="row">
-                    <div class="col-md-7 text-center mx-auto">
+                    <div class="text-light col-md-7 text-center mx-auto">
                         <h3>Q & A</h3>
                     </div>
                 </div>
