@@ -32,8 +32,22 @@ export default {
       thumbnailImage: ''
     };
   },
-  updated() {
+  watch: {
+    recommend: {
+      immediate: true,
+      handler(newVal) {
+        this.updateThumbnailImage(newVal);
+      }
+    }
+  },
+  methods: {
+    updateThumbnailImage(recommend) {
+      this.thumbnailImage = recommend.info.thumnailImage !== '' ? recommend.info.thumnailImage : require('@/assets/noimage.jpg');
+    }
+  },
+  mounted(){
     this.thumbnailImage = this.recommend.info.thumnailImage !== '' ? this.recommend.info.thumnailImage : require('@/assets/noimage.jpg');
+
   }
   
 }

@@ -64,7 +64,7 @@ export default {
   },
   mounted() {
     this.fetchRecommendations();
-  }
+  },
 }
 </script>
 <style scoped src="./style/style.css"></style>
