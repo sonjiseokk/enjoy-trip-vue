@@ -24,13 +24,6 @@
       <router-link class="btn btn-dark m-3" to="/userpage/manage"
         >목록으로</router-link
       >
-      <button
-        v-if="userInfo !== null && userInfo.userId === ban.userId"
-        class="btn btn-dark m-3"
-        @click="deleteban(ban.boardId)"
-      >
-        삭제하기
-      </button>
     </div>
     <br />
   </div>
@@ -39,24 +32,10 @@
 <script setup>
 import http from "@/api/http-common";
 import { ref, onMounted } from "vue";
-import { useRouter, useRoute } from "vue-router";
+import { useRoute } from "vue-router";
 
-const userInfo = ref(JSON.parse(sessionStorage.getItem("jwt")));
 const ban = ref({});
-const router = useRouter();
 const route = useRoute();
-
-const deleteban = (id) => {
-  http
-    .post(`/api/board/delete/` + id)
-    .then((response) => {
-      ban.value = response.data.data;
-      router.push("/ban/list");
-    })
-    .catch((e) => {
-      console.log(e);
-    });
-};
 
 onMounted(() => {
   const boardId = route.params.boardId;

@@ -18,7 +18,7 @@ const writeArticle = () => {
   http
     .post(`/api/board/write`, boardInfo.value)
     .then((response) => {
-      router.push("/notice/list");
+      router.push("/qna/list");
       if (response.data.data.code < 0)
         alert(response.data.data.message);
     })

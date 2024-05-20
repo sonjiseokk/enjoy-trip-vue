@@ -7,13 +7,11 @@
             <like-kakao-map/>
             <div>
               <div class="search-div">
-                <!-- <trip-search class="house-search-bar" @search="search($event)"/> -->
+                <h1 class = "pt-5">찜목록</h1>
                 <div class="list-div type1">
-                  <!-- <trip-search-list class="house-list" :tripList="tripList"/> -->
+                  <like-trip-list class="house-list" :tripList="tripList"/>
                 </div>
-              </div>
-              <div v-if="$store.state.detailOpen" class="detail-div type1">
-                <!-- <trip-detail class="house-detail" /> -->
+                <button class = "btn btn-secondary">현재위치보기</button>
               </div>
             </div>
           </section>
@@ -23,34 +21,26 @@
   </template>
   
   <script>
-  //import TripSearch from '@/components/trip/TripSearch.vue'
   import LikeKakaoMap from '@/components/user/like/LikeKakaoMap.vue'
-  // import TripSearchList from '@/components/trip/TripSearchList.vue'
-  
-  
+  import LikeTripList from './like/LikeTripList.vue';
   import http from "@/api/http-common";
-  // import TripDetail from '@/components/trip/TripDetail.vue';
+
   export default {
     data() {
       return {
         tripList : [],
       }
     },
-    components: { LikeKakaoMap, },
-    methods : {
-      search(formData){
-        console.log(formData);
-        http.post(`/api/trip/search`, formData)
-          .then((response) => {
-            console.log(response.data);
-            this.tripList = response.data
-          })
-          .catch((error) => {
-            this.tripList = [];
-            console.error("요청 중 오류 발생:", error);
-          });
-      }
-    }
+    components: { LikeKakaoMap, LikeTripList},
+    mounted() {
+      http.get(`/api/member/mylike`)
+        .then((response) => {
+          this.tripList = response.data.data;
+        })
+        .catch((error) => {
+          alert(error.message);
+        });
+    },
   }
   </script>
   
@@ -79,7 +69,6 @@
     position: relative;
     width: 268px;
     height: 76vh;
-    top: 142px;
     overflow-y: scroll;
     overflow-x: hidden;
   }
@@ -111,9 +100,8 @@
   .house-list {
     position: absolute;
     z-index: 3;
-    top: 100px;
-    width: 418px;
-    padding: 20px 30px 20px 20px;
+    width: 268px;
+    padding: 20px 20px 20px 20px;
   }
   
   .kakao-map {

@@ -45,9 +45,9 @@
           </div>
         </div>
         <div class="d-flex justify-content-center mt-3">
-          <button class="btn btn-dark mr-2" @click="login">로그인</button>
+          <button class="btn btn-dark m-2" @click="login">로그인</button>
           <button
-            class="btn btn-dark mr-2"
+            class="btn btn-dark m-2"
             @submit.prevent=""
             @click="moveSignup"
           >

@@ -21,6 +21,7 @@ import QnaDetail from "@/components/qna/QnaDetail.vue";
 import QnaModify from "@/components/qna/QnaModify.vue";
 import QnaInsert from "@/components/qna/QnaInsert.vue";
 import BanDetail from "@/components/ban/BanDetail.vue";
+import BannedBoardPage from '@/components/ban/BannedBoardPage.vue';
 const routes = [
   {
     path: "/",
@@ -238,18 +239,23 @@ const routes = [
         path: "ban/:boardId",
         name: "bandetail",
         component: BanDetail,
-        beforeEnter: (to, from, next) => {
-          // sessionStorage에서 값 가져오기
-          const userInfo = JSON.parse(sessionStorage.getItem("jwt"));
-          // 값이 없으면 다른 페이지로 이동
-          if (userInfo === null || userInfo.role !== "ADMIN") {
-            alert("관리자만 진행가능합니다.");
-            next("/");
-          } else {
-            // 값이 있으면 계속 진행
-            next();
-          }
-        },
+        // beforeEnter: (to, from, next) => {
+        //   // sessionStorage에서 값 가져오기
+        //   const userInfo = JSON.parse(sessionStorage.getItem("jwt"));
+        //   // 값이 없으면 다른 페이지로 이동
+        //   if (userInfo === null || userInfo.role !== "ADMIN") {
+        //     alert("관리자만 진행가능합니다.");
+        //     next("/");
+        //   } else {
+        //     // 값이 있으면 계속 진행
+        //     next();
+        //   }
+        // },
+      },
+      {
+        path: "banned",
+        name: "banned",
+        component: BannedBoardPage,
       },
     ],
   },

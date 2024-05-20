@@ -1,58 +1,41 @@
 <script setup>
-import { computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import { useStore } from 'vuex';
 import { KakaoMap, KakaoMapMarker } from 'vue3-kakao-maps';
+import http from "@/api/http-common";
 
-
+const likeList = ref([]);
 const store = useStore();
 
 const lat = computed(() => store.state.lat);
 const lng = computed(() => store.state.lng);
 
+onMounted(() => {
+  http.get(`/api/member/mylike`)
+    .then((response) => {
+      likeList.value = response.data.data;
+      console.log(likeList.value);
+    })
+    .catch((error) => {
+      alert(error.message);
+    });
+})
+
 </script>
-
-
-
 
 <template>
   <div>
     <div id="map">
-      <KakaoMap :lat="lat" :lng="lng" :draggable="true" style="width: 100%; height: 900px;">
+      <KakaoMap :lat="lat" :lng="lng" :level='12' :draggable="true" style="width: 50%; height: 900px;">
         <KakaoMapMarker :lat="lat" :lng="lng">
           <template v-slot:infoWindow><div style="padding: 10px; margin-bottom: 10px;">{{$store.state.mapTripTitle}}</div></template>
         </KakaoMapMarker>
-        
+
+        <KakaoMapMarker v-for='item in likeList' :key='item.contentId' :lat="item.latitude" :lng="item.longitude">
+          <template v-slot:infoWindow><div style="padding: 10px; margin-bottom: 10px;">{{ item.title}}</div></template>
+        </KakaoMapMarker>
     
       </KakaoMap>
-    </div>
-
-    <div class="map_wrap" style="z-index: 3">
-      <ul id="category">
-        <li id="BK9" data-order="0">
-          <span class="category_bg bank"></span>
-          은행
-        </li>
-        <li id="MT1" data-order="1">
-          <span class="category_bg mart"></span>
-          마트
-        </li>
-        <li id="PM9" data-order="2">
-          <span class="category_bg pharmacy"></span>
-          약국
-        </li>
-        <li id="OL7" data-order="3">
-          <span class="category_bg oil"></span>
-          주유소
-        </li>
-        <li id="CE7" data-order="4">
-          <span class="category_bg cafe"></span>
-          카페
-        </li>
-        <li id="CS2" data-order="5">
-          <span class="category_bg store"></span>
-          편의점
-        </li>
-      </ul>
     </div>
   </div>
 
