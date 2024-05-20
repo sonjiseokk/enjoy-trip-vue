@@ -9,18 +9,18 @@
     <table class="table table-hover">
       <colgroup>
         <col style="width: 5%" />
+        <col style="width: 10%" />
         <col style="width: 50%" />
-        <col style="width: 15%" />
-        <col style="width: 15%" />
+        <col style="width: 20%" />
         <col style="width: 15%" />
       </colgroup>
       <thead>
         <tr>
           <th>#</th>
+          <th>게시판</th>
           <th>차단 내역</th>
           <th>날짜</th>
           <th>작성자</th>
-          <th>조회수</th>
         </tr>
       </thead>
       <tbody>

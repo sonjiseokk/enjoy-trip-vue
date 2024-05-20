@@ -221,11 +221,35 @@ const routes = [
         path: "manage",
         name: "manage",
         component: ManagePage,
+        beforeEnter: (to, from, next) => {
+          // sessionStorage에서 값 가져오기
+          const userInfo = JSON.parse(sessionStorage.getItem("jwt"));
+          // 값이 없으면 다른 페이지로 이동
+          if (userInfo === null || userInfo.role !== "ADMIN") {
+            alert("관리자만 진행가능합니다.");
+            next("/");
+          } else {
+            // 값이 있으면 계속 진행
+            next();
+          }
+        },
       },
       {
         path: "ban/:boardId",
         name: "bandetail",
         component: BanDetail,
+        beforeEnter: (to, from, next) => {
+          // sessionStorage에서 값 가져오기
+          const userInfo = JSON.parse(sessionStorage.getItem("jwt"));
+          // 값이 없으면 다른 페이지로 이동
+          if (userInfo === null || userInfo.role !== "ADMIN") {
+            alert("관리자만 진행가능합니다.");
+            next("/");
+          } else {
+            // 값이 있으면 계속 진행
+            next();
+          }
+        },
       },
     ],
   },

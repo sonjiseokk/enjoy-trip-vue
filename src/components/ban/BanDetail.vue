@@ -5,7 +5,15 @@
     <br />
     <div class="card mb-3 m-auto">
       <div class="card-header text-right" style="font-size: 0.8em">
-        등록 날짜 : {{ ban.createDate }}<br />조회수 : {{ ban.viewCount }}
+        등록 날짜 : {{ ban.createDate }}<br />
+        <div>
+          <span v-if='ban.toxicity > 0.6' class="badge bg-warning text-light">TOXICITY</span>
+          <span v-if='ban.severeToxicity > 0.6' class="badge bg-danger text-light">SEVERE_TOXICITY</span>
+          <span v-if='ban.identityAttack > 0.6' class="badge text-light" style='background-color: purple'>IDENTITY_ATTACK</span>
+          <span v-if='ban.insult > 0.6' class="badge text-light" style='background-color: green'>INSULT</span>
+          <span v-if='ban.profanity > 0.6' class="badge text-light" style='background-color: darkblue'>PROFANITY</span>
+          <span v-if='ban.threat > 0.6' class="badge bg-dark text-light">THREAT</span>
+        </div>
       </div>
       <div class="card-body" style="height: 300px">
         <p class="card-text text-left" v-html="ban.content"></p>
@@ -14,7 +22,7 @@
     <br />
     <div class="d-flex justify-content-end">
       <router-link class="btn btn-dark m-3" to="/userpage/manage"
-        >공지 목록</router-link
+        >목록으로</router-link
       >
       <button
         v-if="userInfo !== null && userInfo.userId === ban.userId"

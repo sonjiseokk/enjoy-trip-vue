@@ -17,8 +17,10 @@ const boardInfo = ref({
 const writeArticle = () => {
   http
     .post(`/api/board/write`, boardInfo.value)
-    .then(() => {
-      router.push("/qna/list");
+    .then((response) => {
+      router.push("/notice/list");
+      if (response.data.data.code < 0)
+        alert(response.data.data.message);
     })
     .catch((e) => {
       console.log(e);

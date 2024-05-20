@@ -19,8 +19,8 @@ const writeArticle = () => {
     .post(`/api/board/write`, boardInfo.value)
     .then((response) => {
       router.push("/notice/list");
-      if (response.data.data === "부적절한 게시글로 판단되어 차단되었습니다.")
-        console.log(response.data.data);
+      if (response.data.data.code < 0)
+        alert(response.data.data.message);
     })
     .catch((e) => {
       console.log(e);
