@@ -38,7 +38,10 @@ export default {
     props: {
       trip: Object
     },
-    created() {
+    created(){
+      this.thumnailImage = this.trip.thumnailImage !== '' ? this.trip.thumnailImage : require('@/assets/noimage.jpg');
+    },
+    updated() {
       // 이미지 경로를 조건에 따라 설정
       this.thumnailImage = this.trip.thumnailImage !== '' ? this.trip.thumnailImage : require('@/assets/noimage.jpg');
     },
