@@ -113,7 +113,7 @@ export default {
   },
   mounted() {
     http
-      .get("/api/board?boardType=2")
+      .get("/api/board/list?boardType=2")
       .then((response) => {
         this.selectedQnas = response.data.data;
         console.log(this.selectedQnas);
@@ -130,7 +130,7 @@ export default {
   methods: {
     search(receivedTitle) {
       http
-        .get(`/api/board?boardType=2&keyword=${receivedTitle}`)
+        .get(`/api/board/list?boardType=2&keyword=${receivedTitle}`)
         .then((response) => {
           this.selectedQnas = response.data.data;
           console.log(this.selectedQnas);
@@ -142,7 +142,7 @@ export default {
     },
     getQnaList() {
       http
-        .get("/api/board?boardType=2")
+        .get("/api/board/list?boardType=2")
         .then((response) => {
           this.selectedQnas = response.data.data;
           console.log(this.selectedQnas);

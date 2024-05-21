@@ -59,14 +59,20 @@ const deleteQna = (id) => {
 onMounted(() => {
   const boardId = route.params.boardId;
   http
-    .get(`/api/board/detail/${boardId}`)
-    .then((response) => {
-      console.log(response.data.data);
+  .get(`/api/board/qna/detail/${boardId}`)
+  .then((response) => {
+    console.log(response.data.data);
+    
+    qna.value = response.data.data;
+  })
+  .catch((e) => {
+      console.log('디테일은')
+      console.error();
+      if(e.response.status == 401){
+        alert('작성자와 관리자만 접속할 수 있습니다.');
+        router.push('/qna/list')
+      }
 
-      qna.value = response.data.data;
-    })
-    .catch((e) => {
-      console.log(e);
     });
 });
 </script>
