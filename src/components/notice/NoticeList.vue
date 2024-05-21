@@ -114,7 +114,7 @@ export default {
   },
   mounted() {
     http
-      .get(`/api/board?boardType=1`)
+      .get(`/api/board/list?boardType=1`)
       .then((response) => {
         this.selectedNotices = response.data.data;
         console.log(this.selectedNotices);
@@ -131,7 +131,7 @@ export default {
   methods: {
     search(receivedTitle) {
       http
-        .get(`/api/board?boardType=1&keyword=${receivedTitle}`)
+        .get(`/api/board/list?boardType=1&keyword=${receivedTitle}`)
         .then((response) => {
           this.selectedNotices = response.data.data;
           console.log(this.selectedNotices);
@@ -143,7 +143,7 @@ export default {
     },
     getNoticeList() {
       http
-        .get(`/api/board?boardType=1`)
+        .get(`/api/board/list?boardType=1`)
         .then((response) => {
           this.selectedNotices = response.data.data;
           console.log(this.selectedNotices);

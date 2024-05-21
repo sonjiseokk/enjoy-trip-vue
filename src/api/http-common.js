@@ -26,11 +26,13 @@ const refreshAccessToken = async (jwt) => {
 apiClient.interceptors.response.use(
     (res) => res,
     async (err) => {
+        console.log('에러는')
+        console.log(err);
         const { config, response: { status } } = err;
 
-        if (status === 401 && !config._retry) {
+        let jwt = JSON.parse(localStorage.getItem('jwt'));
+        if (status === 401 && jwt) {
             config._retry = true;
-            let jwt = JSON.parse(localStorage.getItem('jwt'));
 
             const currentTime = new Date();
             const expiredTime = new Date(jwt.expiredTime);
@@ -41,7 +43,7 @@ apiClient.interceptors.response.use(
                 newAccessToken = await refreshAccessToken(jwt);
 
                 if (newAccessToken) {
-                    jwt.accessToken = newAccessToken.accessToken;
+                    jwt.accessToken = newAccessToken.token;
                     jwt.expiredTime = newAccessToken.expiredTime;  // 새로운 만료 시간 저장
                     localStorage.setItem('jwt', JSON.stringify(jwt));
                     config.headers['Authorization'] = `Bearer ${newAccessToken.accessToken}`;

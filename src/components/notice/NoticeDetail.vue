@@ -59,7 +59,7 @@ const deleteNotice = (id) => {
 onMounted(() => {
   const boardId = route.params.boardId;
   http
-    .get(`/api/board/detail/${boardId}`)
+    .get(`/api/board/notice/detail/${boardId}`)
     .then((response) => {
       console.log(response.data.data);
 
