@@ -40,63 +40,26 @@ const trip = ref({});
 const tripDescription = ref({});
 const route = useRoute();
 
-onMounted(() => {
-    http.get(`/api/trip/find?contentId=` + route.params.id)
-        .then((response) => {
-            trip.value = response.data;
-        })
-        .catch((error) => {
-            alert(error.message);
-        });
+const fetchTripData = async () => {
+    try {
+        const response = await http.get(`/api/trip/find?contentId=${route.params.id}`);
+        trip.value = response.data;
+    } catch (error) {
+        alert(error.message);
+    }
 
-    http.get(`/api/trip/view?contentId=` + route.params.id )
-        .then((response) => {
-            tripDescription.value = response.data;
-            console.log(response.data);
-        })
-        .catch((error) => {
-            alert(error.message);
-        });
-})
+    try {
+        const response = await http.get(`/api/trip/view?contentId=${route.params.id}`);
+        tripDescription.value = response.data;
+        console.log(response.data);
+    } catch (error) {
+        alert(error.message);
+    }
+};
 
-watch(trip, async () => {
-    http.get(`/api/trip/find?contentId=` + route.params.id)
-        .then((response) => {
-            trip.value = response.data;
-        })
-        .catch((error) => {
-            alert(error.message);
-        });
+onMounted(fetchTripData);
 
-    http.get(`/api/trip/view?contentId=` + route.params.id )
-        .then((response) => {
-            tripDescription.value = response.data;
-            console.log(response.data);
-        })
-        .catch((error) => {
-            alert(error.message);
-        });
-})
-
-// onUpdated(() => {
-//     http.get(`/api/trip/find?contentId=` + route.params.id)
-//         .then((response) => {
-//             trip.value = response.data;
-//         })
-//         .catch((error) => {
-//             alert(error.message);
-//         });
-
-//     http.get(`/api/trip/view?contentId=` + route.params.id )
-//         .then((response) => {
-//             tripDescription.value = response.data;
-//             console.log(response.data);
-//         })
-//         .catch((error) => {
-//             alert(error.message);
-//         });
-// })
-
+watch(() => route.params.id, fetchTripData);
 </script>
 
 <style></style>
