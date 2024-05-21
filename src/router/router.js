@@ -22,6 +22,11 @@ import QnaModify from "@/components/qna/QnaModify.vue";
 import QnaInsert from "@/components/qna/QnaInsert.vue";
 import BanDetail from "@/components/ban/BanDetail.vue";
 import BannedBoardPage from '@/components/ban/BannedBoardPage.vue';
+import TripBoardView from '@/views/TripBoardView.vue';
+import TripBoard from '@/components/trip/TripBoard.vue';
+import TripBoardInsert from '@/components/trip/TripBoardInsert.vue';
+import TripBoardDetail from '@/components/trip/TripBoardDetail.vue';
+import TripBoardModify from '@/components/trip/TripBoardModify.vue';
 const routes = [
   {
     path: "/",
@@ -259,6 +264,48 @@ const routes = [
       },
     ],
   },
+  {
+    path: "/tripboard/:id",
+    name: "tripboard",
+    component: TripBoardView,
+    redirect: to => {
+      return `/tripboard/${to.params.id}/list/${to.params.id}`;
+    },
+    children: [
+      {
+        path: "list/:id",
+        name: "tripboardlist",
+        component: TripBoard,
+      },
+      {
+        path: "insert/:id",
+        name: "tripboardinsert",
+        component: TripBoardInsert,
+        beforeEnter: (to, from, next) => {
+          // sessionStorage에서 값 가져오기
+          const userInfo = JSON.parse(sessionStorage.getItem("jwt"));
+          // 값이 없으면 다른 페이지로 이동
+          if (userInfo === null) {
+            alert("로그인 후 사용 가능합니다.");
+            next(`/tripboard/list/${to.params.id}`);
+          } else {
+            // 값이 있으면 계속 진행
+            next();
+          }
+        },
+      },
+      {
+        path: "detail/:id",
+        name: "tripboarddetail",
+        component: TripBoardDetail,
+      },
+      {
+        path: "modify/:id",
+        name: "tripboardmodify",
+        component: TripBoardModify,
+      },
+    ],
+  }
 ];
 
 const router = createRouter({

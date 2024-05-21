@@ -12,7 +12,7 @@
         @input="changeTitle($event.target.value)"
         @keyup.enter="searchQna()"
       />
-      <button type="button" class="btn btn-dark" @click="searchQna()">검색</button>
+      <button type="button" class="btn btn-dark text-light" @click="searchQna()">검색</button>
     </div>
   </template>
   

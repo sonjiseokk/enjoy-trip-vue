@@ -12,7 +12,6 @@ const newsList = ref([]);
 onMounted(() => {
     http.get(`/api/news/list/여행지`)
         .then((response) => {
-            console.log(response.data.data);
           newsList.value = response.data.data;
         })
         .catch((error) => {

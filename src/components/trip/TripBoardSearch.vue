@@ -10,16 +10,16 @@
         aria-describedby="search-addon"
         style="max-width: 150px"
         @input="changeTitle($event.target.value)"
-        @keyup.enter="searchNotice()"
+        @keyup.enter="searchTripBoard()"
       />
-      <button type="button" class="btn btn-dark text-light" @click="searchNotice()">검색</button>
+      <button type="button" class="btn btn-dark text-light" @click="searchTripBoard()">검색</button>
     </div>
   </template>
   
   <script>
   
   export default {
-    name: "NoticeSearch",
+    name: "TripBoardSearch",
     data() {
       return {
         title: "",
@@ -29,7 +29,7 @@
       changeTitle(value){
         this.title = value;
       },
-      searchNotice(){
+      searchTripBoard(){
         this.$emit('search',this.title)
       }
     }
