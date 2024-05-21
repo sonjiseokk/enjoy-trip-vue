@@ -1,6 +1,9 @@
 <script setup>
 import { useRouter } from "vue-router";
+import http from '@/api/http-common.js'
+import { useStore } from 'vuex';
 
+const store = useStore();
 const router = useRouter();
 
 const moveModify = () => {
@@ -8,7 +11,14 @@ const moveModify = () => {
 };
 
 const moveModifyPw = () => {
-  alert("미구현");
+  store.dispatch('progressLoading');
+  http.post('/api/member/email/send')
+  .then((response) => {
+    console.log(response);
+    alert(response.data.data);
+  })
+  .catch((e) => alert(e.response.data.data))
+  .finally(() => store.dispatch('endLoading'))
 };
 
 const userInfo = JSON.parse(sessionStorage.getItem("jwt"));
@@ -53,6 +63,7 @@ const userInfo = JSON.parse(sessionStorage.getItem("jwt"));
         <button @click="moveModify" class="btn btn-primary mt-5 mb-5 ms-2 me-2">
           정보 수정
         </button>
+
         <button @click="moveModifyPw" class="btn btn-primary mt-5 mb-5 me-5">
           비밀번호 변경
         </button>

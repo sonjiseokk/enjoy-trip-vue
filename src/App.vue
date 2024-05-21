@@ -1,6 +1,7 @@
 <template>
   <div id="app">
 
+    <loading-modal :isLoading="$store.state.isLoading"/>
     <div class="top-0">
       <NavBar class=".navbar-show" :class="{'navbar-hidden' : !showNavbar}" />
 
@@ -17,14 +18,14 @@
 </template>
 
 <script>
+import LoadingModal from './components/LoadingModal.vue';
 import NavBar from './components/NavBar.vue';
-
 const OFFSET = 200;
 
 export default {
   name: 'App',
   components: {
-    NavBar,
+    NavBar,LoadingModal
   },
   data() {
     return {

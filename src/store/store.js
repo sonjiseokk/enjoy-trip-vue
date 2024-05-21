@@ -10,7 +10,7 @@ const store = createStore({
       detailOpen: false,
       clickedTrip: {},
       session: {},
-
+      isLoading: false,
       markerInfoList: [],
     };
   },
@@ -38,8 +38,8 @@ const store = createStore({
       state.detailOpen = false;
     },
     clickTrip(state, payload) {
-      console.log('클릭된 trip은 ')
-      console.log(payload.trip)
+      console.log("클릭된 trip은 ");
+      console.log(payload.trip);
       state.clickedTrip = payload.trip;
     },
     // JWT 인증
@@ -65,6 +65,20 @@ const store = createStore({
       });
 
       console.log(state.markerInfoList);
+    },
+    progressLoading(state) {
+      state.isLoading = true;
+    },
+    endLoading(state) {
+      state.isLoading = false;
+    },
+  },
+  actions: {
+    progressLoading({ commit }) {
+      commit("progressLoading");
+    },
+    endLoading({ commit }) {
+      commit("endLoading");
     },
   },
 });
