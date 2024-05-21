@@ -1,6 +1,17 @@
 <template>
   <div>
-    <div style="height: 100px"></div>
+    <div class="map-name-div">
+      <div>
+        <input type="text" class="form-control name-search" placeholder="관광지명" style="width: 150px" v-model="allSearchKeyword" />
+        <p class="text-danger" v-if="allSearchEmpty">검색어를 입력해주세요.</p>
+      </div>
+      <div>
+        <button class="btn btn-success" style="margin-right: 90px; margin-bottom: 40px;" @click="searchAll">
+          전체검색
+        </button>
+      </div>
+    </div>
+    <div style="height: 20px"></div>
     <div class="map-select-div">
       <select class="form-control" v-model="sido">
         <option value="all">시/도</option>
@@ -23,7 +34,7 @@
     </div>
     <div class="map-name-div">
       <div>
-        <input type="text" class="form-control name-search" placeholder="관광지명" style="width: 256px" v-model="name" />
+        <input type="text" class="form-control name-search" placeholder="관광지명" style="width: 256px" v-model="keyword" />
       </div>
       <div>
         <button class="btn btn-primary" style="margin: 0" @click="search">
@@ -42,10 +53,12 @@ export default {
       sido: "all",
       gugun: "all",
       contentType: "all",
-      name: "",
+      keyword: "",
+      allSearchKeyword : "",
       sidos: [],
       guguns: [],
       contentTypes : [],
+      allSearchEmpty : false
     }
   },
   created() {
@@ -90,11 +103,22 @@ export default {
         return;
       }
       const formData = {
+        keyword : this.keyword,
         contentTypeId : this.contentType.contentTypeId,
         sidoCode : this.sido.sidoCode,
         gugunCode : this.gugun.gugunCode,
       }
       this.$emit('search',formData);
+    },
+    searchAll(){
+      if(this.allSearchKeyword === ''){
+        this.allSearchEmpty = true;
+        return;
+      } else{
+        this.allSearchEmpty = false;
+        this.$emit('allSearch',this.allSearchKeyword);
+      }
+
     }
   }
 }
@@ -110,7 +134,6 @@ export default {
 .map-name-div {
   display: flex;
   flex-direction: row;
-  align-items: center;
   justify-content: space-between;
   margin-top: 17px;
 }

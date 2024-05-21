@@ -7,7 +7,7 @@
           <my-kakao-map/>
           <div>
             <div class="search-div">
-              <trip-search class="house-search-bar" @search="search($event)"/>
+              <trip-search class="house-search-bar" @search="search($event)" @allSearch="allSearch($event)"/>
               <div class="list-div type1">
                 <trip-search-list class="house-list" :tripList="tripList"/>
               </div>
@@ -47,6 +47,17 @@ export default {
         .then((response) => {
           console.log('검색')
           console.log(response.data);
+          this.tripList = response.data.data
+        })
+        .catch((error) => {
+          this.tripList = [];
+          console.error("요청 중 오류 발생:", error);
+        });
+    },
+    allSearch(keyword){
+      console.log('전체 검색할 키워드는 ', keyword);
+      http.get(`/api/trip/searchAll?keyword=${keyword}`)
+        .then((response) => {
           this.tripList = response.data.data
         })
         .catch((error) => {
