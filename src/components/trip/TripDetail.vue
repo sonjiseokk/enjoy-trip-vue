@@ -9,6 +9,11 @@
         <div class="detail-img-div">
             <img class="sell-thumbnail" :src="thumnailImage" alt="Image 1" />
         </div>
+        <div>
+          <button class = "btn btn-secondary" @click='moveTripBoard'>
+            여행 후기
+          </button>
+        </div>
 
         <!-- <router-view /> -->
         <!-- <detail-info v-if="detail_type.info"></detail-info>
@@ -41,7 +46,9 @@ export default {
         dispalynone(){
             this.$store.commit('closeDetail', );
         },
- 
+        moveTripBoard() {
+          this.$router.push("/tripboard/" + this.trip.contentId + "/list/" + this.trip.contentId);
+        }
     }
 }
 </script>
