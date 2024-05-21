@@ -19,6 +19,7 @@ const moveModifyPw = () => {
   })
   .catch((e) => alert(e.response.data.data))
   .finally(() => store.dispatch('endLoading'))
+  // router.push('/userpage/password-change')
 };
 
 const userInfo = JSON.parse(sessionStorage.getItem("jwt"));

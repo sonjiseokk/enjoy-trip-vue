@@ -12,6 +12,7 @@ import AppLogin from "@/views/AppLogin.vue";
 import AppUserpage from "@/views/AppUserpage.vue";
 import ProfilePage from "@/components/user/ProfilePage.vue";
 import ProfileModify from "@/components/user/ProfileModify.vue";
+import PasswordChange from '@/components/user/PasswordChange';
 import LikePage from "@/components/user/LikePage.vue";
 import ManagePage from "@/components/ban/ManagePage.vue";
 import AiTripView from "@/views/AiTripView.vue";
@@ -194,15 +195,20 @@ const routes = [
     path: "/userpage",
     name: "userpage",
     component: AppUserpage,
-    redirect: "/userPage/profile",
+    redirect: "/userpage/profile",
     beforeEnter: (to, from, next) => {
       // sessionStorage에서 값 가져오기
       const userInfo = sessionStorage.getItem("jwt");
       // 값이 없으면 다른 페이지로 이동
       if (!userInfo) {
+        if(to.path == '/userpage/password-change'){
+          next()
+          return;
+        }
         alert("로그인 후 이용 가능합니다.");
         next("/login");
       } else {
+
         // 값이 있으면 계속 진행
         next();
       }
@@ -262,6 +268,11 @@ const routes = [
         name: "banned",
         component: BannedBoardPage,
       },
+      {
+        path: 'password-change',
+        name: 'passwordChange',
+        component : PasswordChange
+      }
     ],
   },
   {

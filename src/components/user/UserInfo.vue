@@ -1,8 +1,8 @@
 <template>
   <div class="container pt-1">
     <div class="row">
-      <div class="col-lg-2">
-        <div class="sidebar">
+      <div :class="userInfo ? 'col-lg-2' : 'col-lg-1'">
+        <div class="sidebar" v-if="userInfo">
           <!-- User Widget -->
           <div class="card">
             <!-- User Image -->
@@ -10,7 +10,7 @@
               <img src="" class="rounded-circle" style="width:200px; m-auto" />
             </div>
             <!-- User Name -->
-            <div class="card-body">
+            <div class="card-body" >
               <h5 class="text-center">{{ userInfo.userName }}</h5>
               <p>{{ userInfo.userEmail }}</p>
             </div>
@@ -25,12 +25,12 @@
               ><b-icon icon="person-fill"> </b-icon><span> 내 관광지</span>
             </RouterLink>
           </div>
-          <div class="card m-2 p-2" v-if="userInfo.role === 'ADMIN'">
+          <div class="card m-2 p-2" v-if="userInfo != null && userInfo.role === 'ADMIN'">
             <RouterLink class="dash-links" to="/userpage/manage"
               ><b-icon icon="person-fill"> </b-icon><span> 게시판 관리</span>
             </RouterLink>
           </div>
-          <div class="card m-2 p-2" v-if="userInfo.role !== 'ADMIN'">
+          <div class="card m-2 p-2" v-if="userInfo != null && userInfo.role !== 'ADMIN'">
             <RouterLink class="dash-links" to="/userpage/banned"
               ><b-icon icon="person-fill"> </b-icon><span> 내 차단 기록</span>
             </RouterLink>
