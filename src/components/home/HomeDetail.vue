@@ -37,7 +37,7 @@
     <div class="row">
       <div class = "col-1"></div>
       <div class="card col-4 HomeCard">
-        <a href='/trip'><img src="@/assets/maincard1.png" class="card-img-top mt-5" alt="..." style='height: 300px'></a>
+        <img src="@/assets/maincard1.png" class="card-img-top mt-5" alt="..." style='height: 300px' @click="$router.push('/trip')">
         <div class="card-body">
           <p class="card-text">위치를 기반으로 관광지를 검색하고 그와 유사한 관광지에 대해서도 알아보세요</p>
         </div>
