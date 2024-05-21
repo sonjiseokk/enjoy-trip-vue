@@ -9,24 +9,6 @@
         <div class="detail-img-div">
             <img class="sell-thumbnail" :src="thumnailImage" alt="Image 1" />
         </div>
-        <div class="detail-menu-bar">
-            <button @click="showRooms" class="btn menu"
-                :class="{ 'active btn-primary': false, 'btn-outline-primary': true }" id="info">
-                숙박
-            </button>
-            <button @click="showShopping" class="btn menu"
-                :class="{ 'active btn-primary': false, 'btn-outline-primary': true }">
-                쇼핑
-            </button>
-            <button @click="showReisure" class="btn menu"
-                :class="{ 'active btn-primary': false, 'btn-outline-primary': true }">
-                레포츠
-            </button>
-            <button @click="showRestaurant" class="btn menu"
-                :class="{ 'active btn-primary': false, 'btn-outline-primary': true }">
-                음식점
-            </button>
-        </div>
 
         <!-- <router-view /> -->
         <!-- <detail-info v-if="detail_type.info"></detail-info>
@@ -36,7 +18,7 @@
 </template>
 
 <script>
-import http from "@/api/http-common";
+
 import LikeButton from './LikeButton.vue';
 export default {
   components: { LikeButton },
@@ -59,76 +41,7 @@ export default {
         dispalynone(){
             this.$store.commit('closeDetail', );
         },
-        showRooms(){
-          console.log(this.trip);
-          const formData = {
-            contentTypeId : 32,
-            sidoCode : this.trip.sidoCode,
-            gugunCode : this.trip.gugunCode,
-          }
-          http.post(`/api/trip/search`,formData)
-          .then((response) => {
-            console.log(response.data);
-            this.$store.commit('placeMarkers',{data : response.data})
-          })
-          .catch((e) => {
-            console.error(e)
-            alert('해당 정보가 없습니다.')
-        });
-        },
-        showShopping(){
-          console.log(this.trip);
-          const formData = {
-            contentTypeId : 38,
-            sidoCode : this.trip.sidoCode,
-            gugunCode : this.trip.gugunCode,
-          }
-          http.post(`/api/trip/search`,formData)
-          .then((response) => {
-            console.log(response.data);
-            this.$store.commit('placeMarkers',{data : response.data})
-          })
-          .catch((e) => {
-            console.error(e)
-            alert('해당 정보가 없습니다.')
-          });
-          
-        },
-        showRestaurant(){
-          console.log(this.trip);
-          const formData = {
-            contentTypeId : 39,
-            sidoCode : this.trip.sidoCode,
-            gugunCode : this.trip.gugunCode,
-          }
-          http.post(`/api/trip/search`,formData)
-          .then((response) => {
-            console.log(response.data);
-            this.$store.commit('placeMarkers',{data : response.data})
-          })
-          .catch((e) => {
-            console.error(e)
-            alert('해당 정보가 없습니다.')
-        });
-        },
-        showReisure(){
-          console.log(this.trip);
-          const formData = {
-            contentTypeId : 28,
-            sidoCode : this.trip.sidoCode,
-            gugunCode : this.trip.gugunCode,
-          }
-          http.post(`/api/trip/search`,formData)
-          .then((response) => {
-            console.log(response.data);
-            this.$store.commit('placeMarkers',{data : response.data})
-          })
-          .catch((e) => {
-            console.error(e)
-            alert('해당 정보가 없습니다.')
-          });
-        },
-
+ 
     }
 }
 </script>
