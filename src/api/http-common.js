@@ -31,7 +31,7 @@ apiClient.interceptors.response.use(
         const { config, response: { status } } = err;
 
         let jwt = JSON.parse(localStorage.getItem('jwt'));
-        if (status === 401 && jwt) {
+        if (status === 403 && jwt) {
             config._retry = true;
 
             const currentTime = new Date();
@@ -43,13 +43,15 @@ apiClient.interceptors.response.use(
                 newAccessToken = await refreshAccessToken(jwt);
 
                 if (newAccessToken) {
+                    console.log("새로 받은 토큰들은")
+                    console.log(newAccessToken);
                     jwt.accessToken = newAccessToken.token;
                     jwt.expiredTime = newAccessToken.expiredTime;  // 새로운 만료 시간 저장
                     localStorage.setItem('jwt', JSON.stringify(jwt));
                     config.headers['Authorization'] = `Bearer ${newAccessToken.accessToken}`;
 
                     // 새로운 액세스 토큰으로 원래 요청 다시 시도
-                    return axios(config);
+                    return apiClient(config);
                 } else {
                     console.error('Unable to refresh access token');
                 }
