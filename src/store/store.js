@@ -3,22 +3,21 @@ import { createStore } from 'vuex'
 const store = createStore({
   state() {
     return {
-      jwt : {},
+      jwt: {},
       lat: 37.566826,
       lng: 126.9786567,
-      mapTripTitle : '현재 위치',
-      detailOpen : false,
+      mapTripTitle: "현재 위치",
+      detailOpen: false,
       clickedTrip: {},
       session: {},
-      
-      markerInfoList : [
-      ],
+
+      markerInfoList: [],
     };
   },
   mutations: {
-    setDefaultInfoList(state,payload){
+    setDefaultInfoList(state, payload) {
       state.markerInfoList = [
-        { name: "현재 위치" ,lat: payload.lat, lng: payload.lng }
+        { name: "현재 위치", lat: payload.lat, lng: payload.lng },
       ];
       state.lat = payload.lat;
       state.lng = payload.lng;
@@ -28,39 +27,46 @@ const store = createStore({
       state.lat = payload.lat;
       state.lng = payload.lng;
     },
-    changeTitle(state,payload){
-        state.mapTripTitle = payload.title;
+    changeTitle(state, payload) {
+      state.mapTripTitle = payload.title;
     },
-    openDetail(state){
-        state.detailOpen = true;
-        console.log("Detail is open:", state.detailOpen);
+    openDetail(state) {
+      state.detailOpen = true;
+      console.log("Detail is open:", state.detailOpen);
     },
-    closeDetail(state){
-        state.detailOpen = false;
+    closeDetail(state) {
+      state.detailOpen = false;
     },
-    clickTrip(state,payload){
-        state.clickedTrip = payload.trip;
+    clickTrip(state, payload) {
+      console.log('클릭된 trip은 ')
+      console.log(payload.trip)
+      state.clickedTrip = payload.trip;
     },
     // JWT 인증
-    setJwt(state,payload){
+    setJwt(state, payload) {
       console.log("저장하는 값은" + JSON.stringify(payload.jwt));
       state.jwt = JSON.stringify(payload.jwt);
-      sessionStorage.setItem('jwt', state.jwt);
-      localStorage.setItem('jwt',state.jwt)
+      sessionStorage.setItem("jwt", state.jwt);
+      localStorage.setItem("jwt", state.jwt);
       console.log(state.jwt);
     },
 
-    placeMarkers(state, payload){
+    placeMarkers(state, payload) {
       state.markerInfoList = [];
-      console.log(payload.data);
-      payload.data.forEach((location) => {
-        // location 객체에서 lat와 lng를 직접 추가합니다.
-        state.markerInfoList.push({ name : location.title, lat: location.latitude, lng: location.longitude });
+      console.log(payload.data.data);
+      payload.data.data.forEach((dto) => {
+        console.log(dto);
+        // info 객체에서 lat와 lng를 직접 추가합니다.
+        state.markerInfoList.push({
+          name: dto.info.title,
+          lat: dto.info.latitude,
+          lng: dto.info.longitude,
+        });
       });
 
       console.log(state.markerInfoList);
-    }
+    },
   },
-})
+});
 
 export default store;

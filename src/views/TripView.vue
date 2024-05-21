@@ -45,8 +45,9 @@ export default {
       console.log(formData);
       http.post(`/api/trip/search`, formData)
         .then((response) => {
+          console.log('검색')
           console.log(response.data);
-          this.tripList = response.data
+          this.tripList = response.data.data
         })
         .catch((error) => {
           this.tripList = [];

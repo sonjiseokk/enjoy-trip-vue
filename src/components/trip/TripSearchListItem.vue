@@ -11,8 +11,8 @@
         </div>
         <div class="col-md-8">
           <div class="card-body">
-            <h5 class="card-title">{{ trip.title }}</h5>
-            <p class="card-text"><small class="text-body-secondary">{{ trip.address }}</small></p>
+            <h5 class="card-title">{{ trip.info.title }}</h5>
+            <p class="card-text"><small class="text-body-secondary">{{ trip.info.address }}</small></p>
           </div>
         </div>
       </div>
@@ -33,17 +33,17 @@ export default {
   },
   created() {
     // 이미지 경로를 조건에 따라 설정
-    this.thumnailImage = this.trip.thumnailImage !== '' ? this.trip.thumnailImage : require('@/assets/noimage.jpg');
+    this.thumnailImage = this.trip.info.thumnailImage !== '' ? this.trip.info.thumnailImage : require('@/assets/noimage.jpg');
   },
   methods: {
     colorChange(flag) {
       this.isColor = flag;
     },
     cardClick(){
-      this.$store.commit('changeMap', { lat: this.trip.latitude, lng: this.trip.longitude });
-      this.$store.commit('changeTitle', { title : this.trip.title});
+      this.$store.commit('changeMap', { lat: this.trip.info.latitude, lng: this.trip.info.longitude });
+      this.$store.commit('changeTitle', { title : this.trip.info.title});
       this.$store.commit('openDetail');
-      this.$store.commit('clickTrip',{ trip : this.trip});
+      this.$store.commit('clickTrip',{ trip : this.trip.info});
     }
   },
 }
