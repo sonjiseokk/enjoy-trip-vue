@@ -1,7 +1,11 @@
 <script setup>
-import { ref, computed, onMounted } from 'vue';
-import { useStore } from 'vuex';
-import { KakaoMap, KakaoMapMarker, KakaoMapMarkerPolyline } from 'vue3-kakao-maps';
+import { ref, computed, onMounted } from "vue";
+import { useStore } from "vuex";
+import {
+  KakaoMap,
+  KakaoMapMarker,
+  KakaoMapMarkerPolyline,
+} from "vue3-kakao-maps";
 import http from "@/api/http-common";
 
 const store = useStore();
@@ -13,17 +17,19 @@ const lat = computed(() => store.state.lat);
 const lng = computed(() => store.state.lng);
 
 onMounted(() => {
-  http.get(`/api/member/mylike`)
+  http
+    .get(`/api/member/mylike`)
     .then((response) => {
       likeList.value = response.data.data;
     })
     .catch((error) => {
       alert(error.message);
     });
-})
+});
 
 const optimalPath = (id) => {
-  http.post(`/api/member/optimalpath`, id)
+  http
+    .post(`/api/member/optimalpath`, id)
     .then((response) => {
       orderedList.value = [];
       markerList.value = [];
@@ -35,7 +41,7 @@ const optimalPath = (id) => {
         for (var i = 0; i < orderedList.value.length; i++) {
           markerList.value.push({
             lat: orderedList.value[i].latitude,
-            lng: orderedList.value[i].longitude
+            lng: orderedList.value[i].longitude,
           });
         }
       }
@@ -43,31 +49,51 @@ const optimalPath = (id) => {
     .catch((error) => {
       alert(error.message);
     });
-}
- 
+};
 </script>
 
 <template>
   <div>
     <div id="map">
-      <KakaoMap :lat="lat" :lng="lng" :level='12' :draggable="true" style="width: 50%; height: 900px;">
+      <KakaoMap
+        :lat="lat"
+        :lng="lng"
+        :level="4"
+        :draggable="true"
+        style="width: 100%; height: 100vh"
+      >
         <KakaoMapMarker :lat="lat" :lng="lng">
-          <template v-slot:infoWindow><div style="padding: 10px; margin-bottom: 10px;">{{$store.state.mapTripTitle}}</div></template>
+          <template v-slot:infoWindow
+            ><div style="padding: 10px; margin-bottom: 10px">
+              {{ $store.state.mapTripTitle }}
+            </div></template
+          >
         </KakaoMapMarker>
 
-        <KakaoMapMarker v-for='item in likeList' :key='item.contentId' :lat="item.latitude" :lng="item.longitude" :clickable="true">
-          <template v-slot:infoWindow><div style="padding: 10px; margin-bottom: 10px;" @click="optimalPath(item.contentId)">{{ item.title}}</div></template>
+        <KakaoMapMarker
+          v-for="item in likeList"
+          :key="item.contentId"
+          :lat="item.latitude"
+          :lng="item.longitude"
+          :clickable="true"
+        >
+          <template v-slot:infoWindow
+            ><div
+              style="padding: 10px; margin-bottom: 10px"
+              @click="optimalPath(item.contentId)"
+            >
+              {{ item.title }}
+            </div></template
+          >
         </KakaoMapMarker>
-    
+
         <KakaoMapMarkerPolyline :markerList="markerList" :endArrow="true" />
       </KakaoMap>
     </div>
   </div>
-
 </template>
 
 <style scss>
-
 #map {
   width: 100vw;
 }

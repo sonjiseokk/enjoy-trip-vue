@@ -12,7 +12,7 @@ import AppLogin from "@/views/AppLogin.vue";
 import AppUserpage from "@/views/AppUserpage.vue";
 import ProfilePage from "@/components/user/ProfilePage.vue";
 import ProfileModify from "@/components/user/ProfileModify.vue";
-import PasswordChange from '@/components/user/PasswordChange';
+import PasswordChange from "@/components/user/PasswordChange";
 import LikePage from "@/components/user/LikePage.vue";
 import ManagePage from "@/components/ban/ManagePage.vue";
 import AiTripView from "@/views/AiTripView.vue";
@@ -22,12 +22,13 @@ import QnaDetail from "@/components/qna/QnaDetail.vue";
 import QnaModify from "@/components/qna/QnaModify.vue";
 import QnaInsert from "@/components/qna/QnaInsert.vue";
 import BanDetail from "@/components/ban/BanDetail.vue";
-import BannedBoardPage from '@/components/ban/BannedBoardPage.vue';
-import TripBoardView from '@/views/TripBoardView.vue';
-import TripBoard from '@/components/trip/TripBoard.vue';
-import TripBoardInsert from '@/components/trip/TripBoardInsert.vue';
-import TripBoardDetail from '@/components/trip/TripBoardDetail.vue';
-import TripBoardModify from '@/components/trip/TripBoardModify.vue';
+import BannedBoardPage from "@/components/ban/BannedBoardPage.vue";
+import TripBoardView from "@/views/TripBoardView.vue";
+import TripBoard from "@/components/trip/TripBoard.vue";
+import TripBoardInsert from "@/components/trip/TripBoardInsert.vue";
+import TripBoardDetail from "@/components/trip/TripBoardDetail.vue";
+import TripBoardModify from "@/components/trip/TripBoardModify.vue";
+import LikeView from "@/views/LikeView.vue";
 const routes = [
   {
     path: "/",
@@ -201,14 +202,13 @@ const routes = [
       const userInfo = sessionStorage.getItem("jwt");
       // 값이 없으면 다른 페이지로 이동
       if (!userInfo) {
-        if(to.path == '/userpage/password-change'){
-          next()
+        if (to.path == "/userpage/password-change") {
+          next();
           return;
         }
         alert("로그인 후 이용 가능합니다.");
         next("/login");
       } else {
-
         // 값이 있으면 계속 진행
         next();
       }
@@ -269,17 +269,17 @@ const routes = [
         component: BannedBoardPage,
       },
       {
-        path: 'password-change',
-        name: 'passwordChange',
-        component : PasswordChange
-      }
+        path: "password-change",
+        name: "passwordChange",
+        component: PasswordChange,
+      },
     ],
   },
   {
     path: "/tripboard/:id",
     name: "tripboard",
     component: TripBoardView,
-    redirect: to => {
+    redirect: (to) => {
       return `/tripboard/${to.params.id}/list/${to.params.id}`;
     },
     children: [
@@ -316,7 +316,12 @@ const routes = [
         component: TripBoardModify,
       },
     ],
-  }
+  },
+  {
+    path: "/like",
+    name: "like",
+    component: LikeView,
+  },
 ];
 
 const router = createRouter({
