@@ -20,7 +20,7 @@
             <div class="card-body p-2">
               <div class="card-title">{{ trip.title }}</div>
               <p class="card-text">
-                <small class="text-body-secondary">{{ trip.address }}</small>
+                <small class="text-body-secondary">{{ trip.addr1 }}</small>
               </p>
             </div>
             <div class="m-1">
@@ -48,15 +48,15 @@
     },
     created() {
       this.thumnailImage =
-        this.trip.thumnailImage !== ""
-          ? this.trip.thumnailImage
+        this.trip.firstImage !== ""
+          ? this.trip.firstImage
           : require("@/assets/noimage.jpg");
     },
     updated() {
       // 이미지 경로를 조건에 따라 설정
       this.thumnailImage =
-        this.trip.thumnailImage !== ""
-          ? this.trip.thumnailImage
+        this.trip.firstImage !== ""
+          ? this.trip.firstImage
           : require("@/assets/noimage.jpg");
     },
     methods: {
