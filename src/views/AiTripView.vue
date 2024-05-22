@@ -66,31 +66,6 @@ export default {
     }
   },
   methods : {
-    fetchRecommendations() {
-      http.get('/api/embed/most')
-        .then((response) => {
-          this.recommendList = response.data.data.recommendations;
-          this.selectedDto = response.data.data.dto;
-          if (this.recommendList.length == 0) {
-            alert('좋아요 개수가 부족합니다.\n관광지를 더 추가해주세요!');
-            this.$router.push('/');
-          }
-        })
-        .catch((error) => {
-          console.log(error.response.status); // 상태 코드 출력
-          let code = error.response.status;
-          console.error(error.response);
-          if (code === 403) {
-            alert('로그인이 필요한 페이지입니다.');
-            this.$router.push('/');
-          }
-        });
-    },
-    refreshRecommendation(){
-      //this.fetchRecommendations();
-      this.selectedDto = {};
-      this.recommendList = [];
-    },
     setSelectedLike(newValue) {
       this.selectedDto = newValue;
     }

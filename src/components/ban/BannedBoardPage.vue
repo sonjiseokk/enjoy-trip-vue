@@ -31,51 +31,6 @@
           ></BanListItem>
         </tbody>
       </table>
-      <button class = "btn btn-secondary justify-self-end">차단 해제 요청</button>
-      <section class="py-7">
-        <div class="container">
-          <div class="py-2">
-            <div class="">
-              <ul
-                class="pagination pagination-primary mt-4 d-flex justify-content-center"
-              >
-                <li class="page-item">
-                  <a
-                    class="page-link"
-                    aria-label="Previous"
-                    :class="{ hide: hidePrevious }"
-                    @click="previousPage"
-                  >
-                    <span aria-hidden="true"
-                      ><b-icon icon="chevron-left"></b-icon
-                    ></span>
-                  </a>
-                </li>
-                <li
-                  class="page-item"
-                  v-for="(page, index) in pages"
-                  :key="index"
-                  :class="{ active: page == curPage }"
-                >
-                  <a class="page-link" @click="getList(page)">{{ page }}</a>
-                </li>
-                <li class="page-item">
-                  <a
-                    class="page-link"
-                    aria-label="Next"
-                    :class="{ hide: hideNext }"
-                    @click="nextPage"
-                  >
-                    <span aria-hidden="true"
-                      ><b-icon icon="chevron-right"></b-icon
-                    ></span>
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
     </div>
   </template>
   

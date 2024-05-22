@@ -58,7 +58,7 @@ const optimalPath = (id) => {
       <KakaoMap
         :lat="lat"
         :lng="lng"
-        :level="4"
+        :level="12"
         :draggable="true"
         style="width: 100%; height: 100vh"
       >

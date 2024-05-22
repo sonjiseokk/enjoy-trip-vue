@@ -13,7 +13,6 @@ import AppUserpage from "@/views/AppUserpage.vue";
 import ProfilePage from "@/components/user/ProfilePage.vue";
 import ProfileModify from "@/components/user/ProfileModify.vue";
 import PasswordChange from "@/components/user/PasswordChange";
-import LikePage from "@/components/user/LikePage.vue";
 import ManagePage from "@/components/ban/ManagePage.vue";
 import AiTripView from "@/views/AiTripView.vue";
 import NoticeInsert from "@/components/notice/NoticeInsert.vue";
@@ -157,6 +156,18 @@ const routes = [
   {
     path: "/ai",
     component: AiTripView,
+    beforeEnter: (to, from, next) => {
+      // sessionStorage에서 값 가져오기
+      const userInfo = sessionStorage.getItem("jwt");
+      // 값이 없으면 다른 페이지로 이동
+      if (!userInfo) {
+        alert("로그인 후 이용 가능합니다.");
+        next("/");
+      } else {
+        // 값이 있으면 계속 진행
+        next();
+      }
+    },
   },
   {
     path: "/signup",
@@ -223,11 +234,6 @@ const routes = [
         path: "modify",
         name: "modify",
         component: ProfileModify,
-      },
-      {
-        path: "like",
-        name: "like",
-        component: LikePage,
       },
       {
         path: "manage",

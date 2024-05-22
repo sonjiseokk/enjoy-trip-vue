@@ -3,7 +3,7 @@
       <div class="page-header min-vh-40 relative">
         <div class="container absolute">
           <div class="row">
-            <div class="col-md-7 text-center mx-auto">
+            <div class="col-md-7 text-center text-white mx-auto">
               <h3><b-icon icon="person-fill"></b-icon> 마이 페이지</h3>
             </div>
           </div>
