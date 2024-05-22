@@ -1,4 +1,7 @@
 <template>
+  <!-- <div class="d-flex align-items-center">
+    <AiLikeList></AiLikeList>
+  </div> -->
   <div style="z-index: -1">
     <div class="min-vh-75 relative" style="margin-top: 200px">
       <div class="container absolute">
@@ -8,7 +11,8 @@
             <div style="height: 30px;"></div>
             <h4>AI가 나의 성향과 관심사를 분석하여 맞춤형 여행 정보를 제공합니다.</h4>
             <hr>
-            <h5 class="text-secondary">내가 좋아한 "{{ selectedDto.title }}" 과 유사한 관광지</h5>
+            <h5 v-if='selectedTitle' class="text-secondary">내가 좋아한 "{{ selectedTitle }}" 과 유사한 관광지</h5>
+            <h5 v-else class="text-secondary">좌측에서 관광지를 선택하고 유사한 관광지를 추천받아 보세요</h5>
           </div>
           <div class="refresh-box" @click="refreshRecommendation">
             <i class="bi bi-arrow-clockwise refresh-icon"></i>
@@ -16,8 +20,11 @@
           </div>
         </div>
       </div>
-      <main class="ai-main">
-        <AiRecommendList :recommend-list="recommendList" :selected-dto="selectedDto"/>
+      <div class="search-div">
+        <AiLikeList @setLike='setSelectedLike'></AiLikeList>
+      </div>
+      <main class="ai-main" v-if='selectedDto'>
+        <AiRecommendList :recommendList="recommendList"/>
       </main>
     </div>
   </div>
@@ -26,21 +33,42 @@
 <script>
 import AiRecommendList from '@/components/ai/AiRecommendList.vue'
 import http from "@/api/http-common";
+import AiLikeList from '@/components/ai/AiLikeList.vue';
 export default {
   data(){
     return {
       recommendList : [],
-      selectedDto : {},
+      selectedDto: "",
+      selectedTitle: "",
     }
-  },  
+  },
   components: {
-    AiRecommendList
+    AiRecommendList, AiLikeList
+  },
+  watch: {
+    selectedDto: function (newValue) {
+       http.get('/api/embed/recommend5?contentId=' + newValue)
+        .then((response) => {
+          this.recommendList = response.data.data;
+        })
+        .catch((error) => {
+          console.log(error.response.status); // 상태 코드 출력
+        });
+
+      http.get('/api/trip/find?contentId=' + newValue)
+        .then((response) => {
+          this.selectedTitle = response.data.title;
+          console.log(this.selectedTitle);
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+    }
   },
   methods : {
     fetchRecommendations() {
       http.get('/api/embed/most')
         .then((response) => {
-          console.log(response.data);
           this.recommendList = response.data.data.recommendations;
           this.selectedDto = response.data.data.dto;
           if (this.recommendList.length == 0) {
@@ -59,16 +87,37 @@ export default {
         });
     },
     refreshRecommendation(){
-      this.fetchRecommendations();
+      //this.fetchRecommendations();
+      this.selectedDto = {};
+      this.recommendList = [];
+    },
+    setSelectedLike(newValue) {
+      this.selectedDto = newValue;
     }
   },
   mounted() {
-    this.fetchRecommendations();
-  },
+    http.get(`/api/member/mylike`)
+        .then((response) => {
+            console.log(response.data.data)
+            this.selectedDto = response.data.data[0].contentId;
+        })
+        .catch((error) => {
+            alert(error.message); 
+        });
+  }
 }
 </script>
 <style scoped src="./style/style.css"></style>
 <style scoped>
+.search-div {
+  position: absolute;
+  width: 380px;
+  height: 100vh;
+  z-index: 2;
+  top: 0px;
+  left: 0;
+}
+
 .ai-main {
     display: flex;
     flex-direction: column;

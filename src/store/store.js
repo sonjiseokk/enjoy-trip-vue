@@ -12,6 +12,7 @@ const store = createStore({
       session: {},
       isLoading: false,
       markerInfoList: [],
+      selectedLike: "",
     };
   },
   mutations: {
@@ -71,6 +72,9 @@ const store = createStore({
     },
     endLoading(state) {
       state.isLoading = false;
+    },
+    setLike(state, payload) {
+      state.selectedLike = payload.selectedLike;
     },
   },
   actions: {

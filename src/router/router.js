@@ -321,6 +321,18 @@ const routes = [
     path: "/like",
     name: "like",
     component: LikeView,
+    beforeEnter: (to, from, next) => {
+      // sessionStorage에서 값 가져오기
+      const userInfo = JSON.parse(sessionStorage.getItem("jwt"));
+      // 값이 없으면 다른 페이지로 이동
+      if (userInfo === null) {
+        alert("로그인 후 사용 가능합니다.");
+        next(from);
+      } else {
+        // 값이 있으면 계속 진행
+        next();
+      }
+    },
   },
 ];
 

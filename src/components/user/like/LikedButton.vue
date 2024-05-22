@@ -62,7 +62,6 @@
     align-items: center;
     padding: 5px 10px;
     margin-bottom: 10px;
-    margin-left: 20px;
     font-size: 14px;
     font-weight: 500;
     color: #007bff;

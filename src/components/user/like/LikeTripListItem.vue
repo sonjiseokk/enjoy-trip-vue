@@ -24,7 +24,7 @@
               <small class="text-body-secondary">{{ trip.address }}</small>
             </p>
           </div>
-          <div class="row g-1">
+          <div class="ms-auto">
             <liked-button :contentId="trip.contentId"></liked-button>
           </div>
         </div>

@@ -61,6 +61,14 @@
                   >AI추천</router-link
                 >
               </li>
+              <li class="nav-item" @click="changed">
+                <router-link
+                  id="like"
+                  to="/like"
+                  class="ml-3 mr-3 nav-link text-secondary"
+                  >내 관광지</router-link
+                >
+              </li>
             </ul>
             <ul class="navbar-nav me-4">
               <li class="nav-item dropdown">

@@ -77,52 +77,6 @@ onMounted(() => {
 });
 </script>
 
-//
-<script>
-// import http from "@/api/http-common";
-// import { useRouter } from "vue-router";
-// // const userInfo = JSON.parse(sessionStorage.getItem('jwt'));
-// const router = useRouter();
-
-// export default {
-//   name: "NoticeDetail",
-//   data() {
-//     return {
-//       notice: {},
-//       userinfo: JSON.parse(sessionStorage.getItem("jwt")),
-//       router: router,
-//     };
-//   },
-//   mounted() {
-//     const boardId = this.$route.params.boardId;
-//     http
-//       .get(`/api/board/detail/${boardId}`)
-//       .then((response) => {
-//         console.log(response.data.data);
-
-//         this.notice = response.data.data;
-//       })
-//       .catch((e) => {
-//         console.log(e);
-//       });
-//   },
-//   methods: {
-//     deleteNotice(id) {
-//       http
-//         .post(`/api/board/delete/` + id)
-//         .then((response) => {
-//           this.notice = response.data.data;
-//           this.$router.push("/notice/list");
-//         })
-//         .catch((e) => {
-//           console.log(e);
-//         });
-//     },
-//   },
-// };
-//
-</script>
-
 <style scoped>
 h4 {
   font-weight: 600;

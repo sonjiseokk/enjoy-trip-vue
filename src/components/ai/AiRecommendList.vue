@@ -1,6 +1,6 @@
 <template>
   <div class="carousel-container">
-    <Carousel :itemsToShow="3">
+    <Carousel :itemsToShow="2">
       <template v-slot:default="{ prev, next }">
         <Slide v-for="(recommend, index) in recommendList" :key="index">
           <ai-recommend-detail :recommend="recommend" />
@@ -30,14 +30,18 @@ export default {
   },
   props: {
     recommendList : Array,
-    selectedDto : Object,
+  },
+  watch: {
+    recommendList: function() {
+      console.log("오냐? : " + this.recommendList);
+    }
   }
 }
 </script>
 
 <style scoped>
 .carousel-container {
-  max-width: 1700px; /* 캐러셀의 최대 너비를 설정 */
+  max-width: 1200px; /* 캐러셀의 최대 너비를 설정 */
   margin: auto; /* 가운데 정렬 */
   position: relative; /* 버튼 위치를 위해 추가 */
 }

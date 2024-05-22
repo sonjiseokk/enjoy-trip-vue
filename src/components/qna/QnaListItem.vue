@@ -10,7 +10,7 @@
 
 <script>
 export default {
-  name: "NoticeListItem",
+  name: "QnaListItem",
   props: {
     qna: Object,
   },
