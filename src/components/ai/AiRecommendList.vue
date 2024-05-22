@@ -1,6 +1,6 @@
 <template>
   <div class="carousel-container">
-    <Carousel :itemsToShow="2">
+    <Carousel :itemsToShow="2.5">
       <template v-slot:default="{ prev, next }">
         <Slide v-for="(recommend, index) in recommendList" :key="index">
           <ai-recommend-detail :recommend="recommend" />

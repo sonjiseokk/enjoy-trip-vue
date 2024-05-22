@@ -17,8 +17,8 @@
 
     <hr />
     <div>
-      <h4>Travel Pick!</h4>
-      <h5>AI가 유사한 여행지를 추천해드려요</h5>
+        <h4>Travel Pick!</h4>
+        <h5>AI가 유사한 여행지를 추천해드려요</h5>
       <div style="display: inline-block; margin-top: 50px;">
         <mini-loading :isLoading="isLoading"></mini-loading>
       </div>
@@ -84,7 +84,7 @@ export default {
       this.embeddingTrips = [];
       this.isLoading = true;
       if (this.trip.contentId) {
-        http.get('/api/embed/recommend', { params: { contentId: this.trip.contentId } })
+        http.get('/api/embed/recommend', { params: { contentId: this.trip.contentId, number : 4 } })
           .then((response) => {
             console.log('받아온 임베딩 데이터는', response.data);
             this.embeddingTrips = response.data.data;
