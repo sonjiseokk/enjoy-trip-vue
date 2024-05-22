@@ -31,7 +31,7 @@ const modifyArticle = () => {
 onMounted(() => {
   const boardId = route.params.boardId;
   http
-    .get(`/api/board/detail/${boardId}`)
+    .get(`/api/board/notice/detail/${boardId}`)
     .then((response) => {
       newBoard.value.boardId = response.data.data.boardId;
       newBoard.value.subject = response.data.data.subject;
