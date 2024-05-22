@@ -24,7 +24,7 @@
       </div>
       <div class="related-trips">
         <div class="related-trip-card" v-for="embedTrip in embeddingTrips" :key="embedTrip.contentId">
-          <img :src="getThumbnailImage(embedTrip.info.thumnailImage)" alt="Related Image" />
+          <img :src="getThumbnailImage(embedTrip.info.firstImage)" alt="Related Image" />
           <div style="margin-top: 20px;">
             <p>관광지명: {{ embedTrip.info.title }}
               <br />
@@ -61,7 +61,7 @@ export default {
     '$store.state.clickedTrip': {
       handler(newVal) {
         this.trip = newVal;
-        this.thumnailImage = this.trip.thumnailImage !== '' ? this.trip.thumnailImage : require('@/assets/noimage.jpg');
+        this.thumnailImage = this.trip.firstImage !== '' ? this.trip.firstImage : require('@/assets/noimage.jpg');
         this.fetchEmbeddingTrips();
       },
       immediate: true

@@ -11,7 +11,7 @@
         </div>
         <section class="row d-flex flex-row card card-body blur shadow-blur mx-5 md-4 mt-n6 py-5">
             <div class="card col-3">
-                <img :src='trip.thumnailImage' class="card-img-top mt-5" alt="...">
+                <img :src='trip.firstImage' class="card-img-top mt-5" alt="...">
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item pb-2">
                         <h5 class = 'mt-5'>{{ trip.title }}</h5>

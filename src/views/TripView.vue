@@ -4,12 +4,12 @@
       <main class="mt-0 main-content main-content-bg">
         <section>
           <KakaoMap class="kakao-map"></KakaoMap>
-          <my-kakao-map/>
+          <my-kakao-map />
           <div>
             <div class="search-div">
-              <trip-search class="house-search-bar" @search="search($event)" @allSearch="allSearch($event)"/>
-              <div class="list-div type1">
-                <trip-search-list class="house-list" :tripList="tripList"/>
+              <trip-search class="house-search-bar" @search="search($event)" @allSearch="allSearch($event)" />
+              <div class="list-div type1" @scrollend="onScroll">
+                <trip-search-list class="house-list" :tripList="tripList" />
               </div>
             </div>
             <div v-if="$store.state.detailOpen" class="detail-div type1">
@@ -33,28 +33,62 @@ import TripDetail from '@/components/trip/TripDetail.vue';
 export default {
   data() {
     return {
-      tripList : [],
+      tripList: [],
+      pageNum: 0,
+      formData: {}
     }
   },
   mounted() {
     console.log(localStorage.getItem('accessToken'));
   },
   components: { TripSearch, MyKakaoMap, TripSearchList, TripDetail },
-  methods : {
-    search(formData){
-      console.log(formData);
-      http.post(`/api/trip/search`, formData)
+  methods: {
+    search(formData) {
+      this.formData = formData;
+      this.pageNum = 0;
+      this.hasMore = true; // 새로운 검색 시 더 불러올 데이터가 있는지 초기화
+      this.fetchData(formData, 0);
+    },
+    fetchData(formData, pageNum) {
+      if (this.isLoading) return;
+
+      this.isLoading = true;
+      http.post(`/api/trip/search?page=${pageNum}`, formData)
         .then((response) => {
           console.log('검색')
           console.log(response.data);
-          this.tripList = response.data.data
+          if (pageNum === 0) {
+            this.tripList = response.data.data;
+          } else {
+            this.tripList = [...this.tripList, ...response.data.data];
+          }
+          this.pageNum = response.data.pageNum;
+          this.isLoading = false;
+          if (response.data.data.length === 0) {
+            this.hasMore = false; // 더 이상 불러올 데이터가 없는 경우
+          }
         })
         .catch((error) => {
-          this.tripList = [];
+          if (pageNum === 0) {
+            this.tripList = [];
+          }
+          this.isLoading = false;
           console.error("요청 중 오류 발생:", error);
         });
     },
-    allSearch(keyword){
+    loadMore() {
+      if (this.hasMore) {
+        console.log('loadMore')
+        this.fetchData(this.formData, this.pageNum + 1);
+      }
+    },
+    onScroll(event) {
+      const container = event.target;
+      if (container.scrollTop + container.clientHeight >= container.scrollHeight - 5) {
+        this.loadMore();
+      }
+    },
+    allSearch(keyword) {
       console.log('전체 검색할 키워드는 ', keyword);
       http.get(`/api/trip/searchAll?keyword=${keyword}`)
         .then((response) => {
@@ -64,7 +98,7 @@ export default {
           this.tripList = [];
           console.error("요청 중 오류 발생:", error);
         });
-    }
+    },
   }
 }
 </script>
@@ -73,11 +107,9 @@ export default {
 <style scoped>
 .underline-orange {
   display: inline-block;
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0) 70%,
-    rgba(231, 149, 27, 0.3) 30%
-  );
+  background: linear-gradient(180deg,
+      rgba(255, 255, 255, 0) 70%,
+      rgba(231, 149, 27, 0.3) 30%);
 }
 
 .search-div {
@@ -123,6 +155,7 @@ export default {
   left: 28px;
   width: 340px;
 }
+
 .house-list {
   position: absolute;
   z-index: 3;
@@ -135,6 +168,7 @@ export default {
   height: 100vh;
   position: relative;
 }
+
 .house-search-bar {
   z-index: 3;
   position: absolute;

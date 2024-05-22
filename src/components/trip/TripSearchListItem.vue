@@ -12,7 +12,7 @@
         <div class="col-md-8">
           <div class="card-body">
             <h5 class="card-title">{{ trip.info.title }}</h5>
-            <p class="card-text"><small class="text-body-secondary">{{ trip.info.address }}</small></p>
+            <p class="card-text"><small class="text-body-secondary">{{ trip.info.addr1 }}</small></p>
           </div>
         </div>
       </div>
@@ -33,7 +33,7 @@ export default {
   },
   created() {
     // 이미지 경로를 조건에 따라 설정
-    this.thumnailImage = this.trip.info.thumnailImage !== '' ? this.trip.info.thumnailImage : require('@/assets/noimage.jpg');
+    this.thumnailImage = this.trip.info.firstImage !== '' ? this.trip.info.firstImage : require('@/assets/noimage.jpg');
   },
   methods: {
     colorChange(flag) {
