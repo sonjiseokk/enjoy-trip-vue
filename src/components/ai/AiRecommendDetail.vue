@@ -8,7 +8,7 @@
         <h3>{{ recommend.info.title }}</h3>
       </div>
       <div>
-        <span class="main-info-desc">{{ recommend.info.address }}</span>
+        <span class="main-info-desc">{{ recommend.info.addr1 }}</span>
       </div>
       <div>
         <span class="main-info-desc">유사도 : {{ formattedSimilarity }} %</span>
@@ -47,11 +47,11 @@ export default {
   },
   methods: {
     updateThumbnailImage(recommend) {
-      this.thumbnailImage = recommend.info.thumnailImage !== '' ? recommend.info.thumnailImage : require('@/assets/noimage.jpg');
+      this.thumbnailImage = recommend.info.firstImage !== '' ? recommend.info.firstImage : require('@/assets/noimage.jpg');
     }
   },
   mounted(){
-    this.thumbnailImage = this.recommend.info.thumnailImage !== '' ? this.recommend.info.thumnailImage : require('@/assets/noimage.jpg');
+    this.thumbnailImage = this.recommend.info.firstImage !== '' ? this.recommend.info.firstImage : require('@/assets/noimage.jpg');
 
   }
   
