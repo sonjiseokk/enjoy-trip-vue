@@ -20,8 +20,14 @@ const modifyArticle = () => {
   } else {
     http
       .post(`/api/board/modify`, newBoard.value)
-      .then(() => {
-        router.push("/qna/list");
+      .then((response) => {
+        console.log(response.data.data.code)
+        if(response.data.data.code > 0){
+          router.push("/qna/list");
+        }
+        else{
+          alert(response.data.data.message);
+        }
       })
       .catch((e) => {
         console.log(e);
@@ -32,7 +38,7 @@ const modifyArticle = () => {
 onMounted(() => {
   const boardId = route.params.boardId;
   http
-    .get(`/api/board/detail/${boardId}`)
+    .get(`/api/board/qna/detail/${boardId}`)
     .then((response) => {
       newBoard.value.boardId = response.data.data.boardId;
       newBoard.value.subject = response.data.data.subject;

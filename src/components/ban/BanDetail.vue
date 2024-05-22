@@ -7,12 +7,12 @@
       <div class="card-header text-right" style="font-size: 0.8em">
         등록 날짜 : {{ ban.createDate }}<br />
         <div>
-          <span v-if='ban.toxicity > 0.6' class="badge bg-warning text-light">TOXICITY</span>
-          <span v-if='ban.severeToxicity > 0.6' class="badge bg-danger text-light">SEVERE_TOXICITY</span>
-          <span v-if='ban.identityAttack > 0.6' class="badge text-light" style='background-color: purple'>IDENTITY_ATTACK</span>
-          <span v-if='ban.insult > 0.6' class="badge text-light" style='background-color: green'>INSULT</span>
-          <span v-if='ban.profanity > 0.6' class="badge text-light" style='background-color: darkblue'>PROFANITY</span>
-          <span v-if='ban.threat > 0.6' class="badge bg-dark text-light">THREAT</span>
+          <span v-if='ban.toxicity > 0.6' class="badge bg-warning text-light">유해성</span>
+          <span v-if='ban.severeToxicity > 0.6' class="badge bg-danger text-light">심한 유해성</span>
+          <span v-if='ban.identityAttack > 0.6' class="badge text-light" style='background-color: purple'>인신공격</span>
+          <span v-if='ban.insult > 0.6' class="badge text-light" style='background-color: green'>모욕</span>
+          <span v-if='ban.profanity > 0.6' class="badge text-light" style='background-color: darkblue'>비속어</span>
+          <span v-if='ban.threat > 0.6' class="badge bg-dark text-light">폭력성</span>
         </div>
       </div>
       <div class="card-body" style="height: 300px">

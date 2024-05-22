@@ -11,7 +11,7 @@
               <div class="list-div type1">
                 <like-trip-list class="house-list" :tripList="tripList" />
               </div>
-              <button class="btn btn-secondary">현재위치보기</button>
+              <button class="btn btn-secondary" @click="curPoint">현재위치보기</button>
             </div>
           </div>
         </section>
@@ -42,6 +42,21 @@ export default {
         alert(error.message);
       });
   },
+  methods: {
+    curPoint() {
+      this.$getLocation()
+      .then((coordinates) => {
+        console.log(coordinates);
+        this.$store.commit('setDefaultInfoList',{lat : coordinates.lat, lng : coordinates.lng})
+        this.$store.commit("changeTitle", { title: "현재 위치" });
+        this.$store.commit("openDetail");
+        this.$store.commit("clickTrip", { trip: this.trip });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    },
+  }
 };
 </script>
 
