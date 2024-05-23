@@ -17,6 +17,8 @@ const store = createStore({
       markerInfoList: [],
       likeMarkerInfoList: [],
       selectedLike: "",
+
+      isLiked : false,
     };
   },
   mutations: {
@@ -91,9 +93,10 @@ const store = createStore({
     endLoading(state) {
       state.isLoading = false;
     },
-    setLike(state, payload) {
-      state.selectedLike = payload.selectedLike;
-    },
+    setLiked(state, payload) {
+      state.isLiked = payload;
+    }
+
   },
   actions: {
     progressLoading({ commit }) {
@@ -102,6 +105,10 @@ const store = createStore({
     endLoading({ commit }) {
       commit("endLoading");
     },
+
+    updateLiked({ commit }, payload) {
+      commit("setLiked", payload);
+    }
   },
 });
 

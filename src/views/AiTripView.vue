@@ -16,7 +16,6 @@
           </div>
           <div class="explain-box">
             <help-button/>
-            <p>어떻게 관광지를 추천하나요?</p>
           </div>
           <!-- <div class="refresh-box" @click="refreshRecommendation">
             <i class="bi bi-arrow-clockwise refresh-icon"></i>
@@ -73,15 +72,14 @@ export default {
         .catch((error) => {
           console.log(error);
         })
-    }
+    },
   },
   methods : {
     setSelectedLike(newValue) {
       this.selectedDto = newValue;
-    }
-  },
-  mounted() {
-    http.get(`/api/member/mylike`)
+    },
+    fetchMyLikes(){
+      http.get(`/api/member/mylike`)
         .then((response) => {
             console.log(response.data.data)
             this.selectedDto = response.data.data[0].contentId;
@@ -89,6 +87,10 @@ export default {
         .catch((error) => {
             alert(error.message); 
         });
+    }
+  },
+  mounted() {
+    this.fetchMyLikes();
   }
 }
 </script>
@@ -146,8 +148,8 @@ export default {
   display: flex;
   flex-direction: column;
   position: absolute;
-  left: 600px;
-  top: 100px;
+  left: 345px;
+  top: 104px;
   align-items: center;
   justify-content: center;
 }

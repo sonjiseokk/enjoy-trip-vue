@@ -34,6 +34,7 @@ export default {
       .then((response) => {
         if (response.status === 200) {
           this.liked = true;
+          this.$store.dispatch('updateLiked', true);
         }
       })
       .catch((error) => {
@@ -45,6 +46,7 @@ export default {
       .then((response) => {
         if (response.status === 200) {
           this.liked = false;
+          this.$store.dispatch('updateLiked', false);
         }
       })
       .catch((error) => {

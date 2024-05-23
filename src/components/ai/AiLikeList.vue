@@ -1,17 +1,19 @@
 <script setup>
-import { ref, onMounted, defineEmits } from 'vue';
+import { ref, onMounted, defineEmits, watch } from 'vue';
 import http from "@/api/http-common";
+import { useStore } from 'vuex';
 
 import AiLikeListItem from "./AiLikeListItem.vue";
 
 const tripList = ref([]);
+const store = useStore();
 
 const emit = defineEmits(['setLike'])
 const setLike = (newValue) => {
     emit('setLike', newValue);
 }
 
-onMounted(() => {
+const fetchLikeList = () => {
     http.get(`/api/member/mylike`)
         .then((response) => {
             console.log(response.data.data)
@@ -20,6 +22,20 @@ onMounted(() => {
         .catch((error) => {
             alert(error.message); 
         });
+}
+
+watch(() => store.state.isLiked, (newVal) => {
+    console.log("제발 해다오");
+    console.log(newVal);
+    if (newVal) {
+        fetchLikeList();
+        store.commit('setLiked', false);  // 상태 초기화
+    }
+}, { immediate: true });
+
+
+onMounted(() => {
+    fetchLikeList();
 })
 </script>
 
