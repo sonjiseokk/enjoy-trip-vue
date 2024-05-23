@@ -21,7 +21,7 @@
           <div class="card-body">
             <div class="card-title">{{ trip.title }}</div>
             <p class="card-text">
-              <small class="text-body-secondary">{{ trip.address }}</small>
+              <small class="text-body-secondary">{{ trip.addr1 }}</small>
             </p>
           </div>
           <div class="ms-auto">
