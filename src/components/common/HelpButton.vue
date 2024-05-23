@@ -5,6 +5,7 @@
               class="bi bi-question-circle question-icon"
             ></i>
             <template #popper>
+              <div style="height: 15px;"></div>
                 <div>
                     <p>Travel Pick은 유저의 관심 목록을 수집하여 벡터 값으로 저장해요!
                         <br>
