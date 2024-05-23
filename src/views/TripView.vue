@@ -92,6 +92,7 @@ export default {
       console.log('전체 검색할 키워드는 ', keyword);
       http.get(`/api/trip/searchAll?keyword=${keyword}`)
         .then((response) => {
+          this.tripList = [];
           this.tripList = response.data.data
         })
         .catch((error) => {

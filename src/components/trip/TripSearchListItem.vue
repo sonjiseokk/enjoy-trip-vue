@@ -35,6 +35,9 @@ export default {
     // 이미지 경로를 조건에 따라 설정
     this.thumnailImage = this.trip.info.firstImage !== '' ? this.trip.info.firstImage : require('@/assets/noimage.jpg');
   },
+  updated(){
+    this.thumnailImage = this.trip.info.firstImage !== '' ? this.trip.info.firstImage : require('@/assets/noimage.jpg');
+  },
   methods: {
     colorChange(flag) {
       this.isColor = flag;
