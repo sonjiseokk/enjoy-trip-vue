@@ -110,6 +110,25 @@ const store = createStore({
       commit("setLiked", payload);
     }
   },
+
+  getters: {
+    escapeHtml: () => (content) => {
+      if (!content) {
+        return '';
+      }
+
+      const htmlUnescapes = {
+        '&amp;': '&',
+        '&lt;': '<',
+        '&gt;': '>',
+        '&quot;': '"',
+        '&#39;': "'",
+        '<br/>': '\n'
+      };
+
+      return content.replace(/(&amp;|&lt;|&gt;|&quot;|&#39;|<br\/>)/g, match => htmlUnescapes[match]);
+    }
+  }
 });
 
 export default store;

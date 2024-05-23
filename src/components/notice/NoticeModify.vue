@@ -1,11 +1,13 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import { useRouter, useRoute } from "vue-router";
+import { useStore } from 'vuex'; // Vuex store를 가져오기 위해 추가
 import http from "@/api/http-common";
 
 const userInfo = ref(JSON.parse(sessionStorage.getItem("jwt")));
 const router = useRouter();
 const route = useRoute();
+const store = useStore(); // Vuex store를 가져오기 위해 추가
 
 const newBoard = ref({
   boardId: 0,
@@ -17,6 +19,9 @@ const modifyArticle = () => {
   if (userInfo.value.role !== "ADMIN") {
     alert("관리자만 수정 가능합니다.");
   } else {
+    // escapeHtml 메서드를 사용하여 content를 이스케이프 처리
+    newBoard.value.content = store.getters.escapeHtml(newBoard.value.content);
+
     http
       .post(`/api/board/modify`, newBoard.value)
       .then(() => {
@@ -30,18 +35,21 @@ const modifyArticle = () => {
 
 onMounted(() => {
   const boardId = route.params.boardId;
+  
   http
     .get(`/api/board/notice/detail/${boardId}`)
     .then((response) => {
       newBoard.value.boardId = response.data.data.boardId;
       newBoard.value.subject = response.data.data.subject;
-      newBoard.value.content = response.data.data.content;
+      newBoard.value.content = store.getters.escapeHtml(response.data.data.content);
+
     })
     .catch((e) => {
       console.log(e);
     });
 });
 </script>
+
 
 <template>
   <div>

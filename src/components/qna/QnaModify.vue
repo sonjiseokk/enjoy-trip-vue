@@ -1,8 +1,10 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import { useRouter, useRoute } from "vue-router";
+import { useStore } from 'vuex'; // Vuex store를 가져오기 위해 추가
 import http from "@/api/http-common";
 
+const store = useStore(); // Vuex store를 가져오기 위해 추가
 const userInfo = ref(JSON.parse(sessionStorage.getItem("jwt")));
 const writeUser = ref("");
 const router = useRouter();
@@ -42,7 +44,7 @@ onMounted(() => {
     .then((response) => {
       newBoard.value.boardId = response.data.data.boardId;
       newBoard.value.subject = response.data.data.subject;
-      newBoard.value.content = response.data.data.content;
+      newBoard.value.content = store.getters.escapeHtml(response.data.data.content);
       writeUser.value = response.data.data.userId;
     })
     .catch((e) => {
