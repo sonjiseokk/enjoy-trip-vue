@@ -22,8 +22,8 @@ onMounted(() => {
 </script>
 
 <template>
-    <div class="row" style='height: 600px; margin-top: 150px'>
-        <h3>어디를 가야할지 너무 막막하다면? 뉴스로부터 시작해보는 것도 좋아요!</h3>
+    <div class="row" style='height: 600px; margin-top: 80px'>
+        <h1>관광지에 대한 뉴스도 확인해보세요!</h1>
         <div class="carousel-container">
             <Carousel :itemsToShow="3">
             <template v-slot:default="{ prev, next }">

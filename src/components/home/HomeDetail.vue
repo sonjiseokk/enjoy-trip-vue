@@ -30,26 +30,7 @@
     <p style="font-size: 2.5rem; font-family: LINESeedKR-Bd">
       나의 성향에 따른 맞춤형 여행지를 추천해드리겠습니다.
     </p>
-    <!-- <div class="row">
-      <div class = "col-1"></div>
-      <div class="card col-4 HomeCard">
-        <img src="@/assets/maincard1.png" class="card-img-top mt-5" alt="..." style='height: 300px' @click="$router.push('/trip')">
-        <div class="card-body">
-          <p class="card-text">위치를 기반으로 관광지를 검색하고 그와 유사한 관광지에 대해서도 알아보세요</p>
-        </div>
-      </div>
-      <div class = "col-2">
 
-      </div>
-      <div class="card col-4 HomeCard">
-        <img src= "@/assets/maincard2.png" class="card-img-top mt-5" alt="..." style='height: 300px'>
-        <div class="card-body">
-          <p class="card-text">방문했던 여행지가 정말 좋았다면 내 관광지에 저장해보세요. 내 관광지 목록을 통해서 비슷한 여행지를 추천해드릴게요</p>
-        </div>
-      </div>
-    </div>
-
-    <NewsView></NewsView> -->
   </div>
 
   <div class="HomeMid3">
@@ -113,14 +94,25 @@
     </div>
   </div>
 
+  <hr/>
+
+  <div style="margin-top: 100px; margin-bottom: 100px;">
+
+
+    <NewsView></NewsView>
+
+  </div>
   <div class="HomeFoot">
-      <p style="font-size: 4rem; font-family: LINESeedKR-Bd">이제 Travel Pick 만의 서비스를 즐겨보세요!</p>
-      <p style="font-size: 4rem; font-family: LINESeedKR-Bd"></p>
-    </div>
+    <p style="font-size: 4rem; font-family: LINESeedKR-Bd">이제 Travel Pick 만의 서비스를 즐겨보세요!</p>
+    <p style="font-size: 4rem; font-family: LINESeedKR-Bd"></p>
+  </div>
+
+
+
 </template>
 
 <script setup>
-// import NewsView from './NewsView.vue';
+import NewsView from './NewsView.vue';
 </script>
 <style scoped src="../../views/style/style.css"></style>
 <style scoped>
@@ -244,7 +236,7 @@
 
 .HomeMid5 {
   width: 100%;
-  height: 600px;
+  height: 550px;
   /* background-color: rgb(187, 149, 149); */
 }
 

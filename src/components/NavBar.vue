@@ -58,7 +58,7 @@
                   id="ai"
                   to="/ai"
                   class="ml-3 mr-3 nav-link text-secondary"
-                  >AI추천</router-link
+                  >AI트립</router-link
                 >
               </li>
               <li class="nav-item" @click="changed">
