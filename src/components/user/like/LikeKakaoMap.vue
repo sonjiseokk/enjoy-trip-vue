@@ -13,8 +13,8 @@ const likeList = ref([]);
 const orderedList = ref([]);
 const markerList = ref([]);
 
-const lat = computed(() => store.state.lat);
-const lng = computed(() => store.state.lng);
+const lat = computed(() => store.state.likelat);
+const lng = computed(() => store.state.likelng);
 
 onMounted(() => {
   http
@@ -65,7 +65,7 @@ const optimalPath = (id) => {
         <KakaoMapMarker :lat="lat" :lng="lng">
           <template v-slot:infoWindow
             ><div style="padding: 10px; margin-bottom: 10px">
-              {{ $store.state.mapTripTitle }}
+              {{ $store.state.likeTripTitle }}
             </div></template
           >
         </KakaoMapMarker>

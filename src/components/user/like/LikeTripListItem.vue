@@ -66,13 +66,11 @@ export default {
       this.isColor = flag;
     },
     cardClick() {
-      this.$store.commit("changeMap", {
+      this.$store.commit("changeLikeMap", {
         lat: this.trip.latitude,
         lng: this.trip.longitude,
       });
-      this.$store.commit("changeTitle", { title: this.trip.title });
-      this.$store.commit("openDetail");
-      this.$store.commit("clickTrip", { trip: this.trip });
+      this.$store.commit("changeLikeTitle", { title: this.trip.title });
     },
   },
 };

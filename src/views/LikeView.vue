@@ -41,16 +41,16 @@ export default {
       .catch((error) => {
         alert(error.message);
       });
+
+    this.curPoint();
   },
   methods: {
     curPoint() {
       this.$getLocation()
       .then((coordinates) => {
         console.log(coordinates);
-        this.$store.commit('setDefaultInfoList',{lat : coordinates.lat, lng : coordinates.lng})
-        this.$store.commit("changeTitle", { title: "현재 위치" });
-        this.$store.commit("openDetail");
-        this.$store.commit("clickTrip", { trip: this.trip });
+        this.$store.commit('setCurPoint',{lat : coordinates.lat, lng : coordinates.lng})
+        this.$store.commit("changeLikeTitle", { title: "현재 위치" });
       })
       .catch((error) => {
         console.log(error);

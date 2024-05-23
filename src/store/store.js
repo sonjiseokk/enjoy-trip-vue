@@ -6,12 +6,16 @@ const store = createStore({
       jwt: {},
       lat: 37.566826,
       lng: 126.9786567,
+      likelat: 37.566826,
+      likelng: 126.9786567,
       mapTripTitle: "현재 위치",
+      likeTripTitle: "현재 위치",
       detailOpen: false,
       clickedTrip: {},
       session: {},
       isLoading: false,
       markerInfoList: [],
+      likeMarkerInfoList: [],
       selectedLike: "",
     };
   },
@@ -23,13 +27,27 @@ const store = createStore({
       state.lat = payload.lat;
       state.lng = payload.lng;
     },
+    setCurPoint(state, payload) {
+      state.likeMarkerInfoList = [
+        { name: "현재 위치", lat: payload.lat, lng: payload.lng },
+      ];
+      state.likelat = payload.lat;
+      state.likelng = payload.lng;
+    },
     // `state`를 첫 번째 매개변수로 받고, 두 번째 매개변수로 `payload`를 받습니다.
     changeMap(state, payload) {
       state.lat = payload.lat;
       state.lng = payload.lng;
     },
+    changeLikeMap(state, payload) {
+      state.likelat = payload.lat;
+      state.likelng = payload.lng;
+    },
     changeTitle(state, payload) {
       state.mapTripTitle = payload.title;
+    },
+    changeLikeTitle(state, payload) {
+      state.likeTripTitle = payload.title;
     },
     openDetail(state) {
       state.detailOpen = true;
