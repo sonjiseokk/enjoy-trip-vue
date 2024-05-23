@@ -14,7 +14,7 @@
     <br />
     <div class="d-flex justify-content-end">
       <router-link class="btn btn-dark m-3" to="/qna/list"
-        >공지 목록</router-link
+        >목록</router-link
       >
       <router-link
         v-if="userInfo !== null && userInfo.userId === qna.userId"

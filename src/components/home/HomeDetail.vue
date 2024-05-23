@@ -94,9 +94,9 @@
     </div>
   </div>
 
-  <hr/>
 
-  <div style="margin-top: 100px; margin-bottom: 100px;">
+
+  <div style="margin-top: 50px; margin-bottom: 100px;">
 
 
     <NewsView></NewsView>
@@ -236,7 +236,7 @@ import NewsView from './NewsView.vue';
 
 .HomeMid5 {
   width: 100%;
-  height: 550px;
+  height: 530px;
   /* background-color: rgb(187, 149, 149); */
 }
 
