@@ -1,9 +1,10 @@
-# ✈️ EnjoyTrip
+# ✈️ Travel Pick
 
-![](https://i.imgur.com/bF3hFhx.png)
+![](https://i.imgur.com/avPOQGh.png)
 
-> Enjoy Trip 여행 정보 제공 사이트<br>
+> Travel Pick AI 여행지 추천 서비스 플랫폼<br>
 > 임베딩 API를 활용해 유사도를 측정하여 여행지를 추천해주는 서비스
+> Moderations API를 활용해 게시판 자동 관리가 가능한 서비스
 > 
 > 프로젝트 기간 : 2024.05.10 ~ 2024.05.23
 
@@ -23,11 +24,17 @@
 
 
 ## Use-Case Diagram
-![](https://i.imgur.com/1OiaKms.jpeg)
+![](https://i.imgur.com/Cd7cLUb.png)
+
 
 
 ## ERD
-![](https://i.imgur.com/WbLJlTZ.png)
+![](https://i.imgur.com/1snNTDb.png)
+
+
+## 화면 설계서
+![](https://i.imgur.com/ouOXTWh.png)
+
 
 ## Team
 
@@ -50,29 +57,14 @@
     </tr>
 </table>
 
-## 화면 구조 및 주요 코드
-#### 1. 메인화면
-![](https://i.imgur.com/oTGPyNd.png)
-#### 2. 회원가입
-![](https://i.imgur.com/y43bRVd.png)
-![](https://i.imgur.com/nGXfejM.gif)
-#### 3. 로그인
-![](https://i.imgur.com/NsJLGb8.png)
-![](https://i.imgur.com/IBoq0CO.gif)
-#### 4. 로그아웃
-![](https://i.imgur.com/9lbd9M8.gif)
-#### 5. 관광지 확인
-![](https://i.imgur.com/IaNmBkl.png)
-![](https://i.imgur.com/ZCcN2rI.gif)
-#### 6. 공지사항 게시판
-![](https://i.imgur.com/RsAzOBe.png)
-![](https://i.imgur.com/uBLXT0m.gif)
-#### 7. QNA 게시판
-![](https://i.imgur.com/zE64Rwm.gif)
+## 화면 구조 및 시연 영상
 
 
-## API 명세서
+[![영상 이미지](https://img.youtube.com/vi/aWIfDVpwkQo/0.jpg)](https://youtu.be/aWIfDVpwkQo)
 
 ## 이슈/해결 아카이빙
+[Embedding API 사용하여 추천 서비스를 만들어보자 (feat. 스프링)](https://velog.io/@sonjiseokk/Embedding%EC%9D%84-%EC%82%AC%EC%9A%A9%ED%95%98%EC%97%AC-%EC%B6%94%EC%B2%9C-%EC%84%9C%EB%B9%84%EC%8A%A4%EB%A5%BC-%EB%A7%8C%EB%93%A4%EC%96%B4%EB%B3%B4%EC%9E%90)
+
+
 
 
